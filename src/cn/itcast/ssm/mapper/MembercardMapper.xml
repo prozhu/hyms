@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.ssm.mapper.MembercardMapper" >
+  <resultMap id="BaseResultMap" type="cn.itcast.ssm.model.Membercard" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memberId" property="memberid" jdbcType="VARCHAR" />
+    <result column="memberCardId" property="membercardid" jdbcType="VARCHAR" />
+    <result column="cardStatus" property="cardstatus" jdbcType="SMALLINT" />
+    <result column="cardGrade" property="cardgrade" jdbcType="VARCHAR" />
+    <result column="openDate" property="opendate" jdbcType="TIMESTAMP" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="balance" property="balance" jdbcType="DECIMAL" />
+    <result column="totalPoint" property="totalpoint" jdbcType="INTEGER" />
+    <result column="totalConsumption" property="totalconsumption" jdbcType="DECIMAL" />
+    <result column="totalRecharge" property="totalrecharge" jdbcType="DECIMAL" />
+    <result column="memberName" property="membername" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, memberId, memberCardId, cardStatus, cardGrade, openDate, discount, balance, totalPoint, 
+    totalConsumption, totalRecharge, memberName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.itcast.ssm.model.MembercardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from membercard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from membercard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from membercard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.itcast.ssm.model.MembercardExample" >
+    delete from membercard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.itcast.ssm.model.Membercard" >
+    insert into membercard (id, memberId, memberCardId, 
+      cardStatus, cardGrade, openDate, 
+      discount, balance, totalPoint, 
+      totalConsumption, totalRecharge, memberName
+      )
+    values (#{id,jdbcType=BIGINT}, #{memberid,jdbcType=VARCHAR}, #{membercardid,jdbcType=VARCHAR}, 
+      #{cardstatus,jdbcType=SMALLINT}, #{cardgrade,jdbcType=VARCHAR}, #{opendate,jdbcType=TIMESTAMP}, 
+      #{discount,jdbcType=DECIMAL}, #{balance,jdbcType=DECIMAL}, #{totalpoint,jdbcType=INTEGER}, 
+      #{totalconsumption,jdbcType=DECIMAL}, #{totalrecharge,jdbcType=DECIMAL}, #{membername,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.itcast.ssm.model.Membercard" >
+    insert into membercard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberid != null" >
+        memberId,
+      </if>
+      <if test="membercardid != null" >
+        memberCardId,
+      </if>
+      <if test="cardstatus != null" >
+        cardStatus,
+      </if>
+      <if test="cardgrade != null" >
+        cardGrade,
+      </if>
+      <if test="opendate != null" >
+        openDate,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="totalpoint != null" >
+        totalPoint,
+      </if>
+      <if test="totalconsumption != null" >
+        totalConsumption,
+      </if>
+      <if test="totalrecharge != null" >
+        totalRecharge,
+      </if>
+      <if test="membername != null" >
+        memberName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="membercardid != null" >
+        #{membercardid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardstatus != null" >
+        #{cardstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="cardgrade != null" >
+        #{cardgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="opendate != null" >
+        #{opendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="totalpoint != null" >
+        #{totalpoint,jdbcType=INTEGER},
+      </if>
+      <if test="totalconsumption != null" >
+        #{totalconsumption,jdbcType=DECIMAL},
+      </if>
+      <if test="totalrecharge != null" >
+        #{totalrecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="membername != null" >
+        #{membername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.itcast.ssm.model.MembercardExample" resultType="java.lang.Integer" >
+    select count(*) from membercard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update membercard
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberid != null" >
+        memberId = #{record.memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membercardid != null" >
+        memberCardId = #{record.membercardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardstatus != null" >
+        cardStatus = #{record.cardstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.cardgrade != null" >
+        cardGrade = #{record.cardgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opendate != null" >
+        openDate = #{record.opendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalpoint != null" >
+        totalPoint = #{record.totalpoint,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalconsumption != null" >
+        totalConsumption = #{record.totalconsumption,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalrecharge != null" >
+        totalRecharge = #{record.totalrecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.membername != null" >
+        memberName = #{record.membername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update membercard
+    set id = #{record.id,jdbcType=BIGINT},
+      memberId = #{record.memberid,jdbcType=VARCHAR},
+      memberCardId = #{record.membercardid,jdbcType=VARCHAR},
+      cardStatus = #{record.cardstatus,jdbcType=SMALLINT},
+      cardGrade = #{record.cardgrade,jdbcType=VARCHAR},
+      openDate = #{record.opendate,jdbcType=TIMESTAMP},
+      discount = #{record.discount,jdbcType=DECIMAL},
+      balance = #{record.balance,jdbcType=DECIMAL},
+      totalPoint = #{record.totalpoint,jdbcType=INTEGER},
+      totalConsumption = #{record.totalconsumption,jdbcType=DECIMAL},
+      totalRecharge = #{record.totalrecharge,jdbcType=DECIMAL},
+      memberName = #{record.membername,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.itcast.ssm.model.Membercard" >
+    update membercard
+    <set >
+      <if test="memberid != null" >
+        memberId = #{memberid,jdbcType=VARCHAR},
+      </if>
+      <if test="membercardid != null" >
+        memberCardId = #{membercardid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardstatus != null" >
+        cardStatus = #{cardstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="cardgrade != null" >
+        cardGrade = #{cardgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="opendate != null" >
+        openDate = #{opendate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="totalpoint != null" >
+        totalPoint = #{totalpoint,jdbcType=INTEGER},
+      </if>
+      <if test="totalconsumption != null" >
+        totalConsumption = #{totalconsumption,jdbcType=DECIMAL},
+      </if>
+      <if test="totalrecharge != null" >
+        totalRecharge = #{totalrecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="membername != null" >
+        memberName = #{membername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.itcast.ssm.model.Membercard" >
+    update membercard
+    set memberId = #{memberid,jdbcType=VARCHAR},
+      memberCardId = #{membercardid,jdbcType=VARCHAR},
+      cardStatus = #{cardstatus,jdbcType=SMALLINT},
+      cardGrade = #{cardgrade,jdbcType=VARCHAR},
+      openDate = #{opendate,jdbcType=TIMESTAMP},
+      discount = #{discount,jdbcType=DECIMAL},
+      balance = #{balance,jdbcType=DECIMAL},
+      totalPoint = #{totalpoint,jdbcType=INTEGER},
+      totalConsumption = #{totalconsumption,jdbcType=DECIMAL},
+      totalRecharge = #{totalrecharge,jdbcType=DECIMAL},
+      memberName = #{membername,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.itcast.ssm.model.MembercardExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from membercard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
