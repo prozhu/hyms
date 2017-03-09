@@ -3,7 +3,6 @@ package cn.itcast.ssm.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.mapper.MemberMapper;
@@ -12,7 +11,6 @@ import cn.itcast.ssm.model.MemberExample;
 import cn.itcast.ssm.service.SysService;
 import cn.itcast.ssm.util.MD5;
 
-@Service
 public class SysServiceImpl implements SysService {
 
     @Autowired

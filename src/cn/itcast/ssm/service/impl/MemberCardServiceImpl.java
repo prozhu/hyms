@@ -20,7 +20,6 @@ import cn.itcast.ssm.model.Cardrechargerecord;
 import cn.itcast.ssm.model.Cardrecord;
 import cn.itcast.ssm.model.Consumerecord;
 import cn.itcast.ssm.model.Member;
-import cn.itcast.ssm.model.MemberExample;
 import cn.itcast.ssm.model.Membercard;
 import cn.itcast.ssm.model.MembercardExample;
 import cn.itcast.ssm.model.Pointrecord;

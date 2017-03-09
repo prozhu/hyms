@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import cn.itcast.ssm.mapper.CardrecordMapper;
 import cn.itcast.ssm.model.Cardrecord;
 import cn.itcast.ssm.model.CardrecordExample;
-import cn.itcast.ssm.model.PointrecordExample;
 import cn.itcast.ssm.service.CardRecordService;
 import cn.itcast.ssm.util.RandomUtils;
 import cn.itcast.ssm.util.StringUitl;

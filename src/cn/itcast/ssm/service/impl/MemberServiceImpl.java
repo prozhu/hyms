@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.ssm.exception.CustomException;
@@ -34,7 +33,6 @@ import cn.itcast.ssm.util.MD5;
 import cn.itcast.ssm.util.RandomUtils;
 import cn.itcast.ssm.util.StringUitl;
 
-@Service
 public class MemberServiceImpl implements MemberService {
 
     //注入mapper代理对象

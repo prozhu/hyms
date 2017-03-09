@@ -33,8 +33,8 @@
             <c:if test="${member.membertype == 0 }">
 	            <div class="wu-toolbar-search">
 		                <label>起始时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="startTime" id = "startTime">
-		                <label>结束时间：</label><input class="easyui-datebox" editable = "false"  style="width:100px" name="endTime" id = "endTime">
-		                <label>关键词：</label><input class="wu-text easyui-tooltip" onkeyup="findAllByCondition()"  style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
+		                <label>结束时间：</label><input class="easyui-datebox " editable = "false"  style="width:100px" name="endTime" id = "endTime">
+		                <label>关键词：</label><input class="wu-text easyui-tooltip"  style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
 		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()">开始检索</a>
 	            </div>
             </c:if>
@@ -88,6 +88,7 @@
 </div>
 <!-- End of easyui-dialog -->
 <script type="text/javascript">
+
 $.extend($.fn.validatebox.defaults.rules, {
     mobile: {// 验证手机号码
         validator: function (value) {

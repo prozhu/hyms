@@ -1,7 +1,5 @@
 package cn.itcast.ssm.controller;
 
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +24,7 @@ public class LoginController extends BaseController{
 	
 	@Autowired
 	private SysService sysService;
+	
 	
 	//用户登陆提交方法
 	/**

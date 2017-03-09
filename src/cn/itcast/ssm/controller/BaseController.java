@@ -2,11 +2,16 @@ package cn.itcast.ssm.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class BaseController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
+public class BaseController {
+	
     /**
      * @description: 向页面写回json格式的字符串
      * @author ：zc

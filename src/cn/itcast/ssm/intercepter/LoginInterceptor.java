@@ -26,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         String url = request.getRequestURI();
         
         //除了 login.action的url之外， 其他所有的URL都必须进行拦截register.action
-        if (url.indexOf("login.action") >= 0 || url.indexOf("checkLoginName.action") > 0 || url.indexOf("register.action") > 0 || url.indexOf("success.action") > 0) {
+        if (url.indexOf("login.action") >= 0 || url.indexOf("test.action") > 0 || url.indexOf("checkLoginName.action") > 0 || url.indexOf("register.action") > 0 || url.indexOf("success.action") > 0) {
             return true;
         }
         //获取session中保存的member信息
