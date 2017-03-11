@@ -183,8 +183,8 @@ public class MemberServiceImpl implements MemberService {
         if (!newPwd.equals(oldPwd)) {
             state = 2;
           //发送邮件通知密码被修改
-            if (!StringUitl.isNullOrEmpty(m.getEmail())) {
-            	mailSenderUtil.sendMail(m.getEmail(), "密码修改提醒！", "尊敬的用户，您的密码被修改了，请注意账号安全！");
+            if (!StringUitl.isNullOrEmpty(member.getEmail())) {
+            	mailSenderUtil.sendMail(member.getEmail(), "密码修改提醒！", "尊敬的用户，您的密码被修改了，请注意账号安全！");
             }
         }
         if (state == 0) {

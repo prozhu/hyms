@@ -20,11 +20,14 @@ import cn.itcast.ssm.model.Cardrechargerecord;
 import cn.itcast.ssm.model.Cardrecord;
 import cn.itcast.ssm.model.Consumerecord;
 import cn.itcast.ssm.model.Member;
+import cn.itcast.ssm.model.MemberExample;
+import cn.itcast.ssm.model.MemberExample.Criteria;
 import cn.itcast.ssm.model.Membercard;
 import cn.itcast.ssm.model.MembercardExample;
 import cn.itcast.ssm.model.Pointrecord;
 import cn.itcast.ssm.service.MemberCardService;
 import cn.itcast.ssm.service.MemberService;
+import cn.itcast.ssm.util.MailSenderUtil;
 import cn.itcast.ssm.util.RandomUtils;
 import cn.itcast.ssm.util.StringUitl;
 
@@ -42,7 +45,9 @@ public class MemberCardServiceImpl implements MemberCardService {
     private ConsumerecordMapper consumerecordMapper;
     @Autowired
     private CardrechargerecordMapper cardrechargerecordMapper;
-
+	@Autowired
+	private MailSenderUtil mailSenderUtil;
+	
     @Transactional
     @Override
     public void saveMemberCard(String ids, MemberService memberService) throws Exception {
@@ -221,6 +226,11 @@ public class MemberCardServiceImpl implements MemberCardService {
     public Integer updateMemberCard(String recharge, String consume, String id, String point) throws CustomException {
         //1. 首先通过id 查询会员卡信息
         Membercard memberCard = findMemberCardById(id);
+        //查询出会员的邮箱，以便于邮件的发送
+        MemberExample me = new MemberExample();
+		Criteria createCriteria = me.createCriteria();
+		createCriteria.andMemberidEqualTo(memberCard.getMemberid());
+		List<Member> list = memberMapper.selectByExample(me);
        
         //是否积分调整
         if (!StringUitl.isNullOrEmpty(point)) {
@@ -236,8 +246,12 @@ public class MemberCardServiceImpl implements MemberCardService {
             pointRecord.setMembercardid(memberCard.getMembercardid());
             pointRecord.setMemberid(memberCard.getMemberid());
             pointRecord.setMembername(memberCard.getMembername());
-            pointrecordMapper.insert(pointRecord);
-        }
+			if (pointrecordMapper.insert(pointRecord) > 0) {
+				if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
+					mailSenderUtil.sendMail(list.get(0).getEmail(), "会员卡积分提醒！", "尊敬的用户，由于某些原因, 在 "+ RandomUtils.formatTime(new Date())+" 您的积分在原积分基础上调整了 " + point + "分");
+				}
+			}
+		}
         
         //是否充值
         if (!StringUitl.isNullOrEmpty(recharge)) {
@@ -250,8 +264,11 @@ public class MemberCardServiceImpl implements MemberCardService {
             card.setMemberid(memberCard.getMemberid());
             card.setMembername(memberCard.getMembername());
             card.setRechargemoney(new Long(recharge));
-            cardrechargerecordMapper.insert(card);
-            
+            if (cardrechargerecordMapper.insert(card) > 0) {
+            	if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
+					mailSenderUtil.sendMail(list.get(0).getEmail(), "会员卡充值提醒！", "尊敬的用户，您的会员卡在" + RandomUtils.formatTime(new Date()) +"充值了 " + recharge + "元");
+				}
+            }
         }
         //是否消费
         if (!StringUitl.isNullOrEmpty(consume)) {
@@ -287,6 +304,7 @@ public class MemberCardServiceImpl implements MemberCardService {
             consumeRecord.setMemberid(memberCard.getMemberid());
             consumeRecord.setMembername(memberCard.getMembername());
             consumerecordMapper.insert(consumeRecord);
+ 
             //为会员卡添加积分信息
             memberCard.setTotalpoint(memberCard.getTotalpoint() + (int)(Math.ceil(Double.parseDouble(consume))));
             //添加积分记录
@@ -297,7 +315,12 @@ public class MemberCardServiceImpl implements MemberCardService {
             pointRecord.setMembercardid(memberCard.getMembercardid());
             pointRecord.setMemberid(memberCard.getMemberid());
             pointRecord.setMembername(memberCard.getMembername());
-            pointrecordMapper.insert(pointRecord);
+            if (pointrecordMapper.insert(pointRecord) > 0) {
+            	if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
+					mailSenderUtil.sendMail(list.get(0).getEmail(), "会员卡消费获取积分提醒！", "尊敬的用户，您的会员卡在" 
+            	+ RandomUtils.formatTime(new Date())+" 消费了" + consumeRecord.getConsumemoney() + "元, 获取了" + pointRecord.getPoints() +"积分！" );
+				}
+            }
         }
         return membercardMapper.updateByPrimaryKey(memberCard);
     }

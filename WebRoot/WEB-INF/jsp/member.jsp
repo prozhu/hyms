@@ -392,6 +392,8 @@ $.extend($.fn.validatebox.defaults.rules, {
 				text : '取消',
 				iconCls : 'icon-cancel',
 				handler : function() {
+					//解决弹出窗口关闭后，验证消息还显示在页面的最上面
+					$('.tooltip.tooltip-right').hide(); 
 					$('#wu-dialog').dialog('close');
 				}
 			} ]
@@ -453,6 +455,8 @@ $.extend($.fn.validatebox.defaults.rules, {
 				text : '取消',
 				iconCls : 'icon-cancel',
 				handler : function() {
+					//解决弹出窗口关闭后，验证消息还显示在页面的最上面
+                    $('.tooltip.tooltip-right').hide(); 
 					$('#wu-dialog').dialog('close');
 				}
 			} ]
