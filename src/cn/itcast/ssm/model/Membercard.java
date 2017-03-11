@@ -84,12 +84,28 @@ public class Membercard {
         this.discount = discount;
     }
 
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
     public Integer getTotalpoint() {
         return totalpoint;
     }
 
     public void setTotalpoint(Integer totalpoint) {
         this.totalpoint = totalpoint;
+    }
+
+    public BigDecimal getTotalconsumption() {
+        return totalconsumption;
+    }
+
+    public void setTotalconsumption(BigDecimal totalconsumption) {
+        this.totalconsumption = totalconsumption;
     }
 
     public Long getTotalrecharge() {
@@ -107,22 +123,4 @@ public class Membercard {
     public void setMembername(String membername) {
         this.membername = membername == null ? null : membername.trim();
     }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public BigDecimal getTotalconsumption() {
-        return totalconsumption;
-    }
-
-    public void setTotalconsumption(BigDecimal totalconsumption) {
-        this.totalconsumption = totalconsumption;
-    }
-
-    
 }

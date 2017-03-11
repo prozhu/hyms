@@ -77,6 +77,10 @@
                 <td align="right">电话号码:</td>
                 <td><input type="text" name="phone" class="wu-text easyui-validatebox" required = "true" validtype="mobile"  id="phone"  /></td>
             </tr>
+             <tr>
+                <td align="right">电子邮件:</td>
+                <td><input type="text" name="email" class="wu-text easyui-validatebox"  validtype="email"  id="email"  /></td>
+            </tr>
             <tr>
                 <td valign="top" align="right">备 注:</td>
                 <td>
@@ -474,7 +478,7 @@ $.extend($.fn.validatebox.defaults.rules, {
 		}, {
 			field : 'membername',
 			title : '会员名称',
-			width : 80
+			width : 70
 		}, {
 			field : 'loginname',
 			title : '登录名',
@@ -483,7 +487,7 @@ $.extend($.fn.validatebox.defaults.rules, {
 		}, {
 			field : 'loginpwd',
 			title : '登录密码',
-			width : 180
+			width : 200
 		/* formatter : function(value, row, index) {
 			return "***********************";
 		} */
@@ -501,6 +505,10 @@ $.extend($.fn.validatebox.defaults.rules, {
 			title : '电话号码',
 			width : 100
 		}, {
+            field : 'email',
+            title : '邮箱',
+            width : 150
+        }, {
 			field : 'membertype',
 			title : '会员类型',
 			width : 80,

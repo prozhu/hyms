@@ -18,7 +18,7 @@ import cn.itcast.ssm.model.Member;
 import cn.itcast.ssm.service.MemberService;
 import cn.itcast.ssm.service.SysService;
 import cn.itcast.ssm.util.JSONUtil;
-import cn.itcast.ssm.util.JsonUtils;
+import cn.itcast.ssm.util.MailSenderUtil;
 import cn.itcast.ssm.util.StringUitl;
 import cn.itcast.ssm.util.excel.DjExcelCreator;
 import cn.itcast.ssm.util.excel.DjExcelDataRender;
@@ -34,7 +34,7 @@ public class MemberController extends BaseController{
 	
 	@Autowired
     private SysService sysService;
-	
+
 	
 	/**
 	 * @description:用户注册

@@ -40,7 +40,6 @@ public class Consumerecord {
         this.membercardid = membercardid == null ? null : membercardid.trim();
     }
 
-
     public BigDecimal getConsumemoney() {
         return consumemoney;
     }

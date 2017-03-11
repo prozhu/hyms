@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.itcast.ssm.model.Member;
 import cn.itcast.ssm.service.SysService;
 import cn.itcast.ssm.util.JSONUtil;
+import cn.itcast.ssm.util.MailSenderUtil;
 
 /**
  *用户登录的Controller
@@ -25,6 +26,14 @@ public class LoginController extends BaseController{
 	@Autowired
 	private SysService sysService;
 	
+	@Autowired
+	private MailSenderUtil mailSenderUtil;
+	
+	@RequestMapping("/hello")
+	public String hello() {
+		mailSenderUtil.sendMail("496659989@qq.com", "面貌", "233534");
+		return null;
+	}
 	
 	//用户登陆提交方法
 	/**

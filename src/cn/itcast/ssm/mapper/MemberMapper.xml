@@ -14,6 +14,7 @@
     <result column="age" property="age" jdbcType="INTEGER" />
     <result column="registertime" property="registertime" jdbcType="TIMESTAMP" />
     <result column="state" property="state" jdbcType="SMALLINT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, memberId, memberName, loginName, loginPwd, sex, phone, remark, memberType, age, 
-    registertime, state
+    registertime, state, email
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.itcast.ssm.model.MemberExample" >
     select
@@ -111,13 +112,13 @@
     insert into member (id, memberId, memberName, 
       loginName, loginPwd, sex, 
       phone, remark, memberType, 
-      age, registertime, state
-      )
+      age, registertime, state, 
+      email)
     values (#{id,jdbcType=BIGINT}, #{memberid,jdbcType=VARCHAR}, #{membername,jdbcType=VARCHAR}, 
       #{loginname,jdbcType=VARCHAR}, #{loginpwd,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{membertype,jdbcType=CHAR}, 
-      #{age,jdbcType=INTEGER}, #{registertime,jdbcType=TIMESTAMP}, #{state,jdbcType=SMALLINT}
-      )
+      #{age,jdbcType=INTEGER}, #{registertime,jdbcType=TIMESTAMP}, #{state,jdbcType=SMALLINT}, 
+      #{email,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.itcast.ssm.model.Member" >
     insert into member
@@ -158,6 +159,9 @@
       <if test="state != null" >
         state,
       </if>
+      <if test="email != null" >
+        email,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -195,6 +199,9 @@
       </if>
       <if test="state != null" >
         #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -243,6 +250,9 @@
       <if test="record.state != null" >
         state = #{record.state,jdbcType=SMALLINT},
       </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -261,7 +271,8 @@
       memberType = #{record.membertype,jdbcType=CHAR},
       age = #{record.age,jdbcType=INTEGER},
       registertime = #{record.registertime,jdbcType=TIMESTAMP},
-      state = #{record.state,jdbcType=SMALLINT}
+      state = #{record.state,jdbcType=SMALLINT},
+      email = #{record.email,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -302,6 +313,9 @@
       <if test="state != null" >
         state = #{state,jdbcType=SMALLINT},
       </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -317,7 +331,8 @@
       memberType = #{membertype,jdbcType=CHAR},
       age = #{age,jdbcType=INTEGER},
       registertime = #{registertime,jdbcType=TIMESTAMP},
-      state = #{state,jdbcType=SMALLINT}
+      state = #{state,jdbcType=SMALLINT},
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select resultMap="BaseResultMap" parameterType="cn.itcast.ssm.model.MemberExample" id="selectByExampleWithRowbounds" >

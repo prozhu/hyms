@@ -30,6 +30,7 @@ import cn.itcast.ssm.model.Pointrecord;
 import cn.itcast.ssm.model.PointrecordExample;
 import cn.itcast.ssm.service.MemberService;
 import cn.itcast.ssm.util.MD5;
+import cn.itcast.ssm.util.MailSenderUtil;
 import cn.itcast.ssm.util.RandomUtils;
 import cn.itcast.ssm.util.StringUitl;
 
@@ -48,7 +49,9 @@ public class MemberServiceImpl implements MemberService {
     private MembercardMapper membercardMapper;
     @Autowired
     private CardrecordMapper cardrecordMapper;
-
+	@Autowired
+	private MailSenderUtil mailSenderUtil;
+	
   
     @Transactional
     @Override
@@ -56,9 +59,10 @@ public class MemberServiceImpl implements MemberService {
 			// 设置会员的类型（管理员或会员）
 			member.setMemberid(RandomUtils.getUUID());
 			member.setMembertype("1");
-			member.setRemark("");
+			member.setRemark(StringUitl.isNullOrEmpty(member.getRemark())?"": member.getRemark());
 			member.setRegistertime(new Date());
 			member.setState((short) 0);
+			member.setEmail(StringUitl.isNullOrEmpty(member.getEmail())?"": member.getEmail());
 			if (member != null) {
 				// 密码md5 加密
 				member.setLoginpwd(new MD5().getMD5ofStr(member.getLoginpwd()));
@@ -171,12 +175,17 @@ public class MemberServiceImpl implements MemberService {
         member.setRegistertime(m.getRegistertime());
         member.setState(m.getState());
         member.setLoginname(m.getLoginname());
+        member.setEmail(StringUitl.isNullOrEmpty(member.getEmail())?"":member.getEmail());
         
         Integer state =  memberMapper.updateByPrimaryKey(member);
         
         //如果密码修改了就返回2，并强制用户重新登录
         if (!newPwd.equals(oldPwd)) {
             state = 2;
+          //发送邮件通知密码被修改
+            if (!StringUitl.isNullOrEmpty(m.getEmail())) {
+            	mailSenderUtil.sendMail(m.getEmail(), "密码修改提醒！", "尊敬的用户，您的密码被修改了，请注意账号安全！");
+            }
         }
         if (state == 0) {
             return 0;
