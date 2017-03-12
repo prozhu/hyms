@@ -184,7 +184,7 @@ public class MemberServiceImpl implements MemberService {
             state = 2;
           //发送邮件通知密码被修改
             if (!StringUitl.isNullOrEmpty(member.getEmail())) {
-            	mailSenderUtil.sendMail(member.getEmail(), "密码修改提醒:", "尊敬的用户，您的账户:"
+            	mailSenderUtil.send(member.getEmail(), "密码修改提醒:", "尊敬的用户，您的账户:"
             + member.getLoginname() +" 在"+ RandomUtils.formatTime(new Date()) 
             +"时密码被修改了，请注意账号安全！");
             }

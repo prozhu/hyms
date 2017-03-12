@@ -330,6 +330,7 @@ public class MemberCardServiceImpl implements MemberCardService {
         return membercardMapper.updateByPrimaryKey(memberCard);
     }
 
+    @Transactional
     @Override
     public void updateMemberCard(String ids, String flag) throws Exception {
         String[] idd = null;
@@ -353,6 +354,12 @@ public class MemberCardServiceImpl implements MemberCardService {
         Membercard membercard = new Membercard();
         for(String id : idList) {
             membercard = membercardMapper.selectByPrimaryKey(new Long(id));
+            //查询出会员的邮箱，以便于邮件的发送
+            MemberExample me = new MemberExample();
+    		Criteria createCriteria = me.createCriteria();
+    		createCriteria.andMemberidEqualTo(membercard.getMemberid());
+    		List<Member> list = memberMapper.selectByExample(me);
+    		
             //需要保存会员卡激活、挂失记录
             cardrecord.setChangetime(new Date());
             cardrecord.setMembercardid(membercard.getMembercardid());
@@ -372,7 +379,15 @@ public class MemberCardServiceImpl implements MemberCardService {
                 membercard.setCardstatus((short)3);
             }
             membercardMapper.updateByPrimaryKey(membercard);
-            cardrecordMapper.insert(cardrecord);
+            //cardrecordMapper.insert(cardrecord);
+            //会员卡的激活、注销、挂失、解除挂失操作都通过邮箱通知用户
+            if (cardrecordMapper.insert(cardrecord) > 0) {
+            	if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
+					mailSenderUtil.send(list.get(0).getEmail(), "会员卡状态变更提醒！", "尊敬的用户，您卡号为: " 
+            	+ membercard.getMembercardid() + " 的会员卡在 :" 
+            	+ RandomUtils.formatTime(new Date())+" 时，被" + cardrecord.getOperationtype() + "了,请周知！"  );
+				}
+            }
         }
     }
     

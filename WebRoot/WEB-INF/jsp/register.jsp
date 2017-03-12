@@ -42,6 +42,7 @@
         }).ajaxValidator({
             type: "post",
             dataType: "json",
+        	async : true,
             url: "${baseurl}member/checkLoginName.action",
             success: function (data) {
                 if (data) {
@@ -85,6 +86,14 @@
 		}).regexValidator({
 			regExp : "(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)",
 			onError : "电话号码格式不正确"
+		});
+		
+		jQuery("#email").formValidator({
+			onShow : "请输入电子邮箱",
+			onCorrect : "正确"
+		}).regexValidator({
+			regExp : "(^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$)",
+			onError : "电话邮箱格式不正确"
 		});
 	});
 </script>
@@ -137,6 +146,13 @@
 				<td style="width: 100px"><input type="text" name="phone"  id="phone"
 					value="" /></td>
 				<td><div id="phoneTip" style="width: 200px"></div></td>
+			</tr>
+			
+			<tr>
+				<td>电子邮箱：</td>
+				<td style="width: 100px"><input type="text" name="email"  id="email"
+					value="" /></td>
+				<td><div id="emailTip" style="width: 200px"></div></td>
 			</tr>
 
 			<tr>
