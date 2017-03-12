@@ -250,7 +250,7 @@ public class MemberCardServiceImpl implements MemberCardService {
 				if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
 					mailSenderUtil.send(list.get(0).getEmail(), "会员卡积分提醒！", "尊敬的用户，由于某些原因, 在 "
 				+ RandomUtils.formatTime(new Date())+" 您卡号为："+ memberCard.getMembercardid()
-				+" 的会员卡的积分调整了 " + point + "积分，请周知！");
+				+" 的会员卡积分调整了 " + point + "积分，请周知！");
 				}
 			}
 		}
