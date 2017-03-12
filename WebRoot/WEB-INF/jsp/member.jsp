@@ -44,7 +44,7 @@
     </div>
 </div>
 <!-- Begin of easyui-dialog -->
-<div id="wu-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
+<div id="wu-dialog" class="easyui-dialog" data-options=" closable: false,closed:true,iconCls:'icon-save'" style="width:400px; padding:10px;">
 	<!-- 表单 -->
     <form id="wu-form" method="post"  >
         <input type="hidden" name="id" class="wu-text"/>
@@ -418,12 +418,6 @@ $.extend($.fn.validatebox.defaults.rules, {
 	 * 打开修改窗口
 	 */
 	function openEdit() {
-	      $('#loginname').validatebox({
-	            required : false,
-	            validType :"remote['${baseurl}member/checkLoginName.action',  'loginname']",
-	            invalidMessage : '该用户已被注册！'
-	        });
-		$('#wu-form').form('clear');
 		//获取勾选的行信息
 		var member = $('#wu-datagrid').datagrid('getSelections');
 		//alert(item.productid);return;
@@ -436,6 +430,14 @@ $.extend($.fn.validatebox.defaults.rules, {
 			$.messager.alert("温馨提示", "只能选择一条数据进行修改!");
 			return false;
 		}
+		
+	   /*    $('#loginname').validatebox({
+	            required : false,
+	            validType :"remote['${baseurl}member/checkLoginName.action',  'loginname']",
+	            invalidMessage : '该用户已被注册！'
+	      }); */
+		$('#wu-form').form('clear');
+		
 		//加载选中行的数据到表单中填充
 		$('#wu-form').form('load', member[0]);
 		//将loginname输入框给禁用掉，禁用用户修改
