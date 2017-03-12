@@ -14,27 +14,37 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
 	<!-- 加载邮件配置文件 -->
-	<!-- 这里需要注意一点，在多个spring配置文件中，读取外部配置文件来为bean注入属性时，如果需要在不同spring配置文件中
-	读取不同的外部properties文件，需要在<context:property-placeholder location=""/>标签里面添加 属性：ignore-unresolvable="true"
-	如果不加，则会出现错误 -->
-	<context:property-placeholder location="classpath:mail.properties"  ignore-unresolvable="true"/>
-	
-    <!-- 邮件发送器 163  -->  
-    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  
-        <property name="host" value="${mail.host}" />  
-        <property name="username" value="${mail.username}" />  
-        <property name="password" value="${mail.password}" />  
-        <property name="defaultEncoding" value="UTF-8"></property>  
-        <property name="javaMailProperties">  
-            <props>  
-                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>  
-            </props>  
-        </property>  
-    </bean>  
-    
-        <!-- 邮件工具类的注入 -->
-      <bean id="mailSenderUtil" class="cn.itcast.ssm.util.MailSenderUtil">  
-        <property name="javaMailSender" ref="javaMailSender"/>  
-    </bean>  
-      
+	<!-- 这里需要注意一点，在多个spring配置文件中，读取外部配置文件来为bean注入属性时，如果需要在不同spring配置文件中 读取不同的外部properties文件，需要在<context:property-placeholder 
+		location=""/>标签里面添加 属性：ignore-unresolvable="true" 如果不加，则会出现错误 -->
+	<context:property-placeholder location="classpath:mail.properties"
+		ignore-unresolvable="true" />
+
+	<!-- 邮件发送器 163 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.host}" />
+		<property name="username" value="${mail.username}" />
+		<property name="password" value="${mail.password}" />
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.debug">${mail.debug}</prop>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!--线程池异步发送邮件 -->
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="queueCapacity" value="25" />
+	</bean>
+
+	<!-- 邮件工具类的注入 -->
+	<bean id="mailSenderUtil" class="cn.itcast.ssm.util.MailSenderUtil">
+		<property name="javaMailSender" ref="javaMailSender" />
+	</bean>
+
 </beans>

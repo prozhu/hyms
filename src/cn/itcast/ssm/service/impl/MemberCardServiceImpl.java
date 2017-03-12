@@ -248,7 +248,9 @@ public class MemberCardServiceImpl implements MemberCardService {
             pointRecord.setMembername(memberCard.getMembername());
 			if (pointrecordMapper.insert(pointRecord) > 0) {
 				if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
-					mailSenderUtil.sendMail(list.get(0).getEmail(), "会员卡积分提醒！", "尊敬的用户，由于某些原因, 在 "+ RandomUtils.formatTime(new Date())+" 您的积分在原积分基础上调整了 " + point + "分");
+					mailSenderUtil.send(list.get(0).getEmail(), "会员卡积分提醒！", "尊敬的用户，由于某些原因, 在 "
+				+ RandomUtils.formatTime(new Date())+" 您卡号为："+ memberCard.getMembercardid()
+				+" 的会员卡的积分调整了 " + point + "积分，请周知！");
 				}
 			}
 		}
@@ -266,7 +268,9 @@ public class MemberCardServiceImpl implements MemberCardService {
             card.setRechargemoney(new Long(recharge));
             if (cardrechargerecordMapper.insert(card) > 0) {
             	if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
-					mailSenderUtil.sendMail(list.get(0).getEmail(), "会员卡充值提醒！", "尊敬的用户，您的会员卡在" + RandomUtils.formatTime(new Date()) +"充值了 " + recharge + "元");
+					mailSenderUtil.send(list.get(0).getEmail(), "会员卡充值提醒！", "尊敬的用户，您的卡号为：" 
+            	+ memberCard.getMembercardid() 
+							+ " 的会员卡在" + RandomUtils.formatTime(new Date()) +"充值了 " + recharge + "元");
 				}
             }
         }
@@ -317,7 +321,8 @@ public class MemberCardServiceImpl implements MemberCardService {
             pointRecord.setMembername(memberCard.getMembername());
             if (pointrecordMapper.insert(pointRecord) > 0) {
             	if (!StringUitl.isNullOrEmpty(list.get(0).getEmail())) {
-					mailSenderUtil.sendMail(list.get(0).getEmail(), "会员卡消费获取积分提醒！", "尊敬的用户，您的会员卡在" 
+					mailSenderUtil.send(list.get(0).getEmail(), "会员卡消费获取积分提醒！", "尊敬的用户，您卡号为: " 
+            	+ memberCard.getMembercardid() + " 的会员卡在" 
             	+ RandomUtils.formatTime(new Date())+" 消费了" + consumeRecord.getConsumemoney() + "元, 获取了" + pointRecord.getPoints() +"积分！" );
 				}
             }
