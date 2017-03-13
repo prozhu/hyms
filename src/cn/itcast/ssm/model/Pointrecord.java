@@ -1,9 +1,16 @@
 package cn.itcast.ssm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Pointrecord {
-    private Long id;
+public class Pointrecord implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2832017390241250110L;
+
+	private Long id;
 
     private String memberid;
 

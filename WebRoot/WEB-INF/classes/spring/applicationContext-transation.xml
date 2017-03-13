@@ -14,13 +14,15 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
 
-	 <!-- 使用声明式事务配置，可以有效规范代码 -->
-	 
-	 <!-- 事务管理器 -->
-	 <bean id="transactionManager" 
-	 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	 	<property name="dataSource" ref="dataSource"/>
-	 </bean>
-	 <!-- 使用annotation定义事务 -->
-	     <tx:annotation-driven transaction-manager="transactionManager"/>  
+	<!-- 使用声明式事务配置，可以有效规范代码 -->
+
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
 </beans>

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.ssm.exception.CustomException;
@@ -143,7 +144,7 @@ public class MemberCardServiceImpl implements MemberCardService {
         return idList;
     }
     
-    
+    @Cacheable(value="default")
     @Override
     public List<Membercard> findMemberCardByMemberId(String memberid) {
         MembercardExample membercardExample = new MembercardExample();
@@ -155,14 +156,15 @@ public class MemberCardServiceImpl implements MemberCardService {
         }
         return null;
     }
-    
+    @Cacheable(value="default")
     public Membercard findMemberCardById(String id) {
         if (!StringUitl.isNullOrEmpty(id)) {
             return membercardMapper.selectByPrimaryKey(new Long(id));
         }
         return null;
     }
-
+    
+    @Cacheable(value="default")
     @Override
     public List<Membercard> findMemberCardByCondition(String pageNow, String pageSize, String startTime, String endTime,
             String keyword, String sort, String order, MemberService memberService) {
@@ -202,6 +204,7 @@ public class MemberCardServiceImpl implements MemberCardService {
         return null;
     }
 
+    @Cacheable(value="default")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword) {
         MembercardExample membercardExample = new MembercardExample();

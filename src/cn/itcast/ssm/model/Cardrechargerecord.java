@@ -1,9 +1,15 @@
 package cn.itcast.ssm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cardrechargerecord {
-    private Long id;
+public class Cardrechargerecord implements Serializable {  
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8997029612436007510L;
+
+	private Long id;
 
     private String memberid;
 

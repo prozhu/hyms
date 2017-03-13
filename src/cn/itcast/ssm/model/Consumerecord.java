@@ -1,10 +1,17 @@
 package cn.itcast.ssm.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Consumerecord {
-    private Long id;
+public class Consumerecord implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5510392696164510385L;
+
+	private Long id;
 
     private String memberid;
 

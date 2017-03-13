@@ -1,9 +1,16 @@
 package cn.itcast.ssm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Member {
-    private Long id;
+public class Member implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6200063360094495513L;
+
+	private Long id;
 
     private String memberid;
 

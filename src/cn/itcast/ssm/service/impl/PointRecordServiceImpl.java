@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import cn.itcast.ssm.mapper.PointrecordMapper;
 import cn.itcast.ssm.model.Pointrecord;
@@ -18,6 +19,7 @@ public class PointRecordServiceImpl implements PointRecordService {
     @Autowired
     private PointrecordMapper pointrecordMapper;
 
+    @Cacheable(value="default")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null,null, startTime, endTime, keyword,null, null, memberid);
@@ -79,6 +81,7 @@ public class PointRecordServiceImpl implements PointRecordService {
     	return condition;
     }
     
+    @Cacheable(value="default")
     @Override
     public List<Pointrecord> findPointRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

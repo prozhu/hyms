@@ -1,11 +1,18 @@
 package cn.itcast.ssm.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MembercardExample {
-    protected String orderByClause;
+public class MembercardExample implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6896540984751280353L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

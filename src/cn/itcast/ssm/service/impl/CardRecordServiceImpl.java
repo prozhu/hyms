@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import cn.itcast.ssm.mapper.CardrecordMapper;
 import cn.itcast.ssm.model.Cardrecord;
@@ -18,6 +19,7 @@ public class CardRecordServiceImpl implements CardRecordService {
     @Autowired
     private CardrecordMapper cardrecordMapper;
 
+    @Cacheable(value="default")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null, null, startTime, endTime, keyword, null, null, memberid);
@@ -79,7 +81,7 @@ public class CardRecordServiceImpl implements CardRecordService {
         return condition;
     }
     
-    
+    @Cacheable(value="default")
     @Override
     public List<Cardrecord> findCardRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

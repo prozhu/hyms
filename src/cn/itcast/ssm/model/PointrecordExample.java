@@ -1,11 +1,18 @@
 package cn.itcast.ssm.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PointrecordExample {
-    protected String orderByClause;
+public class PointrecordExample implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6660574905528619071L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

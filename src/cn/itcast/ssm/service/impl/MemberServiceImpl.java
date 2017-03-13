@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.itcast.ssm.exception.CustomException;
@@ -52,7 +53,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MailSenderUtil mailSenderUtil;
 	
-  
+   
     @Transactional
     @Override
     public Integer save(Member member) {
@@ -128,6 +129,7 @@ public class MemberServiceImpl implements MemberService {
     }
     
 
+    @Cacheable(value="findAllMember")
     @Override
     public List<Member> findAll(String pageNow, String pageSize) {
         MemberExample memberExample = new MemberExample();
@@ -260,7 +262,7 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
-
+    @Cacheable(value="default")
     @Override
     public List<Member> findMemberByCondition(String pageNow, String pageSize, String startTime, String endTime,
             String keyword, String sort, String order) {

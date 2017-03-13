@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import cn.itcast.ssm.mapper.CardrechargerecordMapper;
 import cn.itcast.ssm.model.Cardrechargerecord;
@@ -17,7 +18,7 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
     
     @Autowired
     private CardrechargerecordMapper cardrechargerecordMapper;
-
+    @Cacheable(value="default")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null, null, startTime, endTime, keyword, null, null, memberid);
@@ -76,6 +77,7 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
     	return condition;
     }
     
+    @Cacheable(value="default")
     @Override
     public List<Cardrechargerecord> findCardRechargeRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
@@ -87,7 +89,8 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
         }
         return null;
     }
-
+    
+    @Cacheable(value="default")
     @Override
     public List<Cardrechargerecord> findCardRechargeRecordByMemberIdAndCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import cn.itcast.ssm.mapper.ConsumerecordMapper;
 import cn.itcast.ssm.model.Consumerecord;
@@ -18,6 +19,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
     @Autowired
     private ConsumerecordMapper consumerecordMapper;
 
+    @Cacheable(value="default")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberId) {
     	List<Object> condition = buildSelectCondition(null,null, startTime, endTime, keyword,null, null, memberId);
@@ -78,6 +80,8 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
         return condition;
 	 
     }
+    
+    @Cacheable(value="default")
     @Override
     public List<Consumerecord> findConsumeRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
