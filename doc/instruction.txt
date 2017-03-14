@@ -1,0 +1,14 @@
+
+一、项目说明
+
+该项目采用了redis作为缓存，使用nginx和两个tomcat作为集群和一个mysql的数据库！
+项目启动之前的动作：
+
+1. 将hyms1.sql 数据库脚本代码，放到mysql 中执行，建立hyms数据库，以及填充相应的测试数据！(sql基本中含有相应的数据)
+2. nginx负责请求分发，由于采用iphash的方式，所以集群中不用担心session共享的问题。nginx监听 localhost/127.0.0.1:8080端口
+3. 两个tomcat的端口号需要手动的更改为8888和9999
+4. 由于将redis作为缓存，所以项目启动前需要先开启redis
+5. 为了操作简单，nginx和tomcat和redis都采用windows版本！
+
+@author： prozhu 
+@date ：2017年3月14日 20:07:26
