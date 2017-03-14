@@ -31,7 +31,6 @@ public class RedisCache implements Cache{
        
     @Override    
     public String getName() {  
-       // TODO Auto-generated method stub    
         return this.name;    
     }  
   

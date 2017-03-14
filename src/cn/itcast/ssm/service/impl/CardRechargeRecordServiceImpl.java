@@ -77,7 +77,9 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
     	return condition;
     }
     
-    @Cacheable(value="default")
+    @Cacheable(value="CardRechargeRecord.findCardRechargeRecordByCondition", 
+    		key = "'CardRechargeRecord.findCardRechargeRecordByCondition'+#sort + #order+#pageNow+#pageSize",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Cardrechargerecord> findCardRechargeRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

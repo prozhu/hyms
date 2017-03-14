@@ -509,12 +509,12 @@ function loss() {
 					required : true
 				}
 			}
-		}, {
+		}/* , {
 			field : 'memberid',
 			title : '会员编号',
 			align : 'center',
 			width : 180
-		}, {
+		} */, {
 			field : 'membercardid',
 			title : '会员卡编号',
 			width : 130,
@@ -608,26 +608,6 @@ function loss() {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

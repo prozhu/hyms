@@ -26,15 +26,6 @@ public class LoginController extends BaseController{
 	@Autowired
 	private SysService sysService;
 	
-	@Autowired
-	private MailSenderUtil mailSenderUtil;
-	
-	@RequestMapping("/hello")
-	public String hello() {
-		mailSenderUtil.sendMail("496659989@qq.com", "面貌", "233534");
-		return null;
-	}
-	
 	//用户登陆提交方法
 	/**
 	 * @param session

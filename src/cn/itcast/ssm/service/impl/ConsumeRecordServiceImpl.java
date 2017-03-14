@@ -19,7 +19,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
     @Autowired
     private ConsumerecordMapper consumerecordMapper;
 
-    @Cacheable(value="default")
+    
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberId) {
     	List<Object> condition = buildSelectCondition(null,null, startTime, endTime, keyword,null, null, memberId);
@@ -81,7 +81,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
 	 
     }
     
-    @Cacheable(value="default")
+    
     @Override
     public List<Consumerecord> findConsumeRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
@@ -94,6 +94,9 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
         return null;
     }
 
+    @Cacheable(value="ConsumeRecord.findConsumeRecordByMemberIdAndCondition", 
+    		key = "'findConsumeRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Consumerecord> findConsumeRecordByMemberIdAndCondition(String memberid
     		, String pageNow,

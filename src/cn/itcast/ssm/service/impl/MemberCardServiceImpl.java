@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +50,9 @@ public class MemberCardServiceImpl implements MemberCardService {
 	@Autowired
 	private MailSenderUtil mailSenderUtil;
 	
+	
     @Transactional
+    @CacheEvict(value="MemberCard.findMemberCardByCondition",allEntries=true) 
     @Override
     public void saveMemberCard(String ids, MemberService memberService) throws Exception {
         String[] idd = null;
@@ -144,7 +147,8 @@ public class MemberCardServiceImpl implements MemberCardService {
         return idList;
     }
     
-    @Cacheable(value="default")
+    @Cacheable(value="MemberCard.findMemberCardByMemberId", 
+    		key = "'MemberCard.findMemberCardByMemberId'+#memberid")
     @Override
     public List<Membercard> findMemberCardByMemberId(String memberid) {
         MembercardExample membercardExample = new MembercardExample();
@@ -156,7 +160,8 @@ public class MemberCardServiceImpl implements MemberCardService {
         }
         return null;
     }
-    @Cacheable(value="default")
+    
+    
     public Membercard findMemberCardById(String id) {
         if (!StringUitl.isNullOrEmpty(id)) {
             return membercardMapper.selectByPrimaryKey(new Long(id));
@@ -164,7 +169,9 @@ public class MemberCardServiceImpl implements MemberCardService {
         return null;
     }
     
-    @Cacheable(value="default")
+    @Cacheable(value="MemberCard.findMemberCardByCondition", 
+	key = "'MemberCard.findMemberCardByCondition'+#sort + #order+#pageNow+#pageSize+#pageSize",
+	condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Membercard> findMemberCardByCondition(String pageNow, String pageSize, String startTime, String endTime,
             String keyword, String sort, String order, MemberService memberService) {
@@ -204,7 +211,9 @@ public class MemberCardServiceImpl implements MemberCardService {
         return null;
     }
 
-    @Cacheable(value="default")
+    @Cacheable(value="MemberCard.getCount", 
+    		key = "'MemberCard.getCount'",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword) {
         MembercardExample membercardExample = new MembercardExample();
@@ -225,6 +234,7 @@ public class MemberCardServiceImpl implements MemberCardService {
     }
 
     @Transactional
+    @CacheEvict(value="MemberCard.findMemberCardByCondition",allEntries=true) 
     @Override
     public Integer updateMemberCard(String recharge, String consume, String id, String point) throws CustomException {
         //1. 首先通过id 查询会员卡信息
@@ -334,6 +344,7 @@ public class MemberCardServiceImpl implements MemberCardService {
     }
 
     @Transactional
+    @CacheEvict(value="MemberCard.findMemberCardByCondition",allEntries=true) 
     @Override
     public void updateMemberCard(String ids, String flag) throws Exception {
         String[] idd = null;

@@ -490,14 +490,14 @@ $.extend($.fn.validatebox.defaults.rules, {
 			title : '登录名',
 			width : 80,
 			sortable : true
-		}, {
+		},/*  {
 			field : 'loginpwd',
 			title : '登录密码',
-			width : 200
-		/* formatter : function(value, row, index) {
+			width : 200,
+		 formatter : function(value, row, index) {
 			return "***********************";
-		} */
-		}, {
+		} 
+		}, */ {
 			field : 'sex',
 			title : '性别',
 			width : 50

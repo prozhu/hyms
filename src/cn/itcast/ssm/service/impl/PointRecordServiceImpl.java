@@ -19,7 +19,6 @@ public class PointRecordServiceImpl implements PointRecordService {
     @Autowired
     private PointrecordMapper pointrecordMapper;
 
-    @Cacheable(value="default")
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null,null, startTime, endTime, keyword,null, null, memberid);
@@ -81,7 +80,6 @@ public class PointRecordServiceImpl implements PointRecordService {
     	return condition;
     }
     
-    @Cacheable(value="default")
     @Override
     public List<Pointrecord> findPointRecordByCondition(String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
@@ -94,6 +92,9 @@ public class PointRecordServiceImpl implements PointRecordService {
         return null;
     }
 
+    @Cacheable(value="PointRecord.findPointRecordByMemberIdAndCondition", 
+    		key = "'findPointRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Pointrecord> findPointRecordByMemberIdAndCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

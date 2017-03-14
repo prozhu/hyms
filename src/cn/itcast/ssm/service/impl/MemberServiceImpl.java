@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +56,8 @@ public class MemberServiceImpl implements MemberService {
 	
    
     @Transactional
+    //@CachePut(value="member.findMemberByCondition",key = "'member.findMemberByConditionnullnull'")
+    @CacheEvict(value="member.findMemberByCondition",allEntries=true) 
     @Override
     public Integer save(Member member) {
 			// 设置会员的类型（管理员或会员）
@@ -92,7 +95,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
-
+	@Cacheable(value="member.findMemberById", 
+    		key = "'member.findMemberById'+#id")
     @Override
     public Member findMemberById(String id) {
         if (!StringUitl.isNullOrEmpty(id)) {
@@ -102,6 +106,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Transactional
+    @CacheEvict(value="member.findMemberByCondition",allEntries=true) 
     @Override
     public Integer deleteMember(String ids) throws CustomException {
         //将多个ids分割为数组
@@ -129,7 +134,7 @@ public class MemberServiceImpl implements MemberService {
     }
     
 
-    @Cacheable(value="findAllMember")
+    @Cacheable(value="member.findAll", key = "'member.findAll'+#pageNow + #pageSize")
     @Override
     public List<Member> findAll(String pageNow, String pageSize) {
         MemberExample memberExample = new MemberExample();
@@ -151,6 +156,8 @@ public class MemberServiceImpl implements MemberService {
 
    
     @Transactional
+    //会员信息更新后，清空所有缓存
+    @CacheEvict(value="member.findMemberByCondition",allEntries=true) 
     @Override
     public Integer updateMember(Member member) {
         //1. 首先根据id查询出原始member信息
@@ -204,6 +211,10 @@ public class MemberServiceImpl implements MemberService {
    * @param membername ： 会员名称
    * @param memberid : 会员编号
    */
+    @CacheEvict(value={"member.findMemberByCondition", "member.findMemberById",
+    		"CardRechargeRecord.findCardRechargeRecordByCondition", "CardRecord.findCardRecordByMemberIdAndCondition"
+    		, "ConsumeRecord.findConsumeRecordByMemberIdAndCondition","PointRecord.findPointRecordByMemberIdAndCondition"
+    		, "MemberCard.findMemberCardByMemberId"},allEntries=true) 
     @Transactional
     private void updateMemberName(String membername, String memberid) {
         //消费记录
@@ -262,7 +273,9 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
-    @Cacheable(value="default")
+    @Cacheable(value="member.findMemberByCondition", 
+    		key = "'member.findMemberByCondition'+#sort + #order+#pageNow+#pageSize",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Member> findMemberByCondition(String pageNow, String pageSize, String startTime, String endTime,
             String keyword, String sort, String order) {
