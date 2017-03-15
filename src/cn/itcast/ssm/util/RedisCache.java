@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.concurrent.Callable;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
@@ -147,6 +148,12 @@ public class RedisCache implements Cache{
         public ValueWrapper putIfAbsent(Object key, Object value) {  
             // TODO Auto-generated method stub  
             return null;  
-        }  
+        }
+
+		@Override
+		public <T> T get(Object arg0, Callable<T> arg1) {
+			// TODO Auto-generated method stub
+			return null;
+		}  
   
 }  
