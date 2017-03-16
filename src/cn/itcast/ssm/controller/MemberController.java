@@ -1,5 +1,7 @@
 package cn.itcast.ssm.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.model.Member;
@@ -42,7 +45,7 @@ public class MemberController extends BaseController{
 	 * @date ：2017-2-6 下午5:22:30 
 	 * @return
 	 */
-	@RequestMapping("/register")
+	@RequestMapping(value = "/register", method = {RequestMethod.POST})
 	public String  register(Member member, HttpServletResponse response, HttpSession session) {
 	    //获取session中的用户信息
 	    Member oldMember = (Member) session.getAttribute("member");
@@ -79,10 +82,8 @@ public class MemberController extends BaseController{
 	 * @author ：zc
 	 * @date ：2017-2-7 下午2:25:53 
 	 * @return 1表示：不存在    0：表示存在
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
 	 */
-	@RequestMapping("/checkLoginName")
+	@RequestMapping(value = "/checkLoginName", method = {RequestMethod.GET})
 	public String isCheckLoginName(String loginname, HttpServletResponse response) throws Exception {
 	    if (StringUitl.isNullOrEmpty(loginname)) {
 	        return writeAjaxResponse(JSONUtil.getJson(false), response);
@@ -102,7 +103,7 @@ public class MemberController extends BaseController{
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/delMember")
+	@RequestMapping(value = "/delMember", method = {RequestMethod.POST})
 	public String delMember(HttpServletRequest request, HttpServletResponse response, String ids) {
 	    Integer num = null;
         try {
@@ -126,7 +127,7 @@ public class MemberController extends BaseController{
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping("/exportMemberInfoExcel")
+	@RequestMapping(value = "/exportMemberInfoExcel", method = {RequestMethod.POST})
 	public String exportMemberInfoExcel(String startTime, String endTime, String keyword, HttpSession session, HttpServletResponse response) throws Exception {
 	  //获取session中的会员信息
         Member member = (Member) session.getAttribute("member");

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.model.Cardrechargerecord;
@@ -43,7 +44,7 @@ public class MemberCardController extends BaseController {
      * @param ids
      * @return
      */
-    @RequestMapping("/addMemberCard")
+    @RequestMapping(value = "/addMemberCard", method = {RequestMethod.POST})
     public String addMemberCard(HttpServletResponse response, String ids) {
         try {
             memberCardService.saveMemberCard(ids, memberService);
@@ -61,7 +62,7 @@ public class MemberCardController extends BaseController {
    * @param response
    * @return
    */
-    @RequestMapping("/memberCardActivate")
+    @RequestMapping(value = "/memberCardActivate", method = {RequestMethod.POST})
     public String memberCardActivate(String ids, String flag,  HttpServletResponse response) {
         try {
             memberCardService.updateMemberCard(ids, flag);
@@ -154,7 +155,7 @@ public class MemberCardController extends BaseController {
      * @date ：2017-2-14 下午6:14:03 
      * @return
      */
-    @RequestMapping("/updateMemberCardInfo")
+    @RequestMapping(value = "/updateMemberCardInfo", method = {RequestMethod.POST})
     public String updateMemberCardInfo(String recharge, String consume, String id,  String point, HttpServletResponse response) {
         Integer state = 0;
         try {

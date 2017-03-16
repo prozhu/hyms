@@ -259,6 +259,7 @@ $.extend($.fn.validatebox.defaults.rules, {
 				$.ajax({
 					traditional : true,
 					url : '${baseurl}member/delMember.action',
+					type: 'post',
 					async : true,
 					dataType : 'json',
 					data : {

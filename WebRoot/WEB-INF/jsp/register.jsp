@@ -17,6 +17,7 @@
 	    	onSuccess:function(){
 	             $.ajax({
 	                    url : '${pageContext.request.contextPath }/member/register.action',
+	                    type : 'post',
 	                    data : $('#memberForm').serialize(),
 	                    success : function(data) {
 	                        if (data) {
@@ -40,7 +41,7 @@
             max: 20,
            onError : "用户名在5-20个字符之间"
         }).ajaxValidator({
-            type: "post",
+            type: "get",
             dataType: "json",
         	async : true,
             url: "${baseurl}member/checkLoginName.action",
