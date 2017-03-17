@@ -5,8 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="${baseurl}css/email.css"/> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true">
@@ -91,6 +93,7 @@
     </form>
 </div>
 <!-- End of easyui-dialog -->
+<link rel="stylesheet" href="${baseurl}css/email.css"/> 
 <script type="text/javascript">
 
 $.extend($.fn.validatebox.defaults.rules, {
@@ -308,7 +311,8 @@ $.extend($.fn.validatebox.defaults.rules, {
 		}
 
 	}
-
+//邮箱自动补全
+$("#email").mailAutoComplete();//使用方法
 	
     // 用户密码修改之后，强制其重新登录
     function returnUrlByTime(messages) {
@@ -539,5 +543,7 @@ $.extend($.fn.validatebox.defaults.rules, {
 		} ] ]
 	});
 </script>
+
 </body>
+
 </html>

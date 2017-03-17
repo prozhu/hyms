@@ -9,6 +9,7 @@
 
 </head>
 <%@ include file="/WEB-INF/jsp/common_js.jsp"%>
+<link rel="stylesheet" href="${baseurl}css/email.css"/>  
 <script type="text/javascript">
 
 	$(document).ready(function() {
@@ -96,7 +97,11 @@
 			regExp : "(^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$)",
 			onError : "电话邮箱格式不正确"
 		});
+		$("#email").mailAutoComplete();//使用方法
 	});
+	
+	
+	
 </script>
 <body>
 	<form id="memberForm"

@@ -253,8 +253,12 @@ function loss() {
 			//正负整数和0
 			var s = /^(0|[1-9][0-9]*|-[1-9][0-9]*)$/;
 			if (!s.test(result)) {
-				$.messager.alert("温馨提示", "请输入整数!");
+				$.messager.alert("温馨提示", "请输入正负整数!");
 				return false;
+			} 
+		     if ((member[0].totalpoint + result) < 0){
+				$.messager.alert("温馨提示", "积分余额不足!");
+                return false;
 			} else {
 				if (result) {
 				$.ajax({
@@ -268,7 +272,7 @@ function loss() {
 					dataType:'json',
 					success : function(data) {
 						if (data.success) {
-							$.messager.alert('信息提示','积分调整成功！','info');
+							$.messager.alert('信息提示','积分调整成功!','info');
 							$('#wu-datagrid4').datagrid('reload');
 						} else {
 							$.messager.alert('信息提示',data.msg,'info');
@@ -308,6 +312,10 @@ function loss() {
 				if (!reg.test(result)) {
 					$.messager.alert("温馨提示", "消费金额错误!");
 					return false;
+				}
+				if (member[0].balance < result) {
+					$.messager.alert("温馨提示", "余额不足!");
+                    return false;
 				}
 				$.ajax({
 					url : '${baseurl}memberCard/updateMemberCardInfo.action',
