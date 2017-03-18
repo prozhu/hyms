@@ -46,20 +46,24 @@
 	 * 有条件的查询所有会员信息
 	 */
 	function findAllByCondition() {
-	    $('#wu-datagrid5').datagrid('load', {
-	        startTime : $.trim($('input[name="startTime"]').val()) + ' 00:00:00',
-	        endTime : $.trim($('input[name="endTime"]').val()) + ' 23:59:59',
-	        keyword : $.trim($("#keyword").val())
-	    });
+		var startTime = $.trim($('input[name="startTime"]').val());
+		var endTime = $.trim($('input[name="endTime"]').val());
+		$('#wu-datagrid5').datagrid('load', {
+			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
+			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
+			keyword : $.trim($("#keyword").val())
+		});
 	}
 
 	   //导出会员卡积分表
     function exportMemberInfoExcel() {
-        download("${baseurl}pointRecord/exportExcel.action", {
-            startTime : $('input[name="startTime"]').val(),
-            endTime : $('input[name="endTime"]').val(),
-            keyword : $("#keyword").val()
-        });
+		var startTime = $.trim($('input[name="startTime"]').val());
+		var endTime = $.trim($('input[name="endTime"]').val());
+		download("${baseurl}pointRecord/exportExcel.action", {
+			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
+	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
+	        keyword : $("#keyword").val()
+		});
     }
 
 	//打印报表

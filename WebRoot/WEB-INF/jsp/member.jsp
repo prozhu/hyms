@@ -125,9 +125,11 @@ $.extend($.fn.validatebox.defaults.rules, {
 	 * 有条件的查询所有会员信息
 	 */
 	function findAllByCondition() {
+		var startTime = $.trim($('input[name="startTime"]').val());
+		var endTime = $.trim($('input[name="endTime"]').val());
 		$('#wu-datagrid').datagrid('load', {
-			startTime : $.trim($('input[name="startTime"]').val()) + ' 00:00:00',
-			endTime : $.trim($('input[name="endTime"]').val()) + ' 23:59:59',
+			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
+			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
 			keyword : $.trim($("#keyword").val())
 		});
 	}
@@ -229,10 +231,12 @@ $.extend($.fn.validatebox.defaults.rules, {
 
 	//导出会员信息表格
 	function exportMemberInfoExcel() {
+		var startTime = $.trim($('input[name="startTime"]').val());
+		var endTime = $.trim($('input[name="endTime"]').val());
 		download("${baseurl}member/exportMemberInfoExcel.action", {
-			startTime : $('input[name="startTime"]').val(),
-			endTime : $('input[name="endTime"]').val(),
-			keyword : $("#keyword").val()
+			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
+	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
+	        keyword : $("#keyword").val()
 		});
 	}
 
@@ -248,10 +252,14 @@ $.extend($.fn.validatebox.defaults.rules, {
 
 	//删除会员信息
 	function del() {
+		var members = $('#wu-datagrid').datagrid('getSelections');
+		var ids = [];
+		if (members == null || members.length == 0) {
+	           $.messager.alert('信息提示', '请选择一条用户信息！');
+	           return false;
+	    }
 		$.messager.confirm('信息提示', '确定要删除该记录？', function(result) {
 			if (result) {
-				var members = $('#wu-datagrid').datagrid('getSelections');
-				var ids = [];
 				$(members).each(function() {
 					if (this.membertype == 0) {
 						$.messager.alert('信息提示','管理员账号不允许删除！','info');  

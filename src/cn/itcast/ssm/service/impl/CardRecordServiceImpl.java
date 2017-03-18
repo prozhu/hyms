@@ -81,12 +81,14 @@ public class CardRecordServiceImpl implements CardRecordService {
         return condition;
     }
     
-    @Cacheable(value="default")
+    @Cacheable(value="CardRecord.findCardRecordByMemberIdAndCondition", 
+    		key = "'findCardRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
-    public List<Cardrecord> findCardRecordByCondition(String pageNow,
+    public List<Cardrecord> findCardRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order) {
-    	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, null);
+    	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
         List<Cardrecord> list = cardrecordMapper.selectByExampleWithRowbounds((CardrecordExample)condition.get(0), (RowBounds)condition.get(1));
         if (list.size() >  0 && list != null) {
             return list;
@@ -94,14 +96,4 @@ public class CardRecordServiceImpl implements CardRecordService {
         return null;
     }
 
-    @Cacheable(value="CardRecord.findCardRecordByMemberIdAndCondition", 
-    		key = "'findCardRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword ")
-    @Override
-    public List<Cardrecord> findCardRecordByMemberIdAndCondition(String memberid, String pageNow,
-            String pageSize, String startTime, String endTime, String keyword,
-            String sort, String order) {
-    	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
-        return cardrecordMapper.selectByExample((CardrecordExample)condition.get(0));
-    }
 }

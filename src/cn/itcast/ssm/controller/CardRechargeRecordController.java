@@ -56,11 +56,11 @@ public class CardRechargeRecordController extends BaseController{
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = cardRechargeRecordService.getCount(startTime, endTime, keyword, null);
-            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(null, pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         } else {
             //普通会员：查询个人信息
         	total = cardRechargeRecordService.getCount(startTime, endTime, keyword, member.getMemberid().toString());
-            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByMemberIdAndCondition(member.getMemberid().toString(), pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(member.getMemberid().toString(), pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         }
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("total", total);
@@ -87,10 +87,10 @@ public class CardRechargeRecordController extends BaseController{
         List<Cardrechargerecord> cardRechargeRecordList = new ArrayList<Cardrechargerecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
-            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(null, null, startTime, endTime, keyword, null, null);
+            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(null, null, null, startTime, endTime, keyword, null, null);
         } else {
             //普通会员：查询个人信息
-            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByMemberIdAndCondition(member.getMemberid().toString(), null, null, startTime, endTime, keyword,  null, null);
+            cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(member.getMemberid().toString(), null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员卡号", "充值金额", "充值时间"};
         String colKeys[] = { "membername", "membercardid", "rechargemoney", "changetime"};

@@ -57,11 +57,11 @@ public class ConsumeRecordController extends BaseController{
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = consumeRecordService.getCount(startTime, endTime, keyword, null);
-            consumeRecordList = consumeRecordService.findConsumeRecordByCondition(pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            consumeRecordList = consumeRecordService.findConsumeRecordByCondition(null, pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         } else {
             //普通会员：查询个人信息
         	total = consumeRecordService.getCount(startTime, endTime, keyword, member.getMemberid().toString());
-            consumeRecordList = consumeRecordService.findConsumeRecordByMemberIdAndCondition(member.getMemberid().toString()
+            consumeRecordList = consumeRecordService.findConsumeRecordByCondition(member.getMemberid().toString()
             		, pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         }
         Map<String, Object> result = new HashMap<String, Object>();
@@ -89,10 +89,10 @@ public class ConsumeRecordController extends BaseController{
         List<Consumerecord> consumeRecordList = new ArrayList<Consumerecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
-            consumeRecordList = consumeRecordService.findConsumeRecordByCondition(null, null, startTime, endTime, keyword,  null, null);
+            consumeRecordList = consumeRecordService.findConsumeRecordByCondition(null, null, null, startTime, endTime, keyword,  null, null);
         } else {
             //普通会员：查询个人信息
-            consumeRecordList = consumeRecordService.findConsumeRecordByMemberIdAndCondition(member.getMemberid().toString()
+            consumeRecordList = consumeRecordService.findConsumeRecordByCondition(member.getMemberid().toString()
             		, null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员卡号", "消费金额", "消费时间"};

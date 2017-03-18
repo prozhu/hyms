@@ -80,27 +80,18 @@ public class PointRecordServiceImpl implements PointRecordService {
     	return condition;
     }
     
+    @Cacheable(value="PointRecord.findPointRecordByMemberIdAndCondition", 
+    		key = "'findPointRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
+    		condition = "null == #startTime and null == #endTime and null == #keyword")
     @Override
-    public List<Pointrecord> findPointRecordByCondition(String pageNow,
+    public List<Pointrecord> findPointRecordByCondition(String memberid,String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order) {
-    	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, null);
+    	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
         List<Pointrecord> list = pointrecordMapper.selectByExampleWithRowbounds((PointrecordExample)condition.get(0), (RowBounds)condition.get(1));
         if (list.size() >  0 && list != null) {
             return list;
         }
         return null;
     }
-
-    @Cacheable(value="PointRecord.findPointRecordByMemberIdAndCondition", 
-    		key = "'findPointRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword ")
-    @Override
-    public List<Pointrecord> findPointRecordByMemberIdAndCondition(String memberid, String pageNow,
-            String pageSize, String startTime, String endTime, String keyword,
-            String sort, String order) {
-    	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
-        return pointrecordMapper.selectByExample((PointrecordExample)condition.get(0));
-    }
-
 }

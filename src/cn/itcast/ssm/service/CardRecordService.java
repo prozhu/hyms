@@ -31,18 +31,8 @@ public interface CardRecordService {
      * @param order
      * @return
      */
-    List<Cardrecord> findCardRecordByCondition(String pageNow,
+    List<Cardrecord> findCardRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 
-    /**
-     * @description: 通过会员编号查询所有会员卡激活或者 挂失记录
-     * @author ：zc
-     * @date ：2017-2-15 下午7:39:34 
-     * @param memberid
-     * @return
-     */
-    List<Cardrecord> findCardRecordByMemberIdAndCondition(String memberid, String pageNow,
-            String pageSize, String startTime, String endTime, String keyword,
-            String sort, String order);
 }

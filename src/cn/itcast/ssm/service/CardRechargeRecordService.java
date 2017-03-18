@@ -31,19 +31,7 @@ public interface CardRechargeRecordService {
      * @param order
      * @return
      */
-    List<Cardrechargerecord> findCardRechargeRecordByCondition(String pageNow,
-            String pageSize, String startTime, String endTime, String keyword,
-            String sort, String order);
-
-
-    /**
-     * @description: 通过会员编号查询会员卡充值记录
-     * @author ：zc
-     * @date ：2017-2-15 下午7:34:38 
-     * @param string
-     * @return
-     */
-    List<Cardrechargerecord> findCardRechargeRecordByMemberIdAndCondition(String memberid, String pageNow,
+    List<Cardrechargerecord> findCardRechargeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 

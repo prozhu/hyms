@@ -46,19 +46,23 @@
 	 * 有条件的查询所有会员信息
 	 */
 	function findAllByCondition() {
+		var startTime = $.trim($('input[name="startTime"]').val());
+		var endTime = $.trim($('input[name="endTime"]').val());
 		$('#wu-datagrid3').datagrid('load', {
-	        startTime : $.trim($('input[name="startTime"]').val()) + ' 00:00:00',
-	        endTime : $.trim($('input[name="endTime"]').val()) + ' 23:59:59',
-	        keyword : $.trim($("#keyword").val())
-	    });
+			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
+			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
+			keyword : $.trim($("#keyword").val())
+		});
 	}
 
 
 	//导出会员信息表格
 	function exportMemberInfoExcel() {
+		var startTime = $.trim($('input[name="startTime"]').val());
+		var endTime = $.trim($('input[name="endTime"]').val());
 		download("${baseurl}consumeRecord/exportExcel.action", {
-			startTime : $('input[name="startTime"]').val(),
-	        endTime : $('input[name="endTime"]').val(),
+			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
+	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
 	        keyword : $("#keyword").val()
 		});
 	}

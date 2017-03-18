@@ -57,11 +57,11 @@ public class PointRecordController extends BaseController{
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = pointRecordService.getCount(startTime, endTime, keyword, null);
-            pointRecordList = pointRecordService.findPointRecordByCondition(pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            pointRecordList = pointRecordService.findPointRecordByCondition(null, pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         } else {
             //普通会员：查询个人信息
         	total = pointRecordService.getCount(startTime, endTime, keyword, member.getMemberid().toString());
-            pointRecordList = pointRecordService.findPointRecordByMemberIdAndCondition(member.getMemberid().toString(), pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            pointRecordList = pointRecordService.findPointRecordByCondition(member.getMemberid().toString(), pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         }
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("total", total);
@@ -88,10 +88,10 @@ public class PointRecordController extends BaseController{
         List<Pointrecord> pointRecordList = new ArrayList<Pointrecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
-            pointRecordList = pointRecordService.findPointRecordByCondition(null, null, startTime, endTime, keyword,  null, null);
+            pointRecordList = pointRecordService.findPointRecordByCondition(null, null, null, startTime, endTime, keyword,  null, null);
         } else {
             //普通会员：查询个人信息
-            pointRecordList = pointRecordService.findPointRecordByMemberIdAndCondition(member.getMemberid().toString()
+            pointRecordList = pointRecordService.findPointRecordByCondition(member.getMemberid().toString()
             		, null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员编号", "会员卡号", "积分", "积分类型", "变更时间"};

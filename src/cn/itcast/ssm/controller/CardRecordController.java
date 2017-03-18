@@ -57,11 +57,11 @@ public class CardRecordController extends BaseController{
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = cardRecordService.getCount(startTime, endTime, keyword, null);
-            cardRecordList = cardRecordService.findCardRecordByCondition(pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            cardRecordList = cardRecordService.findCardRecordByCondition(null, pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         } else {
             //普通会员：查询个人信息
         	total = cardRecordService.getCount(startTime, endTime, keyword, member.getMemberid().toString());
-            cardRecordList = cardRecordService.findCardRecordByMemberIdAndCondition(member.getMemberid().toString(),pageNow, pageSize, startTime, endTime, keyword,  sort, order);
+            cardRecordList = cardRecordService.findCardRecordByCondition(member.getMemberid().toString(),pageNow, pageSize, startTime, endTime, keyword,  sort, order);
         }
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("total", total);
@@ -88,10 +88,10 @@ public class CardRecordController extends BaseController{
         List<Cardrecord> cardRecordList = new ArrayList<Cardrecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
-            cardRecordList = cardRecordService.findCardRecordByCondition(null, null, startTime, endTime, keyword,  null, null);
+            cardRecordList = cardRecordService.findCardRecordByCondition(null, null, null, startTime, endTime, keyword,  null, null);
         } else {
             //普通会员：查询个人信息
-            cardRecordList = cardRecordService.findCardRecordByMemberIdAndCondition(member.getMemberid().toString(),null, null, startTime, endTime, keyword,  null, null);
+            cardRecordList = cardRecordService.findCardRecordByCondition(member.getMemberid().toString(),null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员卡号", "操作类型", "消费时间"};
         String colKeys[] = { "membername", "membercardid", "operationtype", "changetime"};

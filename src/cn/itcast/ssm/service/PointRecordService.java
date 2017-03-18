@@ -30,19 +30,9 @@ public interface PointRecordService {
      * @param order
      * @return
      */
-    List<Pointrecord> findPointRecordByCondition(String pageNow,
+    List<Pointrecord> findPointRecordByCondition(String memberid,String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 
 
-    /**
-     * @description: 通过会员编号查询所有的积分记录
-     * @author ：zc
-     * @date ：2017-2-15 下午7:45:33 
-     * @param string
-     * @return
-     */
-    List<Pointrecord> findPointRecordByMemberIdAndCondition(String memberid, String pageNow,
-            String pageSize, String startTime, String endTime, String keyword,
-            String sort, String order);
 }

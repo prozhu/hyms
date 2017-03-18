@@ -30,19 +30,8 @@ public interface ConsumeRecordService {
      * @param order
      * @return
      */
-    List<Consumerecord> findConsumeRecordByCondition(String pageNow,
+    List<Consumerecord> findConsumeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 
-    /**
-     * @description: 通过会员编号查询所有消费记录(可分页、可搜索)
-     * @author ：zc
-     * @date ：2017-2-15 下午7:42:34 
-     * @param memberid
-     * @return
-     */
-    List<Consumerecord> findConsumeRecordByMemberIdAndCondition(String memberid
-    		, String pageNow,
-            String pageSize, String startTime, String endTime, String keyword,
-            String sort, String order);
 }
