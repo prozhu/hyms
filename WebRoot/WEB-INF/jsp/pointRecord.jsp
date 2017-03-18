@@ -47,8 +47,8 @@
 	 */
 	function findAllByCondition() {
 	    $('#wu-datagrid5').datagrid('load', {
-	        startTime : $.trim($('input[name="startTime"]').val()),
-	        endTime : $.trim($('input[name="endTime"]').val()),
+	        startTime : $.trim($('input[name="startTime"]').val()) + ' 00:00:00',
+	        endTime : $.trim($('input[name="endTime"]').val()) + ' 23:59:59',
 	        keyword : $.trim($("#keyword").val())
 	    });
 	}

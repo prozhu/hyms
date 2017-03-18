@@ -1,7 +1,5 @@
 package cn.itcast.ssm.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +19,6 @@ import cn.itcast.ssm.model.Member;
 import cn.itcast.ssm.service.MemberService;
 import cn.itcast.ssm.service.SysService;
 import cn.itcast.ssm.util.JSONUtil;
-import cn.itcast.ssm.util.MailSenderUtil;
 import cn.itcast.ssm.util.StringUitl;
 import cn.itcast.ssm.util.excel.DjExcelCreator;
 import cn.itcast.ssm.util.excel.DjExcelDataRender;
@@ -83,7 +80,7 @@ public class MemberController extends BaseController{
 	 * @date ：2017-2-7 下午2:25:53 
 	 * @return 1表示：不存在    0：表示存在
 	 */
-	@RequestMapping(value = "/checkLoginName", method = {RequestMethod.GET})
+	@RequestMapping(value = "/checkLoginName", method = {RequestMethod.POST})
 	public String isCheckLoginName(String loginname, HttpServletResponse response) throws Exception {
 	    if (StringUitl.isNullOrEmpty(loginname)) {
 	        return writeAjaxResponse(JSONUtil.getJson(false), response);

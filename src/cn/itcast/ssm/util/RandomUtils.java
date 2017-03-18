@@ -49,7 +49,7 @@ public class RandomUtils {
      * @throws ParseException
      */
    public static Date dateFromString(String date)  {
-       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
        try {
         return sdf.parse(date);
     } catch (ParseException e) {
