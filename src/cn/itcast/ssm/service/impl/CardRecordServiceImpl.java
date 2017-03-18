@@ -83,7 +83,7 @@ public class CardRecordServiceImpl implements CardRecordService {
     
     @Cacheable(value="CardRecord.findCardRecordByMemberIdAndCondition", 
     		key = "'findCardRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword ")
+    		condition = "null == #startTime and null == #endTime and null == #keyword and null == #memberid")
     @Override
     public List<Cardrecord> findCardRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

@@ -84,7 +84,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
     
     @Cacheable(value="ConsumeRecord.findConsumeRecordByMemberIdAndCondition", 
     		key = "'findConsumeRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword ")
+    		condition = "null == #startTime and null == #endTime and null == #keyword and null == #memberid")
     @Override
     public List<Consumerecord> findConsumeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
