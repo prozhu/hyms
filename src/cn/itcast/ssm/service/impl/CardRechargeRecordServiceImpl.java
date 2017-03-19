@@ -18,7 +18,7 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
     
     @Autowired
     private CardrechargerecordMapper cardrechargerecordMapper;
-    @Cacheable(value="default")
+
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null, null, startTime, endTime, keyword, null, null, memberid);
@@ -78,8 +78,8 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
     }
     
     @Cacheable(value="CardRechargeRecord.findCardRechargeRecordByCondition", 
-    		key = "'CardRechargeRecord.findCardRechargeRecordByCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword and null == #memberid")
+    		key = "'CardRechargeRecord.findCardRechargeRecordByCondition'+#sort + #order+#pageNow+#pageSize+#memberid",
+    		condition = "null == #startTime and null == #endTime and null == #keyword")
     @Override
     public List<Cardrechargerecord> findCardRechargeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

@@ -19,7 +19,7 @@ public class CardRecordServiceImpl implements CardRecordService {
     @Autowired
     private CardrecordMapper cardrecordMapper;
 
-    @Cacheable(value="default")
+
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null, null, startTime, endTime, keyword, null, null, memberid);
@@ -82,8 +82,8 @@ public class CardRecordServiceImpl implements CardRecordService {
     }
     
     @Cacheable(value="CardRecord.findCardRecordByMemberIdAndCondition", 
-    		key = "'findCardRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword and null == #memberid")
+    		key = "'findCardRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize+#memberid",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Cardrecord> findCardRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

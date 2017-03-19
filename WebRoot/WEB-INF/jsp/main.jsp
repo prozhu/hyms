@@ -97,7 +97,7 @@
         */  
         function addTab(title, href, iconCls, iframe){
         	//删除当前已经打开的tab 页面（保证每次只有一个页面被打开）
-        	removeTab();
+        	//removeTab();
         	var tabPanel = $('#wu-tabs');   
             if(!tabPanel.tabs('exists',title)){
                 var content = '<iframe scrolling="auto" frameborder="0"  src="'+ href +'" style="width:100%;height:100%;"></iframe>';

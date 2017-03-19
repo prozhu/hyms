@@ -81,8 +81,8 @@ public class PointRecordServiceImpl implements PointRecordService {
     }
     
     @Cacheable(value="PointRecord.findPointRecordByMemberIdAndCondition", 
-    		key = "'findPointRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize",
-    		condition = "null == #startTime and null == #endTime and null == #keyword and null == #memberid")
+    		key = "'findPointRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize+#memberid",
+    		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
     public List<Pointrecord> findPointRecordByCondition(String memberid,String pageNow,
             String pageSize, String startTime, String endTime, String keyword,

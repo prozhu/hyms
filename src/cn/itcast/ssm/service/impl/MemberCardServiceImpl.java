@@ -211,9 +211,7 @@ public class MemberCardServiceImpl implements MemberCardService {
         return null;
     }
 
-    @Cacheable(value="MemberCard.getCount", 
-    		key = "'MemberCard.getCount'",
-    		condition = "null == #startTime and null == #endTime and null == #keyword ")
+
     @Override
     public Integer getCount(String startTime, String endTime, String keyword) {
         MembercardExample membercardExample = new MembercardExample();
@@ -234,7 +232,13 @@ public class MemberCardServiceImpl implements MemberCardService {
     }
 
     @Transactional
-    @CacheEvict(value="MemberCard.findMemberCardByCondition",allEntries=true) 
+    @CacheEvict(value={
+    		"CardRechargeRecord.findCardRechargeRecordByMemberIdAndCondition", 
+    		"CardRecord.findCardRecordByMemberIdAndCondition"
+    		, "ConsumeRecord.findConsumeRecordByMemberIdAndCondition",
+    		"PointRecord.findPointRecordByMemberIdAndCondition"
+    		, "MemberCard.findMemberCardByMemberId", 
+    		"MemberCard.findMemberCardByCondition"},allEntries=true)
     @Override
     public Integer updateMemberCard(String recharge, String consume, String id, String point) throws CustomException {
         //1. 首先通过id 查询会员卡信息
