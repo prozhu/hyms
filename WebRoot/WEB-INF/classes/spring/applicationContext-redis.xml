@@ -70,7 +70,7 @@
                 <!-- 会员卡充值记录 -->
                 <bean class="cn.itcast.ssm.util.RedisCache">
                     <property name="redisTemplate" ref="redisTemplate" />
-                    <property name="name" value="CardRechargeRecord.findCardRechargeRecordByCondition" />
+                    <property name="name" value="CardRechargeRecord.findCardRechargeRecordByMemberIdAndCondition" />
                 </bean>
                 
                    <!-- 会员卡的卡记录(激活、挂失) -->

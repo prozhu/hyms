@@ -34,9 +34,9 @@
             </div>
             <c:if test="${member.membertype == 0 }">
 	            <div class="wu-toolbar-search">
-		                <label>起始时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="startTime" id = "startTime">
-		                <label>结束时间：</label><input class="easyui-datebox " editable = "false"  style="width:100px" name="endTime" id = "endTime">
-		                <label>关键词：</label><input class="wu-text easyui-tooltip"  style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
+		                <label>起始时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="startTime5" id = "startTime5">
+		                <label>结束时间：</label><input class="easyui-datebox " editable = "false"  style="width:100px" name="endTime5" id = "endTime5">
+		                <label>关键词：</label><input class="wu-text easyui-tooltip"  style="width:100px"  title = "可以通过会员名称搜索...." name="keyword5"  id = "keyword5">
 		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()">开始检索</a>
 	            </div>
             </c:if>
@@ -125,12 +125,12 @@ $.extend($.fn.validatebox.defaults.rules, {
 	 * 有条件的查询所有会员信息
 	 */
 	function findAllByCondition() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+		var startTime = $.trim($('input[name="startTime5"]').val());
+		var endTime = $.trim($('input[name="endTime5"]').val());
 		$('#wu-datagrid').datagrid('load', {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-			keyword : $.trim($("#keyword").val())
+			keyword : $.trim($("#keyword5").val())
 		});
 	}
 	
@@ -181,14 +181,14 @@ $.extend($.fn.validatebox.defaults.rules, {
 	 */
 	function addCard() {
 		 //获取勾选的数据
-        var members = $('#wu-datagrid').datagrid('getSelections');
+        var ms = $('#wu-datagrid').datagrid('getSelections');
         var ids = [];
-        if (members == null || members.length == 0) {
+        if (ms == null || ms.length == 0) {
             $.messager.alert('信息提示', '请选择一条用户信息！');
             return false;
         }
         //收集id信息
-        $(members).each(function() {
+        $(ms).each(function() {
             ids.push(this.id);
         }); 
 		$.messager.confirm('信息提示', '确定办理会员卡吗？', function(result) {
@@ -231,12 +231,12 @@ $.extend($.fn.validatebox.defaults.rules, {
 
 	//导出会员信息表格
 	function exportMemberInfoExcel() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+		var startTime = $.trim($('input[name="startTime5"]').val());
+		var endTime = $.trim($('input[name="endTime5"]').val());
 		download("${baseurl}member/exportMemberInfoExcel.action", {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-	        keyword : $("#keyword").val()
+	        keyword : $("#keyword5").val()
 		});
 	}
 

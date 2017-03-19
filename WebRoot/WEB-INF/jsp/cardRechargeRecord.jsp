@@ -14,16 +14,16 @@
         <!-- Begin of toolbar -->
         <div id="wu-toolbar4">
             <div class="wu-toolbar-button">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshRechargeRecord()" plain="true">刷新</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printRechargeRecord()" plain="true">打印</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportRechargeRecordExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
             </div>
 	            <div class="wu-toolbar-search">
-		                <label>起始时间：</label><input class="easyui-datebox" editable = "false"  style="width:100px" name="startTime" id = "startTime">
-		                <label>结束时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="endTime" id = "endTime">
-		                <label>关键词：</label><input class="wu-text easyui-tooltip"    style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
-		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()">开始检索</a>
+		                <label>起始时间：</label><input class="easyui-datebox" editable = "false"  style="width:100px" name="startTime1" id = "startTime1">
+		                <label>结束时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="endTime1" id = "endTime1">
+		                <label>关键词：</label><input class="wu-text easyui-tooltip"    style="width:100px"  title = "可以通过会员名称搜索...." name="keyword1"  id = "keyword1">
+		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findMemberCardRechargeByCondition()">开始检索</a>
 	            </div>
         </div>
         <!-- End of toolbar -->
@@ -34,37 +34,37 @@
 <script type="text/javascript">
 
 	/**
-	 * 有条件的查询所有会员信息
+	 * 有条件的查询所有的会员卡充值记录信息
 	 */
-	function findAllByCondition() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	function findMemberCardRechargeByCondition() {
+		var startTime = $.trim($('input[name="startTime1"]').val());
+		var endTime = $.trim($('input[name="endTime1"]').val());
 		$('#wu-datagrid2').datagrid('load', {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-			keyword : $.trim($("#keyword").val())
+			keyword : $.trim($("#keyword1").val())
 		});
 	}
 
 
-	//导出会员信息表格
-	function exportMemberInfoExcel() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	//导出会员卡充值记录报表
+	function exportRechargeRecordExcel() {
+		var startTime = $.trim($('input[name="startTime1"]').val());
+		var endTime = $.trim($('input[name="endTime1"]').val());
 		download("${baseurl}cardRechargeRecord/exportExcel.action", {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-	        keyword : $("#keyword").val()
+	        keyword : $("#keyword1").val()
 		});
 	}
 
 	//打印报表
-	function print() {
+	function printRechargeRecord() {
 		CreateFormPage("会员信息", $('#wu-datagrid2'));
 	}
 
 	//刷新表格数据
-	function refresh() {
+	function refreshRechargeRecord() {
 		$('#wu-datagrid2').datagrid('reload');
 	}
 
@@ -88,7 +88,7 @@
 		}, {
 			field : 'membername',
 			title : '会员名称',
-			width : 50
+			width : 40
 		}, {
 			field : 'memberid',
 			title : '会员编号',
@@ -97,7 +97,7 @@
 		}, {
 			field : 'membercardid',
 			title : '会员卡号',
-			width : 50
+			width : 55
 		}, {
 			field : 'rechargemoney',
 			title : '充值金额',

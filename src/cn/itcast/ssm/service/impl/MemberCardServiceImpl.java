@@ -231,7 +231,7 @@ public class MemberCardServiceImpl implements MemberCardService {
         return membercardMapper.countByExample(membercardExample);
     }
 
-    @Transactional
+   
     @CacheEvict(value={
     		"CardRechargeRecord.findCardRechargeRecordByMemberIdAndCondition", 
     		"CardRecord.findCardRecordByMemberIdAndCondition"
@@ -239,6 +239,7 @@ public class MemberCardServiceImpl implements MemberCardService {
     		"PointRecord.findPointRecordByMemberIdAndCondition"
     		, "MemberCard.findMemberCardByMemberId", 
     		"MemberCard.findMemberCardByCondition"},allEntries=true)
+    @Transactional
     @Override
     public Integer updateMemberCard(String recharge, String consume, String id, String point) throws CustomException {
         //1. 首先通过id 查询会员卡信息

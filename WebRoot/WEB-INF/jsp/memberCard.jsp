@@ -14,9 +14,9 @@
         <!-- Begin of toolbar -->
         <div id="wu-toolbar2">
             <div class="wu-toolbar-button">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshMemberCard()" plain="true">刷新</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printMemberCard()" plain="true">打印</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberCardExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
                 <c:if test="${member.membertype == 0 }">
 	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="consume()" plain="true">消费</a>
@@ -33,7 +33,7 @@
 		                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="startTime" id = "startTime">
 		                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="endTime" id = "endTime">
 		                <label>关键词：</label><input class="wu-text easyui-tooltip"    style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
-		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()">开始检索</a>
+		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findMemberCardByCondition()">开始检索</a>
 	            </div>
             </c:if>
         </div>
@@ -47,25 +47,25 @@
  */
  function cancel() {
 	    //获取勾选的行信息
-	    var member = $('#wu-datagrid4').datagrid('getSelections');
-	    if (member == null || member.length == 0) {
+	    var memberCard = $('#wu-datagrid4').datagrid('getSelections');
+	    if (memberCard == null || memberCard.length == 0) {
 	        $.messager.alert('信息提示', '请选择一条用户信息！');
 	        return false;
 	    }
 	    //修改信息，只能选择一条数据
-	    if (member.length != 1) {
+	    if (memberCard.length != 1) {
 	        $.messager.alert("温馨提示", "只能选择一个用户进行注销操作！");
 	        return false;
 	    }
 	    //会员卡在禁用(1)状态下：不允许注销
-	    if (member[0].cardstatus == 1) {
+	    if (memberCard[0].cardstatus == 1) {
 	        $.messager.alert("温馨提示", "会员卡在禁用状态下不允许注销！");
 	        return  false;
 	    }
 	    
 	    var ids = [];
 	    //收集id信息
-	    $(member).each(function() {
+	    $(memberCard).each(function() {
 	        ids.push(this.id);
 	    }); 
 	    $.messager.confirm('信息提示', '确定注销该会员卡吗？', function(result) {
@@ -96,24 +96,24 @@
  */
 function unloss() {
     //获取勾选的行信息
-    var member = $('#wu-datagrid4').datagrid('getSelections');
-    if (member == null || member.length == 0) {
+    var memberCard = $('#wu-datagrid4').datagrid('getSelections');
+    if (memberCard == null || memberCard.length == 0) {
         $.messager.alert('信息提示', '请选择一条用户信息！');
         return false;
     }
     //修改信息，只能选择一条数据
-    if (member.length != 1) {
+    if (memberCard.length != 1) {
         $.messager.alert("温馨提示", "只能选择一个用户解除会员卡挂失状态！");
         return false;
     }
     //会员卡在禁用(1)和挂失(2)状态下：不允许挂失
-    if (member[0].cardstatus == 1 || member[0].cardstatus == 0) {
+    if (memberCard[0].cardstatus == 1 || memberCard[0].cardstatus == 0) {
         $.messager.alert("温馨提示", "会员卡在禁用或者正常的状态下不允许解除挂失！");
         return  false;
     }
     var ids = [];
     //收集id信息
-    $(member).each(function() {
+    $(memberCard).each(function() {
         ids.push(this.id);
     }); 
     $.messager.confirm('信息提示', '确定解除该会员卡的挂失状态吗？', function(result) {
@@ -145,24 +145,24 @@ function unloss() {
  */
 function loss() {
     //获取勾选的行信息
-    var member = $('#wu-datagrid4').datagrid('getSelections');
-    if (member == null || member.length == 0) {
+    var memberCard = $('#wu-datagrid4').datagrid('getSelections');
+    if (memberCard == null || memberCard.length == 0) {
         $.messager.alert('信息提示', '请选择一条用户信息！');
         return false;
     }
     //修改信息，只能选择一条数据
-    if (member.length != 1) {
+    if (memberCard.length != 1) {
         $.messager.alert("温馨提示", "只能选择一个用户挂失会员卡！");
         return false;
     }
     //会员卡在禁用(1)和挂失(2)状态下：不允许挂失
-    if (member[0].cardstatus == 1 || member[0].cardstatus == 2) {
+    if (memberCard[0].cardstatus == 1 || memberCard[0].cardstatus == 2) {
     	$.messager.alert("温馨提示", "会员卡在禁用或者挂失的状态下不允许挂失！");
     	return  false;
     }
     var ids = [];
     //收集id信息
-    $(member).each(function() {
+    $(memberCard).each(function() {
         ids.push(this.id);
     }); 
     $.messager.confirm('信息提示', '确定挂失该会员卡吗？', function(result) {
@@ -193,14 +193,14 @@ function loss() {
 	 */
 	function activate() {
         //获取勾选的数据
-        var members = $('#wu-datagrid4').datagrid('getSelections');
+        var memberCards = $('#wu-datagrid4').datagrid('getSelections');
         var ids = [];
-        if (members == null || members.length == 0) {
+        if (memberCards == null || memberCards.length == 0) {
             $.messager.alert('信息提示', '请选择一条用户信息！');
             return false;
         }
         //收集id信息
-        $(members).each(function() {
+        $(memberCards).each(function() {
             ids.push(this.id);
         }); 
         $.messager.confirm('信息提示', '确定激活该会员卡吗？', function(result) {
@@ -233,19 +233,19 @@ function loss() {
 	 */
 	function adjustPoint() {
 		//获取勾选的行信息
-		var member = $('#wu-datagrid4').datagrid('getSelections');
+		var memberCard = $('#wu-datagrid4').datagrid('getSelections');
 		//alert(item.productid);return;
-		if (member == null || member.length == 0) {
+		if (memberCard == null || memberCard.length == 0) {
 			$.messager.alert('信息提示', '请选择一条用户信息！');
 			return false;
 		}
 		//修改信息，只能选择一条数据
-		if (member.length != 1) {
+		if (memberCard.length != 1) {
 			$.messager.alert("温馨提示", "只能选择一条用户信息进行积分调整!");
 			return false;
 		}
 		//会员卡在禁用(1)和挂失(2)状态下：不允许消费
-		if (member[0].cardstatus == 1 || member[0].cardstatus == 2) {
+		if (memberCard[0].cardstatus == 1 || memberCard[0].cardstatus == 2) {
 			$.messager.alert("温馨提示", "会员卡在禁用或者挂失的状态下不允许进行积分调整！");
 			return false;
 		}
@@ -256,7 +256,7 @@ function loss() {
 				$.messager.alert("温馨提示", "请输入正负整数!");
 				return false;
 			} 
-		     if ((member[0].totalpoint + result) < 0){
+		     if ((memberCard[0].totalpoint + result) < 0){
 				$.messager.alert("温馨提示", "积分余额不足!");
                 return false;
 			} else {
@@ -265,7 +265,7 @@ function loss() {
 					url : '${baseurl}memberCard/updateMemberCardInfo.action',
 					data : {
 						point : result,
-						id : member[0].id
+						id : memberCard[0].id
 					},
 					async : true,
 					type : 'post',
@@ -290,19 +290,19 @@ function loss() {
 	 */
 	function consume() {
 		//获取勾选的行信息
-		var member = $('#wu-datagrid4').datagrid('getSelections');
+		var memberCard = $('#wu-datagrid4').datagrid('getSelections');
 		//alert(item.productid);return;
-		if (member == null || member.length == 0) {
+		if (memberCard == null || memberCard.length == 0) {
 			$.messager.alert('信息提示', '请选择一条用户信息！');
 			return false;
 		}
 		//修改信息，只能选择一条数据
-		if (member.length != 1) {
+		if (memberCard.length != 1) {
 			$.messager.alert("温馨提示", "只能选择一条用户信息进行消费!");
 			return false;
 		}
 		//会员卡在禁用(1)和挂失(2)状态下：不允许消费
-		if (member[0].cardstatus == 1 || member[0].cardstatus == 2) {
+		if (memberCard[0].cardstatus == 1 || memberCard[0].cardstatus == 2) {
 			$.messager.alert("温馨提示", "会员卡在禁用或者挂失的状态下不允许消费！");
 			return false;
 		}
@@ -313,7 +313,7 @@ function loss() {
 					$.messager.alert("温馨提示", "消费金额错误!");
 					return false;
 				}
-				if (member[0].balance < result) {
+				if (memberCard[0].balance < result) {
 					$.messager.alert("温馨提示", "余额不足!");
                     return false;
 				}
@@ -321,7 +321,7 @@ function loss() {
 					url : '${baseurl}memberCard/updateMemberCardInfo.action',
 					data : {
 						consume : result,
-						id : member[0].id
+						id : memberCard[0].id
 					},
 					async : true,
 					type : 'post',
@@ -344,20 +344,20 @@ function loss() {
 	 */
 	function recharge() {
 		//获取勾选的行信息
-		var member = $('#wu-datagrid4').datagrid('getSelections');
+		var memberCard = $('#wu-datagrid4').datagrid('getSelections');
 		//alert(item.productid);return;
-		if (member == null || member.length == 0) {
+		if (memberCard == null || memberCard.length == 0) {
 			$.messager.alert('信息提示', '请选择一条数据！');
 			return false;
 		}
 		//修改信息，只能选择一条数据
-		if (member.length != 1) {
+		if (memberCard.length != 1) {
 			$.messager.alert("温馨提示", "只能选择一个用户进行充值!");
 			return false;
 		}
 
 		//会员卡在禁用(1)和挂失(2)状态下：不允许充值
-		if (member[0].cardstatus == 1 || member[0].cardstatus == 2) {
+		if (memberCard[0].cardstatus == 1 || memberCard[0].cardstatus == 2) {
 			$.messager.alert("温馨提示", "会员卡在禁用或者挂失的状态下不允许充值！");
 			return false;
 		}
@@ -373,7 +373,7 @@ function loss() {
 					url : '${baseurl}memberCard/updateMemberCardInfo.action',
 					data : {
 						recharge : result,
-						id : member[0].id
+						id : memberCard[0].id
 					},
 					async : true,
 					type : 'post',
@@ -403,7 +403,7 @@ function loss() {
 	/**
 	 * 有条件的查询所有会员卡信息
 	 */
-	function findAllByCondition() {
+	function findMemberCardByCondition() {
 		var startTime = $.trim($('input[name="startTime"]').val());
 		var endTime = $.trim($('input[name="endTime"]').val());
 		$('#wu-datagrid4').datagrid('load', {
@@ -414,7 +414,7 @@ function loss() {
 	}
 
 	//导出会员信息表格
-	function exportMemberInfoExcel() {
+	function exportMemberCardExcel() {
 		var startTime = $.trim($('input[name="startTime"]').val());
 		var endTime = $.trim($('input[name="endTime"]').val());
 		download("${baseurl}memberCard/exportExcel.action", {
@@ -425,75 +425,17 @@ function loss() {
 	}
 
 	//打印报表
-	function print() {
+	function printMemberCard() {
 		CreateFormPage("会员信息", $('#wu-datagrid4'));
 	}
 
 	//刷新表格数据
-	function refresh() {
+	function refreshMemberCard() {
 		$('#wu-datagrid4').datagrid('reload');
 	}
 
-	/**
-	 * 修改记录
-	 */
-	function edit() {
-		$.ajax({
-			url : '${baseurl}member/register.action',
-			data : $('#wu-form').serialize(),
-			async : true,
-			type : 'post',
-			success : function(data) {
-				if (data) {
-					//$.messager.alert('信息提示','修改成功！','info');
-					$('#wu-datagrid4').datagrid('reload');
-					$('#wu-dialog').dialog('close');
-				} else {
-					$.messager.alert('信息提示', '修改失败！', 'info');
-				}
-			}
-		});
 
-	}
-
-	/**
-	 * 打开修改窗口
-	 */
-	function openEdit() {
-		$('#wu-form').form('clear');
-		//获取勾选的行信息
-		var member = $('#wu-datagrid4').datagrid('getSelections');
-		//alert(item.productid);return;
-		if (member == null || member.length == 0) {
-			$.messager.alert('信息提示', '请选择一条数据！');
-			return false;
-		}
-		//修改信息，只能选择一条数据
-		if (member.length != 1) {
-			$.messager.alert("温馨提示", "只能选择一条数据进行修改!");
-			return false;
-		}
-		$('#wu-form').form('load', member[0]);
-		$("#loginname").attr('disabled', true);
-		$('#wu-dialog').dialog({
-			closed : false,
-			modal : true,
-			cache : false,
-			title : "修改信息",
-			buttons : [ {
-				text : '确定',
-				iconCls : 'icon-ok',
-				handler : edit
-			}, {
-				text : '取消',
-				iconCls : 'icon-cancel',
-				handler : function() {
-					$('#wu-dialog').dialog('close');
-				}
-			} ]
-		});
-	}
-
+	
 	/**
 	 *  载入数据
 	 */

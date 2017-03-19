@@ -14,16 +14,16 @@
         <!-- Begin of toolbar -->
         <div id="wu-toolbar5">
             <div class="wu-toolbar-button">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshCardRecord()" plain="true">刷新</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printCardRecord()" plain="true">打印</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportCardRecordExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
             </div>
             <div class="wu-toolbar-search">
-	                <label>起始时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="startTime" id = "startTime">
-	                <label>结束时间：</label><input class="easyui-datebox"editable = "false"  style="width:100px" name="endTime" id = "endTime">
-	                <label>关键词：</label><input class="wu-text easyui-tooltip" style="width:100px"   title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()" >开始检索</a>
+	                <label>起始时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="startTime2" id = "startTime2">
+	                <label>结束时间：</label><input class="easyui-datebox"editable = "false"  style="width:100px" name="endTime2" id = "endTime2">
+	                <label>关键词：</label><input class="wu-text easyui-tooltip" style="width:100px"   title = "可以通过会员名称搜索...." name="keyword2"  id = "keyword2">
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findCardRecordByCondition()" >开始检索</a>
             </div>
         </div>
         <!-- End of toolbar -->
@@ -33,39 +33,39 @@
 <script type="text/javascript">
 
 	/**
-	 * 有条件的查询所有会员信息
+	 * 有条件的查询所有会员卡激活、挂失记录
 	 */
-	function findAllByCondition() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	function findCardRecordByCondition() {
+		var startTime = $.trim($('input[name="startTime2"]').val());
+		var endTime = $.trim($('input[name="endTime2"]').val());
 		$('#wu-datagrid1').datagrid('load', {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-			keyword : $.trim($("#keyword").val())
+			keyword : $.trim($("#keyword2").val())
 		});
 	}
 
 
 	
 
-	//导出会员信息表格
-	function exportMemberInfoExcel() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	//导出所有会员卡激活、挂失记录
+	function exportCardRecordExcel() {
+		var startTime = $.trim($('input[name="startTime2"]').val());
+		var endTime = $.trim($('input[name="endTime2"]').val());
 		download("${baseurl}cardRecord/exportExcel.action", {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-	        keyword : $("#keyword").val()
+	        keyword : $("#keyword2").val()
 		});
 	}
 
 	//打印报表
-	function print() {
+	function printCardRecord() {
 		CreateFormPage("会员信息", $('#wu-datagrid1'));
 	}
 
 	//刷新表格数据
-	function refresh() {
+	function refreshCardRecord() {
 		$('#wu-datagrid1').datagrid('reload');
 	}
 
@@ -89,7 +89,7 @@
         }, {
             field : 'membername',
             title : '会员名称',
-            width : 50
+            width : 40
         }, {
             field : 'memberid',
             title : '会员编号',
@@ -97,7 +97,7 @@
         }, {
             field : 'membercardid',
             title : '会员卡号',
-            width : 50
+            width : 55
         }, {
             field : 'operationtype',
             title : '操作类型',

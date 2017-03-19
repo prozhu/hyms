@@ -14,16 +14,16 @@
         <!-- Begin of toolbar -->
         <div id="wu-toolbar3">
             <div class="wu-toolbar-button">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshPointRecord()" plain="true">刷新</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printPointRecord()" plain="true">打印</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportPointRecordExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
             </div>
             <div class="wu-toolbar-search">
-	                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="startTime" id = "startTime">
-	                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="endTime" id = "endTime">
-	                <label>关键词：</label><input class="wu-text easyui-tooltip"  style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()" >开始检索</a>
+	                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="startTime4" id = "startTime4">
+	                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="endTime4" id = "endTime4">
+	                <label>关键词：</label><input class="wu-text easyui-tooltip"  style="width:100px"  title = "可以通过会员名称搜索...." name="keyword4"  id = "keyword4">
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findPointRecordByCondition()" >开始检索</a>
             </div>
         </div>
         <!-- End of toolbar -->
@@ -43,36 +43,36 @@
 	}) 
 
 	/**
-	 * 有条件的查询所有会员信息
+	 * 有条件的查询所有会员卡的积分记录
 	 */
-	function findAllByCondition() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	function findPointRecordByCondition() {
+		var startTime = $.trim($('input[name="startTime4"]').val());
+		var endTime = $.trim($('input[name="endTime4"]').val());
 		$('#wu-datagrid5').datagrid('load', {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-			keyword : $.trim($("#keyword").val())
+			keyword : $.trim($("#keyword4").val())
 		});
 	}
 
-	   //导出会员卡积分表
-    function exportMemberInfoExcel() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	   //导出所有会员卡的积分记录
+    function exportPointRecordExcel() {
+		var startTime = $.trim($('input[name="startTime4"]').val());
+		var endTime = $.trim($('input[name="endTime4"]').val());
 		download("${baseurl}pointRecord/exportExcel.action", {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-	        keyword : $("#keyword").val()
+	        keyword : $("#keyword4").val()
 		});
     }
 
 	//打印报表
-	function print() {
+	function printPointRecord() {
 		CreateFormPage("会员信息", $('#wu-datagrid5'));
 	}
 
 	//刷新表格数据
-	function refresh() {
+	function refreshPointRecord() {
 		$('#wu-datagrid5').datagrid('reload');
 	}
 
@@ -97,15 +97,15 @@
         }, {
             field : 'membername',
             title : '会员名称',
-            width : 50
+            width : 40
         }, {
             field : 'memberid',
             title : '会员编号',
-            width : 80,
+            width : 90,
         }, {
             field : 'membercardid',
             title : '会员卡号',
-            width : 50
+            width : 60
         }, {
             field : 'points',
             title : '积分',

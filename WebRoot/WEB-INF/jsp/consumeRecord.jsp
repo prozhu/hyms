@@ -14,16 +14,16 @@
         <!-- Begin of toolbar -->
         <div id="wu-toolbar6">
             <div class="wu-toolbar-button">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshConsumeRecord()" plain="true">刷新</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printConsumeRecord()" plain="true">打印</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportConsumeRecordExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
             </div>
 	            <div class="wu-toolbar-search">
-		                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="startTime" id = "startTime">
-		                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="endTime" id = "endTime">
-		                <label>关键词：</label><input class="wu-text easyui-tooltip"    style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
-		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findAllByCondition()" >开始检索</a>
+		                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="startTime3" id = "startTime3">
+		                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="endTime3" id = "endTime3">
+		                <label>关键词：</label><input class="wu-text easyui-tooltip"    style="width:100px"  title = "可以通过会员名称搜索...." name="keyword3"  id = "keyword3">
+		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findConsumeRecordByCondition()" >开始检索</a>
 	            </div>
         </div>
         <!-- End of toolbar -->
@@ -43,37 +43,37 @@
 	        }
 	}) 
 	/**
-	 * 有条件的查询所有会员信息
+	 * 有条件的查询所有会员卡消费记录
 	 */
-	function findAllByCondition() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	function findConsumeRecordByCondition() {
+		var startTime = $.trim($('input[name="startTime3"]').val());
+		var endTime = $.trim($('input[name="endTime3"]').val());
 		$('#wu-datagrid3').datagrid('load', {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 			endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-			keyword : $.trim($("#keyword").val())
+			keyword : $.trim($("#keyword3").val())
 		});
 	}
 
 
-	//导出会员信息表格
-	function exportMemberInfoExcel() {
-		var startTime = $.trim($('input[name="startTime"]').val());
-		var endTime = $.trim($('input[name="endTime"]').val());
+	//导出所有会员卡消费记录
+	function exportConsumeRecordExcel() {
+		var startTime = $.trim($('input[name="startTime3"]').val());
+		var endTime = $.trim($('input[name="endTime3"]').val());
 		download("${baseurl}consumeRecord/exportExcel.action", {
 			startTime : startTime.length > 0?startTime + ' 00:00:00':startTime,
 	        endTime : endTime.length > 0?endTime + ' 23:59:59':endTime,
-	        keyword : $("#keyword").val()
+	        keyword : $("#keyword3").val()
 		});
 	}
 
 	//打印报表
-	function print() {
+	function printConsumeRecord() {
 		CreateFormPage("会员信息", $('#wu-datagrid3'));
 	}
 
 	//刷新表格数据
-	function refresh() {
+	function refreshConsumeRecord() {
 		$('#wu-datagrid3').datagrid('reload');
 	}
 
@@ -96,7 +96,7 @@
         }, {
             field : 'membername',
             title : '会员名称',
-            width : 50
+            width : 40
         }, {
             field : 'memberid',
             title : '会员编号',
@@ -104,7 +104,7 @@
         }, {
             field : 'membercardid',
             title : '会员卡号',
-            width : 50
+            width : 55
         }, {
             field : 'consumemoney',
             title : '消费金额',
