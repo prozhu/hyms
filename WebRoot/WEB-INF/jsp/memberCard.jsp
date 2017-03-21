@@ -17,22 +17,22 @@
             <div class="wu-toolbar-button">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshMemberCard()" plain="true">刷新</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printMemberCard()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberCardExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-page-excel" onclick="exportMemberCardExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
                 <c:if test="${member.membertype == 0 }">
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="consume()" plain="true">消费</a>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="recharge()" plain="true">充值</a>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="adjustPoint()" plain="true">积分调整</a>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick=" activate()" plain="true">会员卡激活</a>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="loss()" plain="true">会员卡挂失</a>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="unloss()" plain="true">会员卡挂失解除</a>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="cancel()" plain="true">会员卡注销</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-style" onclick="consume()" plain="true">消费</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-style-add" onclick="recharge()" plain="true">充值</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-style-edit" onclick="adjustPoint()" plain="true">积分调整</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-server-start" onclick=" activate()" plain="true">会员卡激活</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-server-key" onclick="loss()" plain="true">会员卡挂失</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-server-lightning" onclick="unloss()" plain="true">会员卡挂失解除</a>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-server-stop" onclick="cancel()" plain="true">会员卡注销</a>
                 </c:if>
             </div>
             <c:if test="${member.membertype == 0 }">
 	            <div class="wu-toolbar-search">
-		                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px" name="startTime" id = "startTime">
-		                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px" name="endTime" id = "endTime">
+		                <label>起始时间：</label><input class="easyui-datebox"  editable = "false" style="width:100px; padding: 5px" name="startTime" id = "startTime">
+		                <label>结束时间：</label><input class="easyui-datebox" editable = "false" style="width:100px; padding: 5px" name="endTime" id = "endTime">
 		                <label>关键词：</label><input class="wu-text easyui-tooltip"    style="width:100px"  title = "可以通过会员名称搜索...." name="keyword"  id = "keyword">
 		                <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="findMemberCardByCondition()">开始检索</a>
 	            </div>

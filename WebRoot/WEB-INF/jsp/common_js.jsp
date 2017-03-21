@@ -11,7 +11,6 @@
 
 <!--引用打印js文件  -->
 <script type="text/javascript" src="${baseurl}js/print.js"></script>
-<script type="text/javascript" src="${baseurl}js/close.js"></script>
 <script type="text/javascript" src="${baseurl}js/jquery.mailAutoComplete-4.0.js"></script>
 
 <script src="${baseurl}js/jqueryvalidator/formValidator-4.1.3.js" type="text/javascript" charset="UTF-8"></script>

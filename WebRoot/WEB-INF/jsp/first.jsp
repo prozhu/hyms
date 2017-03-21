@@ -3,11 +3,10 @@
 <%@ include file="/WEB-INF/jsp/tag.jsp"%>
 <html>
 <head>
-<title>药品采购平台</title>
+<title></title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 
-<LINK rel="stylesheet" type="text/css" href="${baseurl}js/easyui/styles/default.css">
 <%@ include file="/WEB-INF/jsp/common_css.jsp"%>
 <%@ include file="/WEB-INF/jsp/common_js.jsp"%>
 <SCRIPT type="text/javascript">

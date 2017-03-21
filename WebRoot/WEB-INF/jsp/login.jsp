@@ -2,16 +2,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/jsp/tag.jsp"%>
 <%@ include file="/WEB-INF/jsp/common_js.jsp"%>
+ <%@ include file="/WEB-INF/jsp/common_css.jsp"%>
 <html>
 <head>
 <TITLE>会员管理系统</TITLE>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!-- <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="easyui/1.3.4/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="easyui/1.3.4/locale/easyui-lang-zh_CN.js"></script> -->
 <LINK rel="stylesheet" type="text/css" href="${baseurl}styles/style.css">
 <LINK rel="stylesheet" type="text/css" href="${baseurl}styles/login.css">
-<link rel="stylesheet" type="text/css" href="easyui/1.3.4/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="css/wu.css" />
 <link rel="stylesheet" type="text/css" href="css/icon.css" />
 

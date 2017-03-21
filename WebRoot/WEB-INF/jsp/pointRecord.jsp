@@ -17,7 +17,7 @@
             <div class="wu-toolbar-button">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refreshPointRecord()" plain="true">刷新</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="printPointRecord()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportPointRecordExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-page-excel" onclick="exportPointRecordExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
             </div>
             <div class="wu-toolbar-search">

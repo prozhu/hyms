@@ -26,11 +26,11 @@
                 </c:if>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-page-excel" onclick="exportMemberInfoExcel()" plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
                 <c:if test="${member.membertype == 0 }">
-                    <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="addCard()" plain="true">办卡</a>
-                    <a href="#" class="easyui-linkbutton" iconCls="icon-cut" onclick="reCard()" plain="true">补卡</a>
+                    <a href="#" class="easyui-linkbutton" iconCls="icon-server-add" onclick="addCard()" plain="true">办卡</a>
+                    <a href="#" class="easyui-linkbutton" iconCls="icon-server-compressed" onclick="reCard()" plain="true">补卡</a>
                 </c:if>
             </div>
             <c:if test="${member.membertype == 0 }">
@@ -54,8 +54,7 @@
         <table>
             <tr>
                 <td width="60" align="right">登录名称:</td>
-                <td><input type="text" name="loginname" class="wu-text " id="loginname" 
-                /></td>
+                <td><input type="text" name="loginname" class="wu-text" id="loginname" /></td>
             </tr>
             <tr>
                 <td align="right">登录密码:</td>
@@ -94,7 +93,7 @@
     </form>
 </div>
 <!-- End of easyui-dialog -->
-<link rel="stylesheet" href="${baseurl}css/email.css"/> 
+
 <script type="text/javascript">
 
 $.extend($.fn.validatebox.defaults.rules, {

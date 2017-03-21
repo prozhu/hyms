@@ -9,9 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>会员管理系统</title>
 
-<link rel="stylesheet" type="text/css" href="css/wu.css" />
-<link rel="stylesheet" type="text/css" href="css/icon.css" />
-
 </head>
 <body class="easyui-layout">
 
