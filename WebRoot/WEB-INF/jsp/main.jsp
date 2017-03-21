@@ -64,7 +64,6 @@
     
 				  /*主题切换
 				  */
-
 					function changeTheme() {
 						var $easyuiTheme = $('#easyuiTheme');
 						var count = $easyuiTheme.attr('count');
@@ -73,7 +72,8 @@
 							$easyuiTheme.attr('count', count);
 						}
 						var themes = [ "black", "bootstrap", "default", "gray",
-								"metro", "material" ];
+								"metro", "material" , "metro-blue", "metro-gray", "metro-green",
+                                "metro-red", "metro-orange"];
 						count++;
 						if (count == themes.length - 1) {
 							count = 0;
