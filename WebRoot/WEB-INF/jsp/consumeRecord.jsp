@@ -108,7 +108,7 @@
             width : 55
         }, {
             field : 'consumemoney',
-            title : '消费金额',
+            title : '消费金额(元)',
             sortable : true,
             width : 50
         },  {

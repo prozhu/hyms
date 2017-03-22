@@ -1,7 +1,8 @@
 <script type="text/javascript" src="${baseurl}js/jquery-1.8.0.min.js"></script>
-<SCRIPT type="text/javascript" src="${baseurl}easyui/1.3.4/jquery.easyui.min.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="${baseurl}easyui/1.5.1/jquery.easyui.min.js"></SCRIPT>
 
-<script type="text/javascript" src="${baseurl}easyui/1.3.4/locale/easyui-lang-zh_CN.js"></script>
+
+<script type="text/javascript" src="${baseurl}easyui/1.5.1/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${baseurl}js/jquery.form.min.js"></script>
 
 <script type="text/javascript" src="${baseurl}js/custom.jquery.form.js"></script>

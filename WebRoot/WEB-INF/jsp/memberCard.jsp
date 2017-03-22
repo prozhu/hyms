@@ -513,7 +513,7 @@ function loss() {
 			width : 50
 		}, {
 			field : 'balance',
-			title : '余额',
+			title : '余额(元)',
 			sortable : true,
 			align : 'center',
 			width : 70
@@ -525,13 +525,13 @@ function loss() {
 			width : 80
 		}, {
 			field : 'totalconsumption',
-			title : '累计消费总额',
+			title : '累计消费总额(元)',
 			sortable : true,
 			align : 'center',
 			width : 80
 		}, {
 			field : 'totalrecharge',
-			title : '累计充值总额',
+			title : '累计充值总额(元)',
 			sortable : true,
 			align : 'center',
 			width : 80

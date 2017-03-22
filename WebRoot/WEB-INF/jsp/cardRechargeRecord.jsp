@@ -101,7 +101,7 @@
 			width : 55
 		}, {
 			field : 'rechargemoney',
-			title : '充值金额',
+			title : '充值金额(元)',
 			sortable : true,
 			width : 50
 		},  {
