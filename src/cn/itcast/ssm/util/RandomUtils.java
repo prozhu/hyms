@@ -40,6 +40,21 @@ public class RandomUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
+    
+    
+    /**
+     * @description: 将Date日期格式化
+     * @author ：zc
+     * @date ：2017-2-13 下午4:29:21 
+     * @param date
+     * @return
+     */
+    public static String formatTime1(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+    
+    
     /**
      * @description: 将字符串格式的时间 转为 Date 类型
      * @author ：zc

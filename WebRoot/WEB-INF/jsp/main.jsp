@@ -37,6 +37,16 @@
                     <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}consumeRecord.action">消费记录</a></li>
                 </ul>
             </div>
+            
+            <div title="图表管理" data-options="iconCls:'icon-application-cascade'" style="padding:5px;">   
+                <ul class="easyui-tree wu-side-tree"  >
+                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}member.action">会员图表</a></li>
+                    <li iconCls="icon-user-group"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}memberCard.action">会员卡图表</a></li>
+                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}cardRechargeRecord.action">充值图表</a></li>
+                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}pointRecord.action">积分图表</a></li>
+                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}consumeRecordChart.action">消费图表</a></li>
+                </ul>
+            </div>
         </div>
     </div>   
     <!-- end of sidebar -->    

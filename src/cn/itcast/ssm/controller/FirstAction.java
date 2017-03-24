@@ -201,5 +201,14 @@ public class FirstAction {
         return "/consumeRecord";
     }
     
-	
+    /**
+     * 跳转到销售图表页面
+     * @author ：zc
+     * @date ：2017年3月23日 下午8:01:49 
+     * @return
+     */
+    @RequestMapping("/consumeRecordChart")
+    public String consumeRecordChart() {
+    	return "/consumeRecordChart";
+    }
 }	

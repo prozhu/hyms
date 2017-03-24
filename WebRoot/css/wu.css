@@ -125,8 +125,14 @@ select, button, input[type="button"], input[type="reset"], input[type="submit"],
 	background: #e0ecff;
 }
 
-span.datebox .combo-arrow {
+/* span.datebox .combo-arrow {
 	padding: 5px;
 	margin-left: -25px;
 	margin-right: 5px;
 }
+ */
+ 
+ span .combo-arrow {
+    margin-left : -16px;
+    margin-top : 5px;
+ }

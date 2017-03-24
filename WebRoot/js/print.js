@@ -1,4 +1,4 @@
- document.write("<script language=javascript src=’/js/common.js’></script>");
+ //document.write("<script language=javascript src=’/js/common.js’></script>");
 // strPrintName 打印任务名
 // printDatagrid 要打印的datagrid
 function CreateFormPage(strPrintName, printDatagrid) {

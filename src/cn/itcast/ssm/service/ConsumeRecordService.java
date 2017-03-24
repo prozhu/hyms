@@ -1,6 +1,7 @@
 package cn.itcast.ssm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.itcast.ssm.model.Consumerecord;
 
@@ -33,5 +34,18 @@ public interface ConsumeRecordService {
     List<Consumerecord> findConsumeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
+
+    /**
+     * 销售图表查询
+     * @author ：zc
+     * @date ：2017年3月24日 上午9:36:35 
+     * @param mark : 年度、季度、月度显示图表(year, quarter, month)
+     * @param markYear : 年份(2017)
+     * @param time : 指定时间
+     * @return
+     */
+    List<Map<String, Object>> consumeChart(String mark, String markYear, String time);
+
+	List<String> findConsumeYears();
 
 }

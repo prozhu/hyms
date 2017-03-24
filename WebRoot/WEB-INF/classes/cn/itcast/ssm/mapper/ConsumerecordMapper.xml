@@ -239,4 +239,57 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  <select id="consumeChartByYear" resultType="java.util.Map">
+    select year(consumetime) as 'year' , sum(consumemoney) as 'money' from consumerecord  group by  year(consumetime)
+  </select>
+  
+    <select id="consumeChartByQuarter" parameterType="String" resultType="java.util.Map">
+	    select  quarter(consumetime) as 'quarter',sum(consumemoney) as 'money' from consumerecord where
+	       <if test="markYear != '' ">
+	           year(consumetime)=#{markYear}
+	       </if>
+	       <if test=" markYear == '' ">
+	           year(consumetime)=year(now()) 
+	       </if>
+	     group by  quarter(consumetime)
+  </select>
+  
+    <select id="consumeChartByMonth"  parameterType="String" resultType="java.util.Map">
+    select  month(consumetime) as 'month',sum(consumemoney) as 'money' from consumerecord where
+       <if test="markYear != ''">
+               year(consumetime) = #{markYear}
+           </if>
+           <if test="markYear == '' ">
+               year(consumetime)=year(now()) 
+           </if>
+     group by  month(consumetime)
+  </select>
+  
+  <select id="selectYears" resultType = "java.lang.String">
+        select distinct year(consumetime) as 'year'  from consumerecord order by year(consumetime) asc
+  </select>
+  
+  <select id="consumeChartByWeek" resultType = "java.util.Map">
+		SELECT 
+		  DATE_FORMAT(consumetime, '%Y-%m-%d') AS times,
+		  SUM(consumemoney) AS 'money' 
+		FROM
+		  consumerecord 
+		WHERE consumetime <![CDATA[  >=  ]]> DATE_SUB(
+		    #{time},
+		    INTERVAL WEEKDAY(#{time}) DAY
+		  ) 
+		  AND  consumetime <![CDATA[   <=  ]]>  DATE_ADD(
+		    DATE_SUB(
+		      #{time},
+		      INTERVAL WEEKDAY(#{time}) DAY
+		    ),
+		    INTERVAL 7 DAY
+		  ) 
+		GROUP BY times 
+		ORDER BY times
+  </select>
+  
+  
 </mapper>

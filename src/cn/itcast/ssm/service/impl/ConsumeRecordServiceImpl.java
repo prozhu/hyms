@@ -1,7 +1,9 @@
 package cn.itcast.ssm.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
 
     @Autowired
     private ConsumerecordMapper consumerecordMapper;
+   
 
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberId) {
@@ -96,5 +99,35 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
         return null;
     }
 
+
+	@Override
+	public List<Map<String, Object>> consumeChart(String mark, String markYear, String time) {
+		if (StringUitl.isNullOrEmpty(mark.trim())) {
+			return null;
+		}
+		List<Map<String, Object>> map = null;
+		if ("year".equals(mark.trim())) {
+			map = consumerecordMapper.consumeChartByYear();
+		} else if ("quarter".equals(mark.trim())) {
+			map = consumerecordMapper.consumeChartByQuarter(markYear);
+		} else if ("month".equals(mark.trim())) {
+			map = consumerecordMapper.consumeChartByMonth(markYear);
+		} else {
+				map = consumerecordMapper.consumeChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
+		}
+		if (StringUitl.isNullOrEmpty(map)) {
+			return null;
+		}
+		return map;
+	}
+
+	@Override
+	public List<String> findConsumeYears() {
+		List<String> list = consumerecordMapper.selectYears();
+		if (StringUitl.isNullOrEmpty(list)) {
+			return null;
+		}
+		return list;
+	}
 
 }
