@@ -239,4 +239,57 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+    <!-- 自己编写的sql脚本 -->
+    <select id="rechargeChartByYear" resultType="java.util.Map">
+    select year(changetime) as 'year' , sum(rechargeMoney) as 'money' from cardrechargerecord  group by  year(changetime)
+  </select>
+  
+    <select id="rechargeChartByQuarter" parameterType="String" resultType="java.util.Map">
+        select  quarter(changetime) as 'quarter',sum(rechargeMoney) as 'money' from cardrechargerecord where
+           <if test="markYear != '' ">
+               year(changetime)=#{markYear}
+           </if>
+           <if test=" markYear == '' ">
+               year(changetime)=year(now()) 
+           </if>
+         group by  quarter(changetime)
+  </select>
+  
+    <select id="rechargeChartByMonth"  parameterType="String" resultType="java.util.Map">
+    select  month(changetime) as 'month',sum(rechargeMoney) as 'money' from cardrechargerecord where
+       <if test="markYear != ''">
+               year(changetime) = #{markYear}
+           </if>
+           <if test="markYear == '' ">
+               year(changetime)=year(now()) 
+           </if>
+     group by  month(changetime)
+  </select>
+  
+  <select id="selectYears" resultType = "java.lang.String">
+        select distinct year(changetime) as 'year'  from cardrechargerecord order by year(changetime) asc
+  </select>
+  
+  <select id="rechargeChartByWeek" resultType = "java.util.Map">
+        SELECT 
+          DATE_FORMAT(changetime, '%Y-%m-%d') AS times,
+          SUM(rechargeMoney) AS 'money' 
+        FROM
+          cardrechargerecord 
+        WHERE changetime <![CDATA[  >=  ]]> DATE_SUB(
+            #{time},
+            INTERVAL WEEKDAY(#{time}) DAY
+          ) 
+          AND  changetime <![CDATA[   <=  ]]>  DATE_ADD(
+            DATE_SUB(
+              #{time},
+              INTERVAL WEEKDAY(#{time}) DAY
+            ),
+            INTERVAL 7 DAY
+          ) 
+        GROUP BY times 
+        ORDER BY times
+  </select>
+  
 </mapper>

@@ -4,6 +4,8 @@ import cn.itcast.ssm.model.cardchargerecord.Cardrechargerecord;
 import cn.itcast.ssm.model.cardchargerecord.CardrechargerecordExample;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -31,4 +33,34 @@ public interface CardrechargerecordMapper {
     int updateByPrimaryKeySelective(Cardrechargerecord record);
 
     int updateByPrimaryKey(Cardrechargerecord record);
+
+    /**
+     * 按照 “年度” 查询充值图表
+     * @return
+     */
+	List<Map<String, Object>> rechargeChartByYear();
+
+	/**
+     * 按照 “季度” 查询充值图表
+     * @return
+     */
+	List<Map<String, Object>> rechargeChartByQuarter(@Param("markYear")String markYear);
+
+	/**
+     * 按照 “月度” 查询充值图表
+     * @return
+     */
+	List<Map<String, Object>> rechargeChartByMonth(@Param("markYear")String markYear);
+
+	/**
+     * 按照 “周度” 查询充值图表
+     * @return
+     */
+	List<Map<String, Object>> rechargeChartByWeek(@Param("time")String time);
+
+	/**
+	 * 查询充值记录表中存在的年份
+	 * @return
+	 */
+	List<String> selectYears();
 }

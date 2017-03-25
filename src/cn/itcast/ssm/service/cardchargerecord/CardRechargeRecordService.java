@@ -1,6 +1,7 @@
 package cn.itcast.ssm.service.cardchargerecord;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.itcast.ssm.model.cardchargerecord.Cardrechargerecord;
 
@@ -34,5 +35,21 @@ public interface CardRechargeRecordService {
     List<Cardrechargerecord> findCardRechargeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
+
+    /**
+     * 获取充值图表数据
+     * @param mark ：年度、季度、月度显示图表(year, quarter, month)
+     * @param markYear ：年份(2017)
+     * @param time : 指定时间
+     * @return
+     */
+	List<Map<String, Object>> rechargeChart(String mark, String markYear,
+			String time);
+
+	/**
+	 * 获取会员卡充值表中的所有年份
+	 * @return
+	 */
+	List<String> findRechargeYears();
 
 }

@@ -1,10 +1,10 @@
 /**
- * 积分记录的js文件
+ * 充值记录的js文件
  */
 /*保存图片
  */
-function saveImageInfo1() {
-    var mycanvas = document.getElementById("JSChart_pointChart_container");
+function saveImageInfo2() {
+    var mycanvas = document.getElementById("JSChart_cardRechargeChart_container");
     var image = mycanvas.toDataURL('image/png');
     var w = window.open('about:blank', 'image from canvas');
     w.document.write("<img src='" + image + "' alt='from canvas'/>");
@@ -13,8 +13,8 @@ function saveImageInfo1() {
 
 /**下载图片到本地
  */
-function saveAsLocalImage1() {
-    var myCanvas = document.getElementById("JSChart_pointChart_container");
+function saveAsLocalImage2() {
+    var myCanvas = document.getElementById("JSChart_cardRechargeChart_container");
     var image = myCanvas.toDataURL("image/png").replace("image/png",
             "image/octet-stream");
     window.location.href = image; // it will save locally
@@ -22,46 +22,52 @@ function saveAsLocalImage1() {
 
 $(function () {
 
-    //选择时间和选择年份的显示和隐藏
-    $("#mark1").change(function () {
-        if ($("#mark1").val() == "week") {
+    /**
+     * 选择时间和选择年份的显示和隐藏
+     */
+    $("#mark2").change(function () {
+        if ($("#mark2").val() == "week") {
             //显示选择时间的框进行显示
-            $("#week1").css("display", "inline");
+            $("#week2").css("display", "inline");
             //将选择年份的框进行隐藏
-            $("#chooseYear1").css("display", "none");
+            $("#chooseYear2").css("display", "none");
         } else {
             //显示选择时间的框进行隐藏
-            $("#week1").css("display", "none");
+            $("#week2").css("display", "none");
             //将选择年份的框进行显示
-            $("#chooseYear1").css("display", "inline");
+            $("#chooseYear2").css("display", "inline");
         }
     });
 
 
-    //动态的加载年份
+    /**
+     * 动态的加载年份
+     */
     $.ajax({
-        url:  baseurl + "pointRecord/findPointYears.action",
+        url:  baseurl + "cardRechargeRecord/findRechargeYears.action",
         type: 'get',
         async: false,
         dataType: 'json',
         success: function (result) {
             if (result.success) {
                 for (var i = 0; i < result.data.length; i++) {
-                    $("#year1").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
+                    $("#year2").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
                 }
             }
         }
     });
 
 
-    //图表信息
-    $("#search9").click(
+    /**
+     * 图表信息
+     */
+    $("#search10").click(
             function () {
-                var mark = $("#mark1").val();
-                var year = $("#year1").val();
-                var time = $('#time1').datebox('getValue');
+                var mark = $("#mark2").val();
+                var year = $("#year2").val();
+                var time = $('#time2').datebox('getValue');
                 $.ajax({
-                    url: baseurl + "pointRecord/pointChart.action",
+                    url: baseurl + "cardRechargeRecord/rechargeChart.action",
                     type: 'get',
                     data: {
                         mark: mark,
@@ -87,7 +93,7 @@ $(function () {
                                 } else {
                                     data[i][0] = "" + this.times + "日";
                                 }
-                                data[i][1] = this.point;
+                                data[i][1] = this.money;
                             });
                         }
                         //支持js二维数组、json格式、xml格式数据源
@@ -95,8 +101,8 @@ $(function () {
                          [  "商品5", 5 ]); */
                         //第二个参数值有：line,bar,pie分别表示用线形图、柱状图、饼图来展示报表
 
-                        var myChart = new JSChart('pointChart_container', $(
-                                "#type1").val());
+                        var myChart = new JSChart('cardRechargeChart_container', $(
+                                "#type2").val());
                         if (result.data != null) {
                             myChart.setDataArray(data);
                         }
@@ -106,7 +112,7 @@ $(function () {
                                 : mark === "quarter" ? "季度"
                                 : mark === "month" ? "月度" : "周度");
                         //设置 y轴名称, 对饼图无效。
-                        myChart.setAxisNameY('积分数');
+                        myChart.setAxisNameY('充值额');
                         //设置图表的大小
                         myChart.setSize(900, 650);
                         //设置轴线名字体大小，对饼图无效。默认是11。
@@ -123,10 +129,10 @@ $(function () {
                         myChart.setBarSpacingRatio(10);
                         //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
                         myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
-                        myChart.setTitle(mark == "year" ? "年度积分图表"
-                                : mark == "quarter" ? "季度积分图表"
-                                : mark == "month" ? "月度积分图表"
-                                : "周度积分图表");
+                        myChart.setTitle(mark == "year" ? "年度充值图表"
+                                : mark == "quarter" ? "季度充值图表"
+                                : mark == "month" ? "月度充值图表"
+                                : "周度充值图表");
                         if (result.data != null) {
                             myChart.draw();
                         }
@@ -134,8 +140,8 @@ $(function () {
                 });
 
                 //这里控制显示保存图表图片和下载图表图片按钮
-                $("#saveChart1").css("display", "inline");
-                $("#downloadChart1").css("display", "inline");
+                $("#saveChart2").css("display", "inline");
+                $("#downloadChart2").css("display", "inline");
             });
 
 });

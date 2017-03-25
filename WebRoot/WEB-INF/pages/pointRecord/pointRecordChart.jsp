@@ -50,7 +50,7 @@
 	            </div>
 	        </div>
 	        <!-- End of toolbar -->
-	        <div id="pointChart_container" style="margin-left: 20%; margin-top: 30px; ">Loading chart...ing</div>
+	        <div id="pointChart_container" style="margin-left: 10%; margin-top: 20px; ">Loading chart...ing</div>
 	    </div>
 	</div>
     <script type="text/javascript" src="${baseurl}js/pages/pointRecord/pointRecordChart.js"></script>

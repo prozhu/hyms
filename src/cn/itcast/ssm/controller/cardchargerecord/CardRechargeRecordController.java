@@ -12,12 +12,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.itcast.ssm.controller.base.BaseController;
 import cn.itcast.ssm.model.cardchargerecord.Cardrechargerecord;
 import cn.itcast.ssm.model.member.Member;
 import cn.itcast.ssm.service.cardchargerecord.CardRechargeRecordService;
 import cn.itcast.ssm.util.JSONUtil;
+import cn.itcast.ssm.util.StringUitl;
 import cn.itcast.ssm.util.excel.DjExcelCreator;
 
 /**
@@ -102,5 +104,41 @@ public class CardRechargeRecordController extends BaseController{
         creator.createForWeb(cardRechargeRecordList, response);
         return null;
     }
+    
+    /**
+     * 会员卡充值记录图表
+     * @author ：zc
+     * @date ：2017年3月24日 上午9:35:29 
+     * @param response
+     * @param mark ：年度、季度、月度显示图表(year, quarter, month)
+     * @param markYear ：年份(2017)
+     * @param time : 指定时间
+     * @return
+     */
+    @RequestMapping(value = "/rechargeChart", method = {RequestMethod.GET})
+    public String rechargeChart(HttpServletResponse response, String mark, String markYear, String time) {
+    	List<Map<String, Object>> con = cardRechargeRecordService.rechargeChart(mark, markYear, time);
+    	if (StringUitl.isNullOrEmpty(con)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(con)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(con)), response);
+    }
+    
+    /**
+     * 获取会员卡充值表中的所有年份
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:25:58 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/findRechargeYears", method = {RequestMethod.GET})
+    public String findRechargeYears(HttpServletResponse response) {
+    	List<String> list = cardRechargeRecordService.findRechargeYears();
+    	if (StringUitl.isNullOrEmpty(list)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
+    }
+
     
 }

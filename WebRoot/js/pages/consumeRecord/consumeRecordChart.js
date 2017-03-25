@@ -106,7 +106,7 @@
                             //设置 y轴名称, 对饼图无效。
                             myChart.setAxisNameY('销售额');
                             //设置图表的大小
-                            myChart.setSize(1000, 700);
+                            myChart.setSize(900, 650);
                             //设置轴线名字体大小，对饼图无效。默认是11。
                             myChart.setAxisNameFontSize(13);
                             //设置x轴和容器底部的距离，默认30

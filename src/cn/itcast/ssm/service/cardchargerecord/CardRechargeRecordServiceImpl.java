@@ -1,7 +1,9 @@
 package cn.itcast.ssm.service.cardchargerecord;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +92,36 @@ public class CardRechargeRecordServiceImpl implements CardRechargeRecordService 
         }
         return null;
     }
+
+	@Override
+	public List<Map<String, Object>> rechargeChart(String mark,
+			String markYear, String time) {
+		if (StringUitl.isNullOrEmpty(mark.trim())) {
+			return null;
+		}
+		List<Map<String, Object>> map = null;
+		if ("year".equals(mark.trim())) {
+			map = cardrechargerecordMapper.rechargeChartByYear();
+		} else if ("quarter".equals(mark.trim())) {
+			map = cardrechargerecordMapper.rechargeChartByQuarter(markYear);
+		} else if ("month".equals(mark.trim())) {
+			map = cardrechargerecordMapper.rechargeChartByMonth(markYear);
+		} else {
+				map = cardrechargerecordMapper.rechargeChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
+		}
+		if (StringUitl.isNullOrEmpty(map)) {
+			return null;
+		}
+		return map;
+	}
+
+	@Override
+	public List<String> findRechargeYears() {
+		List<String> list = cardrechargerecordMapper.selectYears();
+		if (StringUitl.isNullOrEmpty(list)) {
+			return null;
+		}
+		return list;
+	}
     
 }

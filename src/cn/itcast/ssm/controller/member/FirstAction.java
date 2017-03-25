@@ -153,6 +153,18 @@ public class FirstAction {
     }
     
     /**
+     * @description: 跳转到 会员卡充值图表页面
+     * @author ：zc
+     * @date ：2017-3-25 20:51:26
+     * @return
+     */
+    @RequestMapping("/cardRechargeRecordChart")
+    public String cardRechargeRecordChart() {
+        return "/cardRechargeRecord/cardRechargeRecordChart";
+    }
+    
+    
+    /**
      * @description: 跳转到会员卡信息页面
      * @author ：zc
      * @date ：2017-2-13 上午11:59:11 
@@ -187,6 +199,17 @@ public class FirstAction {
     }
     
     /**
+     * 跳转到积分图表页面
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:17:00 
+     * @return
+     */
+    @RequestMapping("/pointRecordChart")
+    public String pointRecordChart() {
+    	return "/pointRecord/pointRecordChart";
+    }
+    
+    /**
      * @description: 跳转到消费记录页面
      * @author ：zc
      * @date ：2017-2-15 上午11:58:00 
@@ -208,15 +231,6 @@ public class FirstAction {
     	return "/consumeRecord/consumeRecordChart";
     }
     
-    /**
-     * 跳转到积分图表页面
-     * @author ：zc
-     * @date ：2017年3月24日 下午7:17:00 
-     * @return
-     */
-    @RequestMapping("/pointRecordChart")
-    public String pointRecordChart() {
-    	return "/pointRecord/pointRecordChart";
-    }
+
     
 }	
