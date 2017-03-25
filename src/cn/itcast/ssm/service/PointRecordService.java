@@ -1,6 +1,7 @@
 package cn.itcast.ssm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.itcast.ssm.model.Pointrecord;
 
@@ -33,6 +34,25 @@ public interface PointRecordService {
     List<Pointrecord> findPointRecordByCondition(String memberid,String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
+
+    /**
+     * 查询积分表中所有的年份
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:27:33 
+     * @return
+     */
+	List<String> findPointYears();
+
+	/**
+	 * 积分图表
+	 * @author ：zc
+	 * @date ：2017年3月24日 下午7:28:04 
+	 * @param mark
+	 * @param markYear
+	 * @param time
+	 * @return
+	 */
+	List<Map<String, Object>> pointChart(String mark, String markYear, String time);
 
 
 }

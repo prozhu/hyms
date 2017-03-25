@@ -8,8 +8,8 @@
 <title>会员注册</title>
 
 </head>
-<%@ include file="/WEB-INF/jsp/common_js.jsp"%>
-<link rel="stylesheet" href="${baseurl}css/email.css"/>  
+ <%@ include file="/WEB-INF/jsp/common/common_js.jsp"%>
+ <%@ include file="/WEB-INF/jsp/common/common_css.jsp"%>
 <script type="text/javascript">
 
 	$(document).ready(function() {

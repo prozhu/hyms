@@ -254,4 +254,58 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  
+  <!-- 自己编写的sql脚本 -->
+    <select id="pointChartByYear" resultType="java.util.Map">
+    select year(changetime) as 'year' , sum(points) as 'point' from pointrecord  group by  year(changetime)
+  </select>
+  
+    <select id="pointChartByQuarter" parameterType="String" resultType="java.util.Map">
+        select  quarter(changetime) as 'quarter',sum(points) as 'point' from pointrecord where
+           <if test="markYear != '' ">
+               year(changetime)=#{markYear}
+           </if>
+           <if test=" markYear == '' ">
+               year(changetime)=year(now()) 
+           </if>
+         group by  quarter(changetime)
+  </select>
+  
+    <select id="pointChartByMonth"  parameterType="String" resultType="java.util.Map">
+    select  month(changetime) as 'month',sum(points) as 'point' from pointrecord where
+       <if test="markYear != ''">
+               year(changetime) = #{markYear}
+           </if>
+           <if test="markYear == '' ">
+               year(changetime)=year(now()) 
+           </if>
+     group by  month(changetime)
+  </select>
+  
+  <select id="selectYears" resultType = "java.lang.String">
+        select distinct year(changetime) as 'year'  from pointrecord order by year(changetime) asc
+  </select>
+  
+  <select id="pointChartByWeek" resultType = "java.util.Map">
+        SELECT 
+          DATE_FORMAT(changetime, '%Y-%m-%d') AS times,
+          SUM(points) AS 'point' 
+        FROM
+          pointrecord 
+        WHERE changetime <![CDATA[  >=  ]]> DATE_SUB(
+            #{time},
+            INTERVAL WEEKDAY(#{time}) DAY
+          ) 
+          AND  changetime <![CDATA[   <=  ]]>  DATE_ADD(
+            DATE_SUB(
+              #{time},
+              INTERVAL WEEKDAY(#{time}) DAY
+            ),
+            INTERVAL 7 DAY
+          ) 
+        GROUP BY times 
+        ORDER BY times
+  </select>
+  
 </mapper>

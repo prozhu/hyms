@@ -1,7 +1,9 @@
 package cn.itcast.ssm.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,4 +96,34 @@ public class PointRecordServiceImpl implements PointRecordService {
         }
         return null;
     }
+
+	@Override
+	public List<String> findPointYears() {
+		List<String> list = pointrecordMapper.selectYears();
+		if (StringUitl.isNullOrEmpty(list)) {
+			return null;
+		}
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> pointChart(String mark, String markYear, String time) {
+		if (StringUitl.isNullOrEmpty(mark.trim())) {
+			return null;
+		}
+		List<Map<String, Object>> map = null;
+		if ("year".equals(mark.trim())) {
+			map = pointrecordMapper.pointChartByYear();
+		} else if ("quarter".equals(mark.trim())) {
+			map = pointrecordMapper.pointChartByQuarter(markYear);
+		} else if ("month".equals(mark.trim())) {
+			map = pointrecordMapper.pointChartByMonth(markYear);
+		} else {
+				map = pointrecordMapper.pointChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
+		}
+		if (StringUitl.isNullOrEmpty(map)) {
+			return null;
+		}
+		return map;
+	}
 }

@@ -130,10 +130,6 @@ public class FirstAction {
     }
     
     
-    @RequestMapping("/echart")
-    public String echart() {
-        return "forward:WEB-INF/echart/echart.jsp";
-    }
     /**
      * @description: 跳转到main_center.jsp 页面
      * @author ：zc
@@ -142,7 +138,7 @@ public class FirstAction {
      */
     @RequestMapping("/member")
     public String mainCenter() {
-        return "/member";
+        return "/member/member";
     }
     
     /**
@@ -153,7 +149,7 @@ public class FirstAction {
      */
     @RequestMapping("/cardRechargeRecord")
     public String cardRechargeRecord() {
-        return "/cardRechargeRecord";
+        return "/cardRechargeRecord/cardRechargeRecord";
     }
     
     /**
@@ -164,7 +160,7 @@ public class FirstAction {
      */
     @RequestMapping("/memberCard")
     public String memberCard() {
-        return "/memberCard";
+        return "/memberCard/memberCard";
     }
     
     
@@ -176,7 +172,7 @@ public class FirstAction {
      */
     @RequestMapping("/cardRecord")
     public String cardRecord() {
-        return "/cardRecord";
+        return "/cardRecord/cardRecord";
     }
     
     /**
@@ -187,7 +183,7 @@ public class FirstAction {
      */
     @RequestMapping("/pointRecord")
     public String pointRecord() {
-        return "/pointRecord";
+        return "/pointRecord/pointRecord";
     }
     
     /**
@@ -198,7 +194,7 @@ public class FirstAction {
      */
     @RequestMapping("/consumeRecord")
     public String consumeRecord() {
-        return "/consumeRecord";
+        return "/consumeRecord/consumeRecord";
     }
     
     /**
@@ -209,6 +205,18 @@ public class FirstAction {
      */
     @RequestMapping("/consumeRecordChart")
     public String consumeRecordChart() {
-    	return "/consumeRecordChart";
+    	return "/consumeRecord/consumeRecordChart";
     }
+    
+    /**
+     * 跳转到积分图表页面
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:17:00 
+     * @return
+     */
+    @RequestMapping("/pointRecordChart")
+    public String pointRecordChart() {
+    	return "/pointRecord/pointRecordChart";
+    }
+    
 }	

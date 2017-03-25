@@ -126,6 +126,13 @@ public class ConsumeRecordController extends BaseController{
     	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(con)), response);
     }
     
+    /**
+     * 获取销售表中的所有年份
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:25:58 
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/findConsumeYears", method = {RequestMethod.GET})
     public String findConsumeYears(HttpServletResponse response) {
     	List<String> list = consumeRecordService.findConsumeYears();
