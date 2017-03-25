@@ -1,0 +1,142 @@
+/**
+ * 积分记录的js文件
+ */
+/*保存图片
+ */
+function saveImageInfo1() {
+    var mycanvas = document.getElementById("JSChart_pointChart_container");
+    var image = mycanvas.toDataURL('image/png');
+    var w = window.open('about:blank', 'image from canvas');
+    w.document.write("<img src='" + image + "' alt='from canvas'/>");
+}
+
+
+/**下载图片到本地
+ */
+function saveAsLocalImage1() {
+    var myCanvas = document.getElementById("JSChart_pointChart_container");
+    var image = myCanvas.toDataURL("image/png").replace("image/png",
+            "image/octet-stream");
+    window.location.href = image; // it will save locally
+}
+
+$(function () {
+
+    //选择时间和选择年份的显示和隐藏
+    $("#mark1").change(function () {
+        if ($("#mark1").val() == "week") {
+            //显示选择时间的框进行显示
+            $("#week1").css("display", "inline");
+            //将选择年份的框进行隐藏
+            $("#chooseYear1").css("display", "none");
+        } else {
+            //显示选择时间的框进行隐藏
+            $("#week1").css("display", "none");
+            //将选择年份的框进行显示
+            $("#chooseYear1").css("display", "inline");
+        }
+    });
+
+
+    //动态的加载年份
+    $.ajax({
+        url:  baseurl + "pointRecord/findPointYears.action",
+        type: 'get',
+        async: false,
+        dataType: 'json',
+        success: function (result) {
+            if (result.success) {
+                for (var i = 0; i < result.data.length; i++) {
+                    $("#year1").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
+                }
+            }
+        }
+    });
+
+
+    //图表信息
+    $("#search9").click(
+            function () {
+                var mark = $("#mark1").val();
+                var year = $("#year1").val();
+                var time = $('#time').datebox('getValue');
+                $.ajax({
+                    url: baseurl + "pointRecord/pointChart.action",
+                    type: 'get',
+                    data: {
+                        mark: mark,
+                        markYear: year,
+                        time: time
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (!result.success) {
+                            $.messager.alert('信息提示', '查询数据为空！', 'info');
+                        }
+                        var data = new Array(); //data是一个数组
+                        if (result.data != null) {
+                            $(result.data).each(function (i) {
+                                //alert("i:" + i + "," + this.month + "," + this.money);
+                                data[i] = new Array(); // data[i] 声明为数组
+                                if (mark === "year") {
+                                    data[i][0] = "" + this.year + "年";
+                                } else if (mark === "quarter") {
+                                    data[i][0] = "第" + this.quarter + "季度";
+                                } else if (mark === "month") {
+                                    data[i][0] = "" + this.month + "月";
+                                } else {
+                                    data[i][0] = "" + this.times + "日";
+                                }
+                                data[i][1] = this.point;
+                            });
+                        }
+                        //支持js二维数组、json格式、xml格式数据源
+                        /* var myData = new Array([ "商品1", 20 ], [  "商品2", 10 ], [  "商品3", 30 ], [  "商品4", 10 ],
+                         [  "商品5", 5 ]); */
+                        //第二个参数值有：line,bar,pie分别表示用线形图、柱状图、饼图来展示报表
+
+                        var myChart = new JSChart('pointChart_container', $(
+                                "#type1").val());
+                        if (result.data != null) {
+                            myChart.setDataArray(data);
+                        }
+                        //myChart.set3D(true);
+                        //设置 X轴名称, 对饼图无效。
+                        myChart.setAxisNameX(mark === "year" ? "年度"
+                                : mark === "quarter" ? "季度"
+                                : mark === "month" ? "月度" : "周度");
+                        //设置 y轴名称, 对饼图无效。
+                        myChart.setAxisNameY('积分数');
+                        //设置图表的大小
+                        myChart.setSize(1000, 700);
+                        //设置轴线名字体大小，对饼图无效。默认是11。
+                        myChart.setAxisNameFontSize(13);
+                        //设置x轴和容器底部的距离，默认30
+                        myChart.setAxisPaddingBottom(45);
+                        //设置y轴和容器左边距的距离，默认40
+                        myChart.setAxisPaddingLeft(70);
+                        //设置图表右边和容器的距离，默认30。
+                        myChart.setAxisPaddingRight(30);
+                        //设置图表上边和容器的距离，默认30
+                        myChart.setAxisPaddingTop(30);
+                        //设置柱状图矩形间距，由此来控制柱状图的宽度，值为0～100之间的整数，默认是10。
+                        myChart.setBarSpacingRatio(10);
+                        //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
+                        myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
+                        myChart.setTitle(mark == "year" ? "年度积分图表"
+                                : mark == "quarter" ? "季度积分图表"
+                                : mark == "month" ? "月度积分图表"
+                                : "周度积分图表");
+                        if (result.data != null) {
+                            myChart.draw();
+                        }
+                    }
+                });
+
+                //这里控制显示保存图表图片和下载图表图片按钮
+                $("#saveChart1").css("display", "inline");
+                $("#downloadChart1").css("display", "inline");
+            });
+
+});
+	
