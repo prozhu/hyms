@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no">
@@ -8,8 +8,9 @@
 <title>会员注册</title>
 
 </head>
- <%@ include file="/WEB-INF/jsp/common/common_js.jsp"%>
- <%@ include file="/WEB-INF/jsp/common/common_css.jsp"%>
+ <%@ include file="/WEB-INF/pages/common/tag.jsp"%>
+ <%@ include file="/WEB-INF/pages/common/common_js.jsp"%>
+ <%@ include file="/WEB-INF/pages/common/common_css.jsp"%>
 <script type="text/javascript">
 
 	$(document).ready(function() {

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@ page contentType="text/html; charset=UTF-8"%>
- <%@ include file="/WEB-INF/jsp/common/tag.jsp"%>
- <%@ include file="/WEB-INF/jsp/common/common_js.jsp"%>
- <%@ include file="/WEB-INF/jsp/common/common_css.jsp"%>
+  <%@ include file="/WEB-INF/pages/common/tag.jsp"%>
+ <%@ include file="/WEB-INF/pages/common/common_js.jsp"%>
+ <%@ include file="/WEB-INF/pages/common/common_css.jsp"%>
 <html>
 <head>
 <TITLE>会员管理系统</TITLE>
