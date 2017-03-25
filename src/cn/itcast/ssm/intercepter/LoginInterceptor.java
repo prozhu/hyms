@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.itcast.ssm.model.Member;
+import cn.itcast.ssm.model.member.Member;
 
 /**
  * 登录校验拦截器
