@@ -1,18 +1,16 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8"%>
   <%@ include file="/WEB-INF/pages/common/tag.jsp"%>
  <%@ include file="/WEB-INF/pages/common/common_js.jsp"%>
  <%@ include file="/WEB-INF/pages/common/common_css.jsp"%>
 <html>
 <head>
-<TITLE>会员管理系统</TITLE>
+<title>会员管理系统</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<LINK rel="stylesheet" type="text/css" href="${baseurl}styles/style.css">
-<LINK rel="stylesheet" type="text/css" href="${baseurl}styles/login.css">
-<link rel="stylesheet" type="text/css" href="css/wu.css" />
-<link rel="stylesheet" type="text/css" href="css/icon.css" />
+<link rel="stylesheet" type="text/css" href="${baseurl}styles/style.css">
+<link rel="stylesheet" type="text/css" href="${baseurl}styles/login.css">
 
-<STYLE type="text/css">
+<style type="text/css">
 .btnalink {
 	cursor: hand;
 	display: block;
@@ -27,71 +25,71 @@
 	font-weight: bold;
 	text-decoration: none;
 }
-</STYLE>
+</style>
 
 
-</HEAD>
-<BODY 
+</head>
+<body 
 	style="background: #f6fdff url(${baseurl}images/login/bg1.jpg) repeat-x;">
-	<FORM id="loginform" name="loginform"  method="post">
+	<form id="loginform" name="loginform"  method="post">
 		
-		<DIV class="logincon">
+		<div class="logincon">
 
-			<DIV class="title">
+			<div class="title">
 				<%-- <IMG alt="" src="${baseurl}images/login/logo.png"> --%>
-			</DIV>
+			</div>
 
-			<DIV class="cen_con">
+			<div class="cen_con">
 			     <h1><font size=4" >会员管理系统</font></h1>
-				<IMG alt="" src="${baseurl}images/login/bg2.png">
-			</DIV>
+				<img alt="" src="${baseurl}images/login/bg2.png">
+			</div>
 
-			<DIV class="tab_con">
+			<div class="tab_con">
 
-				<TABLE class="tab" border="0" cellSpacing="6" cellPadding="8">
-					<TBODY>
-						<TR>
-							<TD>用户名：</TD>
-							<TD colSpan="2">
-								<input type="text" id="loginName" name="loginName" style="WIDTH: 130px"  />
-							</TD>
-						</TR>
-						<TR>
-							<TD>密 码：</TD>
-							<TD>
-								<input type="password" id="loginPwd" name="loginPwd"  style="WIDTH: 130px"/>
-							</TD>
-						</TR>
-						<TR>
-							<TD>验证码：</TD>
-							<TD><input id="randomcode" name="randomcode" size="8"/> 
+				<table class="tab" border="0" cellSpacing="6" cellPadding="8">
+					<tbody>
+						<tr>
+							<td>用户名：</td>
+							<td colSpan="2">
+								<input type="text" id="loginName" name="loginName" style="width: 130px;margin-left:-6px"  />
+							</td>
+						</tr>
+						<tr>
+							<td>密&nbsp;&nbsp;&nbsp;码：</td>
+							<td>
+								<input type="password" id="loginPwd" name="loginPwd"  style="width: 130px"/>
+							</td>
+						</tr>
+						<tr>
+							<td >验证码：</td>
+							<td><input id="randomcode" name="randomcode" size="8" style = "margin-left: 16px"/> 
 								<img id="randomcode_img" src="${baseurl}validatecode.jsp" alt="" width="56" height="20" align='absMiddle' /> 
 								<a href=javascript:randomcode_refresh()>刷新</a>
-							</TD>
-						</TR>
+							</td>
+						</tr>
 
-						<TR>
-							<TD colSpan="2" align="center"><input type="button"
+						<tr>
+							<td colSpan="2" align="center"><input type="button"
 								class="btnalink" onclick="loginsubmit()" value="登&nbsp;&nbsp;录"  
 								id = "login"/>
 								<input type="reset" class="btnalink" value="重&nbsp;&nbsp;置" />
-							</TD>
-						</TR>
+							</td>
+						</tr>
 						
-						<TR>
-							<TD colSpan="2" align="center">
+						<tr>
+							<td colSpan="2" align="center">
 		                         <span >还没有账号，点击</span>
 	                            <a href="${baseurl}toRegister.action" style="color:red">这里</a>
 	                            <span >进行注册！</span>
-	                         </TD>
-						</TR>
-					</TBODY>
-				</TABLE>
+	                         </td>
+						</tr>
+					</tbody>
+				</table>
 
-			</DIV>
-		</DIV>
-	</FORM>
-</BODY>
+			</div>
+		</div>
+	</form>
+</body>
 
 <script type="text/javascript">
           //登录方法
