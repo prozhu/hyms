@@ -1,6 +1,7 @@
 package cn.itcast.ssm.service.member;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.model.member.Member;
@@ -93,6 +94,31 @@ public interface MemberService {
      * @return
      */
     public Integer getCount(String startTime, String endTime, String keyword);
+
+
+    /**
+     * 获取会员表中的信息
+     * @param mark ：年度、季度、月度显示图表(year, quarter, month)
+     * @param markYear ：年份(2017)
+     * @param time : 指定时间
+     * @return
+     */
+	public List<Map<String, Object>> memberChart(String mark, String markYear,
+			String time);
+
+	
+	/**
+	 * 获取会员表中的所有年份
+	 * @return
+	 */
+	public List<String> findMemberYears();
+
+
+	/**
+	 * 按照年龄查询会员图表
+	 * @return
+	 */
+	public List<Map<String, Object>> memberChartByAge();
 
 
 }

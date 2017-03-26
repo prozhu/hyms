@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -331,5 +332,48 @@ public class MemberServiceImpl implements MemberService {
         }
         return memberMapper.countByExample(memberExample);
     }
+
+
+	@Override
+	public List<Map<String, Object>> memberChart(String mark, String markYear,
+			String time) {
+		if (StringUitl.isNullOrEmpty(mark.trim())) {
+			return null;
+		}
+		List<Map<String, Object>> map = null;
+		if ("year".equals(mark.trim())) {
+			map = memberMapper.memberChartByYear();
+		} else if ("quarter".equals(mark.trim())) {
+			map = memberMapper.memberChartByQuarter(markYear);
+		} else if ("month".equals(mark.trim())) {
+			map = memberMapper.memberChartByMonth(markYear);
+		} else {
+				map = memberMapper.memberChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
+		}
+		if (StringUitl.isNullOrEmpty(map)) {
+			return null;
+		}
+		return map;
+	}
+
+
+	@Override
+	public List<String> findMemberYears() {
+		List<String> list = memberMapper.selectYears();
+		if (StringUitl.isNullOrEmpty(list)) {
+			return null;
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> memberChartByAge() {
+		List<Map<String, Object>> map = memberMapper.memberChartByAge();
+		if (StringUitl.isNullOrEmpty(map)) {
+			return null;
+		}
+		return map;
+	}
 
 }

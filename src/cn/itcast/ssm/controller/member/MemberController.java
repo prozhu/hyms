@@ -185,4 +185,57 @@ public class MemberController extends BaseController{
         return writeAjaxResponse(JSONUtil.getJson(result), response);
 	}
 	
+	/**
+     * 会员记录图表
+     * @author ：zc
+     * @date ：2017年3月24日 上午9:35:29 
+     * @param response
+     * @param mark ：年度、季度、月度显示图表(year, quarter, month)
+     * @param markYear ：年份(2017)
+     * @param time : 指定时间
+     * @return
+     */
+    @RequestMapping(value = "/memberChart", method = {RequestMethod.GET})
+    public String memberChart(HttpServletResponse response, String mark, String markYear, String time) {
+    	List<Map<String, Object>> con = memberService.memberChart(mark, markYear, time);
+    	if (StringUitl.isNullOrEmpty(con)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(con)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(con)), response);
+    }
+    
+    /**
+     * 获取会员表中的所有年份
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:25:58 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/findMemberYears", method = {RequestMethod.GET})
+    public String findMemberYears(HttpServletResponse response) {
+    	List<String> list = memberService.findMemberYears();
+    	if (StringUitl.isNullOrEmpty(list)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
+    }
+    
+    
+    /**
+     * 按照年龄查询会员报表
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:25:58 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/memberChartByAge", method = {RequestMethod.GET})
+    public String memberChartByAge(HttpServletResponse response) {
+    	List<Map<String, Object>> list = memberService.memberChartByAge();
+    	if (StringUitl.isNullOrEmpty(list)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
+    }
+
+	
 }

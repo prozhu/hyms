@@ -142,6 +142,17 @@ public class FirstAction {
     }
     
     /**
+     * @description: 跳转到 会员图表页面
+     * @author ：zc
+     * @date ：2017-3-25 20:51:26
+     * @return
+     */
+    @RequestMapping("/memberChart")
+    public String memberChart() {
+        return "/member/memberChart";
+    }
+    
+    /**
      * @description: 跳转到 会员卡充值记录页面
      * @author ：zc
      * @date ：2017-2-13 上午11:59:11 

@@ -1,6 +1,8 @@
 package cn.itcast.ssm.mapper.member;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -31,4 +33,43 @@ public interface MemberMapper {
     int updateByPrimaryKeySelective(Member record);
 
     int updateByPrimaryKey(Member record);
+
+    /**
+     * 查询会员表中所有的年份
+     * @return
+     */
+	List<String> selectYears();
+
+	/**
+	 * 按照 “年度”查询会员人数
+	 * @return
+	 */
+	List<Map<String, Object>> memberChartByYear();
+
+	/**
+	 * 按照 “季度”查询会员人数
+	 * @param markYear
+	 * @return
+	 */
+	List<Map<String, Object>> memberChartByQuarter(@Param("markYear")String markYear);
+
+	/**
+	 * 按照 “月度”查询会员人数
+	 * @param markYear
+	 * @return
+	 */
+	List<Map<String, Object>> memberChartByMonth(@Param("markYear")String markYear);
+
+	/**
+	 * 按照 “周”查询会员人数
+	 * @param string
+	 * @return
+	 */
+	List<Map<String, Object>> memberChartByWeek(@Param("time")String time);
+
+	/**
+	 * 按照年龄查询会员图表
+	 * @return
+	 */
+	List<Map<String, Object>> memberChartByAge();
 }
