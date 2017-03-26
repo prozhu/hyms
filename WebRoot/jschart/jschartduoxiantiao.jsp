@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
  <%@ include file="/WEB-INF/pages/common/tag.jsp"%>
+ 
 <html>
 <head>
+<script type="text/javascript" src="${baseurl}js/jscharts.js"></script>
     <title>Login page</title>  	
   </head>  
   <body>
@@ -30,7 +32,7 @@
 	//设置y轴的结束值，如果设置了起始值，则此值必须比起始值大。
 	myChart.setIntervalEndY(200);
 	//在x轴上添加标签，其参数是两个值构成的一个数组，第一个参数为标签在x轴上的位置，第二个值为标签显示的内容（名称）,一般用来对应数组的第一个为数字的元素。
-/* 	 myChart.setLabelX([1,'p1']);
+/*  	 myChart.setLabelX([1,'p1']);
 	myChart.setLabelX([2,'p2']);
 	myChart.setLabelX([3,'p3']);
 	myChart.setLabelX([4,'p4']);
@@ -39,7 +41,7 @@
 	myChart.setLabelX([7,'p2']);
 	myChart.setLabelX([8,'p3']);
 	myChart.setLabelX([9,'p4']);
-	myChart.setLabelX([10,'p5']);  */
+	myChart.setLabelX([10,'p5']);   */
 	//设置x轴上显示的值的个数，此值会自动调整，对饼图无效。
 	myChart.setAxisValuesNumberX(5);
 	//是否显示x轴上的刻度值
@@ -52,9 +54,11 @@
 	myChart.setLineColor('#A4D314', '收入');
 	myChart.setLineColor('#BBBBBB', '支出');
 	//设置x轴上提示
-	 myChart.setTooltip([1]);
+	myChart.setTooltip([1]);
 	myChart.setTooltip([2]);
 	myChart.setTooltip([3]);
+	myChart.setTooltip([4]);
+	myChart.setTooltip([5]);
 	/*myChart.setTooltip([4]);
 	myChart.setTooltip([5]);
 	myChart.setTooltip([6]);
