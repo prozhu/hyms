@@ -68,8 +68,16 @@ public interface MemberMapper {
 	List<Map<String, Object>> memberChartByWeek(@Param("time")String time);
 
 	/**
-	 * 按照年龄查询会员图表
+	 * 按照年龄查询会员图表(线形图)
 	 * @return
 	 */
 	List<Map<String, Object>> memberChartByAge();
+
+	/**
+	 * 按照年龄查询会员图表(线形图)
+	 * @author ：zc
+	 * @date ：2017年3月27日 下午7:38:06 
+	 * @return
+	 */
+	List<Map<String, Object>> memberChartByAgeBar();
 }

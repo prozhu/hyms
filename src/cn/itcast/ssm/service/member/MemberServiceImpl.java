@@ -376,4 +376,14 @@ public class MemberServiceImpl implements MemberService {
 		return map;
 	}
 
+
+	@Override
+	public List<Map<String, Object>> memberChartByAgeBar() {
+		List<Map<String, Object>> map = memberMapper.memberChartByAgeBar();
+		if (StringUitl.isNullOrEmpty(map)) {
+			return null;
+		}
+		return map;
+	}
+
 }

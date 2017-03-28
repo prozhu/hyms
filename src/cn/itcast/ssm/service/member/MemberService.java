@@ -120,5 +120,13 @@ public interface MemberService {
 	 */
 	public List<Map<String, Object>> memberChartByAge();
 
+	/**
+	 * 按照年龄查询会员报表(柱形图)
+	 * @author ：zc
+	 * @date ：2017年3月27日 下午7:37:14 
+	 * @return
+	 */
+	public List<Map<String, Object>> memberChartByAgeBar();
+
 
 }

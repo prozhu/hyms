@@ -34,15 +34,15 @@
 	                    <option value="quarter">季度图表</option>
 	                    <option value="month">月度图表</option>
 	                    <option value="week">周度图表</option>
+	                    <option value="ageChart">年龄图表</option>
 	                </select>
 	
 	                <label>选择图表类型：</label>
 	                <select panelHeight="auto" id="type3" style="margin-right:10px">
 	                    <option value="bar">柱状图</option>
 	                    <option value="line">线形图</option>
-	                    <option value="pie">饼状图</option>
+	                    <option value="pie" id = "pie">饼状图</option>
 	                </select>
-	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="ageChart" >年龄分布</a>
 	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="search11" >生成图表</a>
 	                <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="saveImageInfo3()" plain="true"
 	                   id="saveChart3" style="display:none">保存图表图片</a>

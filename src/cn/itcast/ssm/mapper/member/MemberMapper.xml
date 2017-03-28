@@ -406,22 +406,69 @@
 
 	<select id="memberChartByAge" parameterType="String"
 		resultType="java.util.Map">
-		select nnd as 'age',count(*) as 'total' from(  
-			 select   
-			 case  
-			  when age<![CDATA[  >=  ]]>1 and age<![CDATA[   <=  ]]>10 then '1-10'  
-			  when age<![CDATA[  >=  ]]>11 and age<![CDATA[   <=  ]]>20 then '11-20'  
-			  when age<![CDATA[  >=  ]]>21 and age<![CDATA[   <=  ]]>30 then '21-30'  
-			  when age<![CDATA[  >=  ]]>31 and age<![CDATA[   <=  ]]>40 then '31-40' 
-			  when age <![CDATA[  >=  ]]> 41 and age <![CDATA[   <=  ]]>50 then '41-50' 
-			  when age <![CDATA[  >=  ]]> 51 and age <![CDATA[   <=  ]]>60 then '51-60' 
-			  when age <![CDATA[  >=  ]]> 61 and age <![CDATA[   <=  ]]>70 then '61-70' 
-			  when age <![CDATA[  >=  ]]> 71 and age <![CDATA[   <=  ]]>80 then '71-80' 
-			  WHEN age <![CDATA[  >=  ]]> 81 AND age <![CDATA[   <=  ]]>90 THEN '81-90' 
-			 end   
-			 as nnd from member 
-		)a group by nnd
+		SELECT nnd AS 'age', COUNT(*) AS 'total' FROM(  
+             SELECT  
+              CASE 
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 1 AND age <![CDATA[   <=  ]]> 10 THEN  '男1-10'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 1 AND age <![CDATA[   <=  ]]> 10 THEN  '女1-10'  
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 11 AND age <![CDATA[   <=  ]]> 20 THEN  '男11-20'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 11 AND age <![CDATA[   <=  ]]> 20 THEN  '女11-20' 
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 21 AND age <![CDATA[   <=  ]]> 30 THEN  '男21-30'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 21 AND age <![CDATA[   <=  ]]> 30 THEN  '女21-30'  
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 31 AND age <![CDATA[   <=  ]]> 40 THEN  '男31-40'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 31 AND age <![CDATA[   <=  ]]> 40 THEN  '女31-40'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  41 AND age  <![CDATA[   <=  ]]> 50 THEN  '男41-50'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  41 AND age  <![CDATA[   <=  ]]> 50 THEN  '女41-50'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  51 AND age  <![CDATA[   <=  ]]> 60 THEN  '男51-60'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  51 AND age  <![CDATA[   <=  ]]> 60 THEN  '女51-60'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  61 AND age  <![CDATA[   <=  ]]> 70 THEN  '男61-70'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  61 AND age  <![CDATA[   <=  ]]> 70 THEN  '女61-70'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  71 AND age  <![CDATA[   <=  ]]> 80 THEN  '男71-80'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  71 AND age  <![CDATA[   <=  ]]> 80 THEN  '女71-80'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  81 AND age  <![CDATA[   <=  ]]> 90 THEN  '男81-90'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  81 AND age  <![CDATA[   <=  ]]> 90 THEN  '女81-90'  
+              END
+            AS nnd FROM member  
+        )a GROUP BY nnd 
 	</select>
+	
+	<select id="memberChartByAgeBar" parameterType="String"
+        resultType="java.util.Map">
+       SELECT   age, totalMan , totalLady FROM
+
+((SELECT nnd AS 'age', COUNT(*) AS 'totalMan' FROM(  
+             SELECT  
+              CASE 
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 1 AND age <![CDATA[   <=  ]]> 10 THEN  '1-10'  
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 11 AND age <![CDATA[   <=  ]]> 20 THEN  '11-20'  
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 21 AND age <![CDATA[   <=  ]]> 30 THEN  '21-30'  
+                  WHEN sex = '男' AND age <![CDATA[  >=  ]]> 31 AND age <![CDATA[   <=  ]]> 40 THEN  '31-40'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  41 AND age  <![CDATA[   <=  ]]> 50 THEN  '41-50'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  51 AND age  <![CDATA[   <=  ]]> 60 THEN  '51-60'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  61 AND age  <![CDATA[   <=  ]]> 70 THEN  '61-70'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  71 AND age  <![CDATA[   <=  ]]> 80 THEN  '71-80'  
+                  WHEN sex = '男' AND age  <![CDATA[  >=  ]]>  81 AND age  <![CDATA[   <=  ]]> 90 THEN  '81-90'  
+              END
+            AS nnd FROM member  
+        )a GROUP BY nnd ) AS man) ,
+            
+((SELECT nnd AS 'age1', COUNT(*) AS 'totalLady' FROM(  
+             SELECT  
+              CASE 
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 1 AND age <![CDATA[   <=  ]]> 10 THEN  '1-10'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 11 AND age <![CDATA[   <=  ]]> 20 THEN  '11-20'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 21 AND age <![CDATA[   <=  ]]> 30 THEN  '21-30'  
+                  WHEN sex = '女' AND age <![CDATA[  >=  ]]> 31 AND age <![CDATA[   <=  ]]> 40 THEN  '31-40'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  41 AND age  <![CDATA[   <=  ]]> 50 THEN  '41-50'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  51 AND age  <![CDATA[   <=  ]]> 60 THEN  '51-60'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  61 AND age  <![CDATA[   <=  ]]> 70 THEN  '61-70'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  71 AND age  <![CDATA[   <=  ]]> 80 THEN  '71-80'  
+                  WHEN sex = '女' AND age  <![CDATA[  >=  ]]>  81 AND age  <![CDATA[   <=  ]]> 90 THEN  '81-90'  
+              END
+            AS nnd FROM member  
+        )a GROUP BY nnd ) AS lady) WHERE man.age = lady.age1
+        
+    </select>
   
   
 </mapper>
