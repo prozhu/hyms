@@ -334,4 +334,70 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+   <!-- 自己编写的sql脚本 -->
+    <select id="memberCardChartByYear" resultType="java.util.Map">
+    SELECT 
+  YEAR(openDate) AS 'year',
+  SUM(balance) AS 'balance' ,
+  SUM(totalPoint) AS 'totalpoint' ,
+  SUM(totalConsumption) AS 'totalconsumption' ,
+  SUM(totalRecharge) AS 'totalrecharge' 
+FROM
+  membercard 
+GROUP BY YEAR(openDate)
+  </select>
+  
+    <select id="memberCardChartByQuarter" parameterType="String" resultType="java.util.Map">
+        select quarter(opendate) as 'quarter',sum(balance) as 'balance' ,sum(totalpoint) as 'totalpoint' ,sum(totalconsumption) as 'totalconsumption' 
+        ,sum(totalrecharge) as 'totalrecharge' 
+        FROM membercard WHERE
+           <if test="markYear != '' ">
+               year(opendate)=#{markYear}
+           </if>
+           <if test=" markYear == '' ">
+               year(opendate)=year(now()) 
+           </if>
+         group by  quarter(opendate)
+  </select>
+  
+    <select id="memberCardChartByMonth"  parameterType="String" resultType="java.util.Map">
+           select month(opendate) as 'month',sum(balance) as 'balance' ,sum(totalpoint) as 'totalpoint' ,sum(totalconsumption) as 'totalconsumption' 
+        ,sum(totalrecharge) as 'totalrecharge' 
+        FROM membercard WHERE
+           <if test="markYear != '' ">
+               year(opendate)=#{markYear}
+           </if>
+           <if test=" markYear == '' ">
+               year(opendate)=year(now()) 
+           </if>
+         group by  month(opendate)
+  </select>
+  
+  <select id="selectYears" resultType = "java.lang.String">
+        select distinct year(opendate) as 'year'  from membercard order by year(opendate) asc
+  </select>
+  
+  <select id="rechargeChartByWeek" resultType = "java.util.Map">
+        SELECT 
+          DATE_FORMAT(changetime, '%Y-%m-%d') AS times,
+          SUM(rechargeMoney) AS 'money' 
+        FROM
+          cardrechargerecord 
+        WHERE changetime <![CDATA[  >=  ]]> DATE_SUB(
+            #{time},
+            INTERVAL WEEKDAY(#{time}) DAY
+          ) 
+          AND  changetime <![CDATA[   <=  ]]>  DATE_ADD(
+            DATE_SUB(
+              #{time},
+              INTERVAL WEEKDAY(#{time}) DAY
+            ),
+            INTERVAL 7 DAY
+          ) 
+        GROUP BY times 
+        ORDER BY times
+  </select>
+  
+  
 </mapper>

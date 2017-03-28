@@ -22,6 +22,7 @@ import cn.itcast.ssm.model.membercard.Membercard;
 import cn.itcast.ssm.service.member.MemberService;
 import cn.itcast.ssm.service.membercard.MemberCardService;
 import cn.itcast.ssm.util.JSONUtil;
+import cn.itcast.ssm.util.StringUitl;
 import cn.itcast.ssm.util.excel.DjExcelCreator;
 import cn.itcast.ssm.util.excel.DjExcelDataRender;
 
@@ -170,5 +171,77 @@ public class MemberCardController extends BaseController {
             return writeAjaxResponse(JSONUtil.result(false, "充值或消费失败！", "", ""), response);
         }
     }
+    
+    
+    /**
+     * 会员卡记录图表()
+     * @author ：zc
+     * @date ：2017年3月24日 上午9:35:29 
+     * @param response
+     * @param mark ：年度、季度、月度显示图表(year, quarter, month)
+     * @param markYear ：年份(2017)
+     * @param time : 指定时间
+     * @return
+     */
+    @RequestMapping(value = "/memberCardChart", method = {RequestMethod.GET})
+    public String memberCardChart(HttpServletResponse response, String mark, String markYear, String time) {
+    	List<Map<String, Object>> con = memberCardService.memberCardChart(mark, markYear, time);
+    	if (StringUitl.isNullOrEmpty(con)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(con)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(con)), response);
+    }
+    
+    /**
+     * 获取会员卡表中的所有年份
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:25:58 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/findMemberCardYears", method = {RequestMethod.GET})
+    public String findMemberCardYears(HttpServletResponse response) {
+    	List<String> list = memberCardService.findMemberCardYears();
+    	if (StringUitl.isNullOrEmpty(list)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
+    }
+    
+    
+    /**
+     * 按照年龄查询会员报表(线形图)
+     * @author ：zc
+     * @date ：2017年3月24日 下午7:25:58 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/memberChartByAge", method = {RequestMethod.GET})
+    public String memberChartByAge(HttpServletResponse response) {
+    	List<Map<String, Object>> list = memberService.memberChartByAge();
+    	if (StringUitl.isNullOrEmpty(list)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
+    }
+    
+    
+    /**
+     * 按照年龄查询会员报表(柱形图)
+     * @author ：zc
+     * @date ：2017年3月27日 下午7:36:28 
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/memberChartByAgeBar", method = {RequestMethod.GET})
+    public String memberChartByAgeBar(HttpServletResponse response) {
+    	List<Map<String, Object>> list = memberService.memberChartByAgeBar();
+    	if (StringUitl.isNullOrEmpty(list)) {
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    	}
+    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
+    }
+    
+    
     
 }

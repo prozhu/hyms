@@ -1,6 +1,7 @@
 package cn.itcast.ssm.service.membercard;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.model.member.Member;
@@ -108,6 +109,25 @@ public interface MemberCardService {
      * @throws Exception 
      */
     void updateMemberCard(String ids, String flag) throws Exception;
+
+    /**
+     *  会员卡记录图表
+     * @author ：zc
+     * @date ：2017年3月28日 下午7:07:49 
+     * @param mark
+     * @param markYear
+     * @param time
+     * @return
+     */
+	List<Map<String, Object>> memberCardChart(String mark, String markYear, String time);
+
+	/**
+	 *  获取会员卡表中的所有年份
+	 * @author ：zc
+	 * @date ：2017年3月28日 下午7:13:50 
+	 * @return
+	 */
+	List<String> findMemberCardYears();
     
     
 }

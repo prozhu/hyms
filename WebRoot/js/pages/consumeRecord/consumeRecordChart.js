@@ -145,7 +145,15 @@
             consumeChart();
         });
 
-        //动态的加载年份
+    });
+    
+    
+    //easyui 框架加载完毕之后，在调用执行方法(可以有效避免元素没有构建成功，就执行方法)
+    $.parser.onComplete = function(){  
+    	//执行图表方法
+    	consumeChart();
+    	
+    	   //动态的加载年份
         $.ajax({
             url:  baseurl + "consumeRecord/findConsumeYears.action",
             type: 'get',
@@ -159,10 +167,5 @@
                 }
             }
         });
-
-        //图表信息
-        $("#search8").click(function(){
-        	consumeChart();
-        });
-
-    });
+    	
+    }

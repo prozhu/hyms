@@ -385,22 +385,8 @@
             memberChart();
         });
 
-        /**
-         * 动态的加载年份
-         */
-        $.ajax({
-            url: baseurl + "member/findMemberYears.action",
-            type: 'get',
-            async: false,
-            dataType: 'json',
-            success: function (result) {
-                if (result.success) {
-                    for (var i = 0; i < result.data.length; i++) {
-                        $("#year3").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
-                    }
-                }
-            }
-        });
+       
+       
 
 
         /**
@@ -426,3 +412,30 @@
 
     });
     //自动加载函数的尾部
+    
+    
+    
+    //easyui 框架加载完毕之后，在调用执行方法(可以有效避免元素没有构建成功，就执行方法)
+    $.parser.onComplete = function(){  
+    	//调用普通的加载图表事件
+        memberChart();
+        
+        
+        /**
+         * 动态的加载年份
+         */
+        $.ajax({
+            url: baseurl + "member/findMemberYears.action",
+            type: 'get',
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.success) {
+                    for (var i = 0; i < result.data.length; i++) {
+                        $("#year3").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
+                    }
+                }
+            }
+        });
+ 
+    }

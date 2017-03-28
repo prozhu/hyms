@@ -105,6 +105,7 @@ public class MemberServiceImpl implements MemberService {
         return null;
     }
 
+
     @Transactional
     @CacheEvict(value="member.findMemberByCondition",allEntries=true) 
     @Override

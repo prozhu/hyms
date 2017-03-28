@@ -158,32 +158,32 @@
         	rechargeChart();
         });
 
-        /**
-         * 动态的加载年份
-         */
-        $.ajax({
-            url: baseurl + "cardRechargeRecord/findRechargeYears.action",
-            type: 'get',
-            async: false,
-            dataType: 'json',
-            success: function (result) {
-                if (result.success) {
-                    for (var i = 0; i < result.data.length; i++) {
-                        $("#year2").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
-                    }
-                }
-            }
-        });
-
-
-        /**
-         * 图表信息
-         */
-        $("#search10").click(function () {
-                    rechargeChart();
-                }
-        );
-
 
     });
     //自动加载函数的尾部
+    
+    
+    
+    //easyui 框架加载完毕之后，在调用执行方法(可以有效避免元素没有构建成功，就执行方法)
+    $.parser.onComplete = function(){  
+    	//图表信息
+    	 rechargeChart();
+    	 
+    	 /**
+          * 动态的加载年份
+          */
+         $.ajax({
+             url: baseurl + "cardRechargeRecord/findRechargeYears.action",
+             type: 'get',
+             async: false,
+             dataType: 'json',
+             success: function (result) {
+                 if (result.success) {
+                     for (var i = 0; i < result.data.length; i++) {
+                         $("#year2").append("<option value = " + result.data[i] + ">" + result.data[i] + "</option>");
+                     }
+                 }
+             }
+         });
+    	 
+    }

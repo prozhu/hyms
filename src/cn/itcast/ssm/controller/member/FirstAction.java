@@ -187,6 +187,18 @@ public class FirstAction {
     }
     
     
+    
+    /**
+     * @description: 跳转到会员卡图表页面
+     * @author ：zc
+     * @date ：2017-2-13 上午11:59:11 
+     * @return
+     */
+    @RequestMapping("/memberCardChart")
+    public String memberCardChart() {
+        return "/memberCard/memberCardChart";
+    }
+    
     /**
      * @description: 会员卡挂失/激活记录页面
      * @author ：zc

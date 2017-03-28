@@ -159,7 +159,16 @@
             pointChart();
         });
 
-        /**
+        
+    });
+
+    
+    //easyui 框架加载完毕之后，在调用执行方法(可以有效避免元素没有构建成功，就执行方法)
+    $.parser.onComplete = function(){  
+    	//生成积分图表信息
+    	pointChart();
+    	
+    	  /**
          * 动态的加载年份
          */
         $.ajax({
@@ -176,13 +185,4 @@
             }
         });
 
-
-        /**
-         * 生成积分图表信息
-         */
-        $("#search9").click(function () {
-            pointChart();
-        });
-
-        
-    });
+    }
