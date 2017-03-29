@@ -41,6 +41,7 @@
 	                    <option value="line">线形图</option>
 	                    <option value="pie">饼状图</option>
 	                </select>
+	                <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="search8" >生成图表</a>
 	                <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="saveImageInfo()" plain="true"
 	                   id="saveChart" style="display:none">保存图表图片</a>
 	                <a href="#" class="easyui-linkbutton" iconCls="icon-arrow-down" onclick="saveAsLocalImage()"

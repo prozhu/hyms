@@ -209,39 +209,5 @@ public class MemberCardController extends BaseController {
     }
     
     
-    /**
-     * 按照年龄查询会员报表(线形图)
-     * @author ：zc
-     * @date ：2017年3月24日 下午7:25:58 
-     * @param response
-     * @return
-     */
-    @RequestMapping(value = "/memberChartByAge", method = {RequestMethod.GET})
-    public String memberChartByAge(HttpServletResponse response) {
-    	List<Map<String, Object>> list = memberService.memberChartByAge();
-    	if (StringUitl.isNullOrEmpty(list)) {
-    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
-    	}
-    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
-    }
-    
-    
-    /**
-     * 按照年龄查询会员报表(柱形图)
-     * @author ：zc
-     * @date ：2017年3月27日 下午7:36:28 
-     * @param response
-     * @return
-     */
-    @RequestMapping(value = "/memberChartByAgeBar", method = {RequestMethod.GET})
-    public String memberChartByAgeBar(HttpServletResponse response) {
-    	List<Map<String, Object>> list = memberService.memberChartByAgeBar();
-    	if (StringUitl.isNullOrEmpty(list)) {
-    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
-    	}
-    	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
-    }
-    
-    
     
 }

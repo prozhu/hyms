@@ -101,10 +101,10 @@
                 }
                 //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
                 myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
-                myChart.setTitle(mark == "year" ? "年度充值图表"
-                        : mark == "quarter" ? "季度充值图表"
-                        : mark == "month" ? "月度充值图表"
-                        : "周度充值图表");
+                myChart.setTitle(mark == "year" ? year + "年 年度充值图表"
+                        : mark == "quarter" ? year + "年 季度充值图表"
+                        : mark == "month" ? year + "年 月度充值图表"
+                        : year + "年 周度充值图表");
                 if (result.data != null) {
                     myChart.draw();
                 }
@@ -157,6 +157,15 @@
         $("#year2").change(function(){
         	rechargeChart();
         });
+        
+        /**
+         * 图表信息
+         */
+        $("#search10").click(function () {
+                    rechargeChart();
+                }
+        );
+
 
 
     });

@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color: #EEE8CD">
 	<div class="easyui-layout" data-options="fit:true">
 	    <div data-options="region:'center',border:false">
 	        <!-- Begin of toolbar -->

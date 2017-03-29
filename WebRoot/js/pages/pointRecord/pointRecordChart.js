@@ -100,10 +100,10 @@
                 }
                 //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
                 myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
-                myChart.setTitle(mark == "year" ? "年度积分图表"
-                        : mark == "quarter" ? "季度积分图表"
-                        : mark == "month" ? "月度积分图表"
-                        : "周度积分图表");
+                myChart.setTitle(mark == "year" ? year + "年 年度积分图表"
+                        : mark == "quarter" ? year + "年 季度积分图表"
+                        : mark == "month" ? year + "年 月度积分图表"
+                        : year + "年 周度积分图表");
                 if (result.data != null) {
                     myChart.draw();
                 }
@@ -156,6 +156,14 @@
          */
         $("#year1").change(function () {
             //调用生成积分图表函数
+            pointChart();
+        });
+
+        
+        /**
+         * 生成积分图表信息
+         */
+        $("#search9").click(function () {
             pointChart();
         });
 

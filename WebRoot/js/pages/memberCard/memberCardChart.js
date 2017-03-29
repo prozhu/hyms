@@ -72,7 +72,7 @@
                 //设置 y轴名称, 对饼图无效。
                 myChart.setAxisNameY('额度');
                 //设置图表的大小
-                myChart.setSize(150 * data.length, 500);
+                myChart.setSize(1000, 500);
                 //设置多柱形图的颜色
                 myChart.setBarColor('#2D6B96', 1);
                 myChart.setBarColor('#9CCEF0', 2);
@@ -107,14 +107,16 @@
                  myChart.setLegend('#9CCEF0', '女性');*/
                 //设置图例显示的位置，可以是相对位置
                 myChart.setLegendPosition('right top');
-                myChart.setLegendForBar(1, '卡余额');
+                myChart.setLegendForBar(1, '卡余额(元)');
                 myChart.setLegendForBar(2, '累计积分');
-                myChart.setLegendForBar(3, '累计消费');
-                myChart.setLegendForBar(4, '累计充值');
+                myChart.setLegendForBar(3, '累计消费(元)');
+                myChart.setLegendForBar(4, '累计充值(元)');
 
                 //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
                 myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
-                myChart.setTitle("会员卡统计表");
+                myChart.setTitle(mark == "year" ? year + "年 年度会员卡统计表"
+                        : mark == "quarter" ? year + "年 季度会员卡统计表"
+                                : year + "年 月度会员卡统计表");
                 if (result.data != null) {
                     myChart.draw();
                 }
@@ -184,10 +186,10 @@
                 var myChart = new JSChart('memberCardChart_container', $(
                         "#type4").val());
                 if (result.data != null) {
-                    myChart.setDataArray(data, '卡余额');
+                    myChart.setDataArray(data, '卡余额(元)');
                     myChart.setDataArray(data1, '累计积分');
-                    myChart.setDataArray(data2, '累计消费');
-                    myChart.setDataArray(data3, '累计充值');
+                    myChart.setDataArray(data2, '累计消费(元)');
+                    myChart.setDataArray(data3, '累计充值(元)');
                 }
                 //myChart.set3D(true);
                 //设置 X轴名称, 对饼图无效。
@@ -197,7 +199,7 @@
                 //设置 y轴名称, 对饼图无效。
                 myChart.setAxisNameY('额度');
                 //设置图表的大小
-                myChart.setSize(800, 500);
+                myChart.setSize(900, 500);
                 //设置轴线名字体大小，对饼图无效。默认是11。
                 myChart.setAxisNameFontSize(13);
                 //设置x轴和容器底部的距离，默认30
@@ -215,10 +217,10 @@
                 //设置图表的背景颜色
                 myChart.setBackgroundColor('#EEE');
                 //设置曲线图中曲线的颜色,第一个参数为颜色，第二个参数为数组（数据源）的最后一个字符串元素
-                myChart.setLineColor('#2D6B96', '卡余额');
+                myChart.setLineColor('#2D6B96', '卡余额(元)');
                 myChart.setLineColor('#CD919E', '累计积分');
-                myChart.setLineColor('#FFEC8B', '累计消费');
-                myChart.setLineColor('#FA8072', '累计充值');
+                myChart.setLineColor('#FFEC8B', '累计消费(元)');
+                myChart.setLineColor('#FA8072', '累计充值(元)');
                 //为提示标志设置颜色
                 myChart.setFlagColor('#9D16FC');
                 //设置是否显示图例
@@ -234,7 +236,9 @@
                 }
                 //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
                 myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
-                myChart.setTitle("会员卡统计图表");
+                myChart.setTitle(mark == "year" ? year + "年 年度会员卡统计表"
+                        : mark == "quarter" ? year + "年 季度会员卡统计表"
+                                : year + "年 月度会员卡统计表");
                 if (result.data != null) {
                     myChart.draw();
                 }

@@ -103,10 +103,10 @@
                 }
                 //myChart.setGraphExtend(true);//设置是否开启图表延伸功能
                 myChart.setTitlePosition("center");//设置标题位置，取值范围（center, left ， right.）
-                myChart.setTitle(mark == "year" ? "年度会员人数统计图表"
-                        : mark == "quarter" ? "季度会员人数统计图表"
-                        : mark == "month" ? "月度会员人数统计图表"
-                        : "周度会员人数统计图表");
+                myChart.setTitle(mark == "year" ? year + "年 年度会员人数统计图表"
+                        : mark == "quarter" ? year + "年 季度会员人数统计图表"
+                        : mark == "month" ? year + "年 月度会员人数统计图表"
+                        : year + "年 周度会员人数统计图表");
                 if (result.data != null) {
                     myChart.draw();
                 }
@@ -328,6 +328,8 @@
                 $("#chooseYear3").css("display", "none");
                 //显示饼图
                 $("#pie").css("display", "inline");
+              //同时显示年份选项卡
+                $("#chooseYear3").css("display", "inline");
             } else {
                 //显示选择时间的框进行隐藏
                 $("#week3").css("display", "none");
@@ -335,11 +337,15 @@
                 $("#chooseYear3").css("display", "inline");
                 //显示饼图
                 $("#pie").css("display", "inline");
+              //同时显示年份选项卡
+                $("#chooseYear3").css("display", "inline");
             }
             //如果是年龄图表(只显示 "line", "bar"， 不显示 "pie")
             if (temp == "ageChart") {
                 //隐藏饼图
                 $("#pie").css("display", "none");
+                //同时隐藏年份选项卡
+                $("#chooseYear3").css("display", "none");
             }
             //如果是按照年龄区分图表的话，(ageChart 和 多柱形图)
             if (temp == "ageChart" && type == "bar") {
@@ -385,28 +391,11 @@
             memberChart();
         });
 
-       
-       
-
-
         /**
          * 图表信息
          */
         $("#search11").click(function () {
-                    var temp = $("#mark3").val();
-                    var type = $("#type3").val();
-                    //年龄图表，线形图
-                    if (temp == "aggChart" && type == "line") {
-                        //调用按照年龄加载图表信息
-                        memberChartByAge();
-                    }
-                    //年龄图表，柱形图
-                    if (temp == "aggChart" && type == "bar") {
-                        memberChartByAgeBar();
-                    } else {
-                        //调用普通的加载图表事件
-                        memberChart();
-                    }
+                    memberChart();
                 }
         );
 

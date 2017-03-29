@@ -131,9 +131,11 @@ select, button, input[type="button"], input[type="reset"], input[type="submit"],
 	margin-right: 5px;
 }
  */
- 
- span .combo-arrow {
-    margin-left : -16px;
-    margin-top : 5px;
- }
+span .combo-arrow {
+	margin-left: -16px;
+	margin-top: 5px;
+}
 
+body {
+	background: #EEE8CD;
+}
