@@ -328,8 +328,6 @@
                 $("#chooseYear3").css("display", "none");
                 //显示饼图
                 $("#pie").css("display", "inline");
-              //同时显示年份选项卡
-                $("#chooseYear3").css("display", "inline");
             } else {
                 //显示选择时间的框进行隐藏
                 $("#week3").css("display", "none");
@@ -337,8 +335,6 @@
                 $("#chooseYear3").css("display", "inline");
                 //显示饼图
                 $("#pie").css("display", "inline");
-              //同时显示年份选项卡
-                $("#chooseYear3").css("display", "inline");
             }
             //如果是年龄图表(只显示 "line", "bar"， 不显示 "pie")
             if (temp == "ageChart") {
