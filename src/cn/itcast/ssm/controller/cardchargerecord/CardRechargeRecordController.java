@@ -116,7 +116,12 @@ public class CardRechargeRecordController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/rechargeChart", method = {RequestMethod.GET})
-    public String rechargeChart(HttpServletResponse response, String mark, String markYear, String time) {
+    public String rechargeChart(HttpServletResponse response, HttpSession session, String mark, String markYear, String time) {
+        //获取session中的会员信息
+        Member member = (Member) session.getAttribute("member");
+        if (!"0".equals(member.getMembertype())) {
+        	return writeAjaxResponse(JSONUtil.result(false, "无权访问!", "", ""), response);
+        }
     	List<Map<String, Object>> con = cardRechargeRecordService.rechargeChart(mark, markYear, time);
     	if (StringUitl.isNullOrEmpty(con)) {
     		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(con)), response);

@@ -37,7 +37,7 @@
                     <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}consumeRecord.action">消费记录</a></li>
                 </ul>
             </div>
-            
+            <c:if test="${member.membertype == 0 }">
             <div title="图表管理" data-options="iconCls:'icon-application-cascade'" style="padding:5px;">   
                 <ul class="easyui-tree wu-side-tree"  >
                     <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}memberChart.action">会员图表</a></li>
@@ -47,6 +47,7 @@
                     <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}consumeRecordChart.action">消费图表</a></li>
                 </ul>
             </div>
+            </c:if>
         </div>
     </div>   
     <!-- end of sidebar -->    

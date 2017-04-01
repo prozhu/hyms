@@ -116,7 +116,7 @@ function CreateFormPage(strPrintName, printDatagrid) {
   //解决浏览器兼容问题
     if (navigator.userAgent.indexOf("Chrome") > 0) {
         window.open("print.html?tableString=" + tableString, "",
-            "height=600,width=1000,top=0,left=0,toolbar=no,menubar=no,scrollbars=auto, resizable=no,location=no, status=no,help=no");
+            "height=600,width=1000, top=0, left=0, toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no, help=no");
         //openPostWindow("print.html",tableString);
     } else {
         window.showModalDialog("print.html", tableString,

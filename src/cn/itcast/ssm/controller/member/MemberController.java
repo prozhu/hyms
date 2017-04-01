@@ -196,10 +196,15 @@ public class MemberController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/memberChart", method = {RequestMethod.GET})
-    public String memberChart(HttpServletResponse response, String mark, String markYear, String time) {
+    public String memberChart(HttpServletResponse response, HttpSession session, String mark, String markYear, String time) {
+        //获取session中的会员信息
+        Member member = (Member) session.getAttribute("member");
+        if (!"0".equals(member.getMembertype())) {
+        	return writeAjaxResponse(JSONUtil.result(false, "无权访问!", "", ""), response);
+        }
     	List<Map<String, Object>> con = memberService.memberChart(mark, markYear, time);
     	if (StringUitl.isNullOrEmpty(con)) {
-    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(con)), response);
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", ""), response);
     	}
     	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(con)), response);
     }
@@ -215,7 +220,7 @@ public class MemberController extends BaseController{
     public String findMemberYears(HttpServletResponse response) {
     	List<String> list = memberService.findMemberYears();
     	if (StringUitl.isNullOrEmpty(list)) {
-    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
+    		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", ""), response);
     	}
     	return writeAjaxResponse(JSONUtil.result(true, "", "", JSONUtil.getJson(list)), response);
     }
@@ -229,7 +234,12 @@ public class MemberController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/memberChartByAge", method = {RequestMethod.GET})
-    public String memberChartByAge(HttpServletResponse response) {
+    public String memberChartByAge(HttpServletResponse response, HttpSession session) {
+        //获取session中的会员信息
+        Member member = (Member) session.getAttribute("member");
+        if (!"0".equals(member.getMembertype())) {
+        	return writeAjaxResponse(JSONUtil.result(false, "无权访问!", "", ""), response);
+        }
     	List<Map<String, Object>> list = memberService.memberChartByAge();
     	if (StringUitl.isNullOrEmpty(list)) {
     		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
@@ -246,7 +256,12 @@ public class MemberController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/memberChartByAgeBar", method = {RequestMethod.GET})
-    public String memberChartByAgeBar(HttpServletResponse response) {
+    public String memberChartByAgeBar(HttpServletResponse response, HttpSession session) {
+        //获取session中的会员信息
+        Member member = (Member) session.getAttribute("member");
+        if (!"0".equals(member.getMembertype())) {
+        	return writeAjaxResponse(JSONUtil.result(false, "无权访问!", "", ""), response);
+        }
     	List<Map<String, Object>> list = memberService.memberChartByAgeBar();
     	if (StringUitl.isNullOrEmpty(list)) {
     		return writeAjaxResponse(JSONUtil.result(false, "没有数据", "", JSONUtil.getJson(list)), response);
