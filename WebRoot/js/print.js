@@ -1,4 +1,41 @@
- //document.write("<script language=javascript src=’/js/common.js’></script>");
+/**
+ * window.open 新窗口，参数以post方式提交
+ * @param url
+ * @param data
+ */
+function openPostWindow(url,data1){
+
+    var tempForm = document.createElement("form");
+    tempForm.id = "tempForm1";
+    tempForm.method = "post";
+    tempForm.action = url;
+    tempForm.target="_blank"; //打开新页面
+    var hideInput1 = document.createElement("input");
+    hideInput1.type = "hidden";
+    hideInput1.name="opid"; //后台要接受这个参数来取值
+    hideInput1.value = data1; //后台实际取到的值
+    /*var hideInput2 = document.createElement("input");
+     hideInput2.type = "hidden";
+     hideInput2.name="xtmc";
+     hideInput2.value = data2;*/  //这里就是如果需要第二个参数的时候可以自己再设置
+    tempForm.appendChild(hideInput1);
+    //tempForm.appendChild(hideInput2);
+    if(document.all){
+        tempForm.attachEvent("onsubmit",function(){});        //IE
+    }else{
+        var subObj = tempForm.addEventListener("submit",function(){},false);    //firefox
+    }
+    document.body.appendChild(tempForm);
+    if(document.all){
+        tempForm.fireEvent("onsubmit");
+    }else{
+        tempForm.dispatchEvent(new Event("submit"));
+    }
+    tempForm.submit();
+    document.body.removeChild(tempForm);
+}
+
+//document.write("<script language=javascript src=’/js/common.js’></script>");
 // strPrintName 打印任务名
 // printDatagrid 要打印的datagrid
 function CreateFormPage(strPrintName, printDatagrid) {
@@ -63,20 +100,28 @@ function CreateFormPage(strPrintName, printDatagrid) {
                 tableString += rows[i][nl[j].f.substring(0, e)];
             }
             else {
-            	//将json格式的时间转为正常可观的时间格式
-            	if (('' + rows[i][nl[j].f]).length == 13) {
-            		var unixTimestamp = new Date(rows[i][nl[j].f]);
+                //将json格式的时间转为正常可观的时间格式
+                if (('' + rows[i][nl[j].f]).length == 13) {
+                    var unixTimestamp = new Date(rows[i][nl[j].f]);
                     rows[i][nl[j].f] = unixTimestamp.pattern("yyyy-MM-dd hh:mm:ss");
-            	}
+                }
                 tableString += rows[i][nl[j].f];
                 tableString += '</td>';
             }
         });
         tableString += '\n</tr>';
     }
-    tableString += '\n</table>'; 
+    tableString += '\n</table>';
 
-     window.showModalDialog("print.html", tableString,
-    "location:No;status:No;help:No;dialogWidth:1000px;dialogHeight:600px;scroll:auto;");
-    
+  //解决浏览器兼容问题
+    if (navigator.userAgent.indexOf("Chrome") > 0) {
+        window.open("print.html?tableString=" + tableString, "",
+            "height=600,width=1000,top=0,left=0,toolbar=no,menubar=no,scrollbars=auto, resizable=no,location=no, status=no,help=no");
+        //openPostWindow("print.html",tableString);
+    } else {
+        window.showModalDialog("print.html", tableString,
+            "location:No;status:No;help:No;dialogWidth:1000px;dialogHeight:600px;scroll:auto;");
+    }
+
+
 }
