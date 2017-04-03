@@ -34,7 +34,7 @@
      * 打印报表
      */
     function printPointRecord() {
-        CreateFormPage("会员信息", $('#wu-datagrid5'));
+        CreateFormPage("会积分记录明细", $('#wu-datagrid5'));
     }
 
     /**

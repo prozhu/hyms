@@ -30,7 +30,7 @@
 
 </head>
 <body 
-	style="background: #f6fdff url(${baseurl}images/login/bg1.jpg) repeat-x;">
+	style="background: #f6fdff url(${baseurl}images/login/bg1.jpg) repeat-x; background-size:cover">
 	<form id="loginform" name="loginform"  method="post">
 		
 		<div class="logincon">

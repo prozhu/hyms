@@ -10,7 +10,7 @@
 <title>会员管理系统</title>
 
 </head>
-<body class="easyui-layout">
+<body class="easyui-layout" style="background-color: #C7EDCC">
 
     <!-- begin of header -->
     <div class="wu-header" data-options="region:'north',border:false,split:true">
