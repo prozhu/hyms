@@ -29,8 +29,10 @@
                        plain="true">积分调整</a>
                     <a href="#" class="easyui-linkbutton" iconCls="icon-server-start" onclick=" activate()"
                        plain="true">会员卡激活</a>
+                </c:if>
                     <a href="#" class="easyui-linkbutton" iconCls="icon-server-key" onclick="loss()"
-                       plain="true">会员卡挂失</a>
+                       plain="true" id = "loss">会员卡挂失</a>
+                <c:if test="${member.membertype == 0 }">
                     <a href="#" class="easyui-linkbutton" iconCls="icon-server-lightning" onclick="unloss()"
                        plain="true">会员卡挂失解除</a>
                     <a href="#" class="easyui-linkbutton" iconCls="icon-server-stop" onclick="cancel()" plain="true">会员卡注销</a>
@@ -52,9 +54,13 @@
         <table id="wu-datagrid4" toolbar="#wu-toolbar2"></table>
     </div>
 </div>
+<script type="text/javascript">
+	var memberGrade = ${member.membertype};
+</script>
 <script type="text/javascript" src="${baseurl}js/pages/memberCard/MemberCard.js"></script>
 
 </body>
+
 </html>
 
 
