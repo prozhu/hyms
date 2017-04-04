@@ -26,6 +26,8 @@
 <!-- 会员卡积分记录 -->
 <bean id="pointRecordService" class="cn.itcast.ssm.service.pointrecord.PointRecordServiceImpl"></bean> 
 <!-- 会员卡挂失、激活记录-->
-<bean id="cardRecordService" class="cn.itcast.ssm.service.cardrecord.CardRecordServiceImpl"></bean> 
+<bean id="cardRecordService" class="cn.itcast.ssm.service.cardrecord.CardRecordServiceImpl"></bean>
+
+<bean id="discountService" class="cn.itcast.ssm.service.member.DiscountServiceImpl"></bean> 
 
 </beans>

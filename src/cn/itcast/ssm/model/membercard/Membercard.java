@@ -22,7 +22,7 @@ public class Membercard implements Serializable {
 
     private Date opendate;
 
-    private Long discount;
+    private double discount;
 
     private BigDecimal balance;
 
@@ -82,11 +82,11 @@ public class Membercard implements Serializable {
         this.opendate = opendate;
     }
 
-    public Long getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Long discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 

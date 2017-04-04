@@ -8,7 +8,7 @@
     <result column="cardStatus" property="cardstatus" jdbcType="SMALLINT" />
     <result column="cardGrade" property="cardgrade" jdbcType="VARCHAR" />
     <result column="openDate" property="opendate" jdbcType="TIMESTAMP" />
-    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DOUBLE" />
     <result column="balance" property="balance" jdbcType="DECIMAL" />
     <result column="totalPoint" property="totalpoint" jdbcType="INTEGER" />
     <result column="totalConsumption" property="totalconsumption" jdbcType="DECIMAL" />
@@ -256,7 +256,7 @@
       cardStatus = #{record.cardstatus,jdbcType=SMALLINT},
       cardGrade = #{record.cardgrade,jdbcType=VARCHAR},
       openDate = #{record.opendate,jdbcType=TIMESTAMP},
-      discount = #{record.discount,jdbcType=DECIMAL},
+      discount = #{record.discount,jdbcType=DOUBLE},
       balance = #{record.balance,jdbcType=DECIMAL},
       totalPoint = #{record.totalpoint,jdbcType=INTEGER},
       totalConsumption = #{record.totalconsumption,jdbcType=DECIMAL},
@@ -285,7 +285,7 @@
         openDate = #{opendate,jdbcType=TIMESTAMP},
       </if>
       <if test="discount != null" >
-        discount = #{discount,jdbcType=DECIMAL},
+        discount = #{discount,jdbcType=DOUBLE},
       </if>
       <if test="balance != null" >
         balance = #{balance,jdbcType=DECIMAL},
@@ -312,7 +312,7 @@
       cardStatus = #{cardstatus,jdbcType=SMALLINT},
       cardGrade = #{cardgrade,jdbcType=VARCHAR},
       openDate = #{opendate,jdbcType=TIMESTAMP},
-      discount = #{discount,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=DOUBLE},
       balance = #{balance,jdbcType=DECIMAL},
       totalPoint = #{totalpoint,jdbcType=INTEGER},
       totalConsumption = #{totalconsumption,jdbcType=DECIMAL},

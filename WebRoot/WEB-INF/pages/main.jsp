@@ -38,6 +38,11 @@
                 </ul>
             </div>
             <c:if test="${member.membertype == 0 }">
+            <div title="折扣管理" data-options="iconCls:'icon-application-cascade'" style="padding:5px;">   
+                <ul class="easyui-tree wu-side-tree"  >
+                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}memberDiscount.action">会员折扣管理</a></li>
+                </ul>
+            </div>
             <div title="图表管理" data-options="iconCls:'icon-application-cascade'" style="padding:5px;">   
                 <ul class="easyui-tree wu-side-tree"  >
                     <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-tip"  iframe="0" data-link="${baseurl}memberChart.action">会员图表</a></li>

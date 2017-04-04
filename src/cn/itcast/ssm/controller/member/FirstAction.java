@@ -189,6 +189,18 @@ public class FirstAction {
     
     
     /**
+     * @description: 跳转到会员折扣设置页面
+     * @author ：zc
+     * @date ：2017-2-13 上午11:59:11 
+     * @return
+     */
+    @RequestMapping("/memberDiscount")
+    public String memberDiscount() {
+        return "/memberCard/memberDiscount";
+    }
+    
+    
+    /**
      * @description: 跳转到会员卡图表页面
      * @author ：zc
      * @date ：2017-2-13 上午11:59:11 

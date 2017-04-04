@@ -16,12 +16,14 @@ import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.mapper.cardchargerecord.CardrechargerecordMapper;
 import cn.itcast.ssm.mapper.cardrecord.CardrecordMapper;
 import cn.itcast.ssm.mapper.consumerecord.ConsumerecordMapper;
+import cn.itcast.ssm.mapper.discount.DiscountMapper;
 import cn.itcast.ssm.mapper.member.MemberMapper;
 import cn.itcast.ssm.mapper.membercard.MembercardMapper;
 import cn.itcast.ssm.mapper.pointrecord.PointrecordMapper;
 import cn.itcast.ssm.model.cardchargerecord.Cardrechargerecord;
 import cn.itcast.ssm.model.cardrecord.Cardrecord;
 import cn.itcast.ssm.model.consumerecord.Consumerecord;
+import cn.itcast.ssm.model.discount.Discount;
 import cn.itcast.ssm.model.member.Member;
 import cn.itcast.ssm.model.member.MemberExample;
 import cn.itcast.ssm.model.member.MemberExample.Criteria;
@@ -47,6 +49,8 @@ public class MemberCardServiceImpl implements MemberCardService {
     private ConsumerecordMapper consumerecordMapper;
     @Autowired
     private CardrechargerecordMapper cardrechargerecordMapper;
+    @Autowired
+    private DiscountMapper discountMapper;
 	@Autowired
 	private MailSenderUtil mailSenderUtil;
 	
@@ -297,30 +301,31 @@ public class MemberCardServiceImpl implements MemberCardService {
             if (memberCard.getBalance().compareTo(new BigDecimal(consume)) < 0) {
                 throw new CustomException("余额不足");
             }
+            
             // 根据会员的级别 和 相应的折扣 ，来计算最终消费的金额
-            if (!memberCard.getCardgrade().equals("青铜")) {
-                memberCard.setBalance(memberCard.getBalance().subtract((new BigDecimal(consume).multiply(new BigDecimal(memberCard.getDiscount() / 10.0)))));
-                memberCard.setTotalconsumption(memberCard.getTotalconsumption().add((new BigDecimal(consume).multiply(new BigDecimal(memberCard.getDiscount() / 10.0)))));
-            } else {
-                memberCard.setBalance(memberCard.getBalance().subtract(new BigDecimal(consume)));
-                memberCard.setTotalconsumption(memberCard.getTotalconsumption().add(new BigDecimal(consume)));
-            }
-            //这里更改会员的级别
-            if (memberCard.getTotalconsumption().compareTo(new BigDecimal(20000)) <= 0  && memberCard.getTotalconsumption().compareTo(new BigDecimal(10000)) > 0) {
-                memberCard.setCardgrade("白银");
-                memberCard.setDiscount((long)8);
-            } else if (memberCard.getTotalconsumption().compareTo(new BigDecimal(20000)) > 0) {
-                memberCard.setCardgrade("黄金");
-                memberCard.setDiscount((long)5);
-            }
+            Discount discount = discountMapper.queyDiscountByGrade(memberCard.getCardgrade());
+            memberCard.setBalance(memberCard.getBalance()
+            		.subtract((new BigDecimal(consume)
+            		.multiply(new BigDecimal(discount.getDiscount())))));
+            memberCard.setTotalconsumption(memberCard.getTotalconsumption()
+            		.add((new BigDecimal(consume)
+            		.multiply(new BigDecimal(discount.getDiscount())))));
+            //这里更改会员的级别和折扣(需要遍历折扣表)
+			List<Discount> dis = discountMapper.queryAllDiscount();
+			for (int i = 0; i < dis.size(); i++) {
+				if (memberCard.getTotalconsumption().compareTo(
+						dis.get(i).getHighConsume()) < 0
+						&& memberCard.getTotalconsumption().compareTo(
+								dis.get(i).getLowConsume()) >= 0) {
+					memberCard.setCardgrade(dis.get(i).getGrade());
+					memberCard.setDiscount(dis.get(i).getDiscount());
+				}
+			}
+
             //添加消费记录
             Consumerecord consumeRecord = new Consumerecord();
             //消费金额涉及到打折，需要和会员级别进行区分
-            if (!memberCard.getCardgrade().equals("青铜")) {
-                consumeRecord.setConsumemoney(new BigDecimal(consume).multiply(new BigDecimal(memberCard.getDiscount() / 10.0)));
-            } else {
-                consumeRecord.setConsumemoney(new BigDecimal(consume));
-            }
+            consumeRecord.setConsumemoney(new BigDecimal(consume).multiply(new BigDecimal(discount.getDiscount())));
             consumeRecord.setConsumetime(new Date());
             consumeRecord.setMembercardid(memberCard.getMembercardid());
             consumeRecord.setMemberid(memberCard.getMemberid());
