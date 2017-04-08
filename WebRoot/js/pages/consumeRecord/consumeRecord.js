@@ -79,8 +79,14 @@
                     width: 55
                 },
                 {
-                    field: 'consumemoney',
-                    title: '消费金额(元)',
+                    field: 'discountMoney',
+                    title: '消费金额(折前|元)',
+                    sortable: true,
+                    width: 50
+                },
+                {
+                    field: 'consumeMoney',
+                    title: '消费金额(折后|元)',
                     sortable: true,
                     width: 50
                 },

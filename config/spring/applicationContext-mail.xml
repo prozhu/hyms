@@ -43,7 +43,7 @@
 	</bean>
 
 	<!-- 邮件工具类的注入 -->
-	<bean id="mailSenderUtil" class="cn.itcast.ssm.util.MailSenderUtil">
+	<bean id="mailSenderUtil" class="cn.prozhu.ssm.util.MailSenderUtil">
 		<property name="javaMailSender" ref="javaMailSender" />
 	</bean>
 

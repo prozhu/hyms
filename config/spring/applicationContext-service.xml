@@ -14,20 +14,20 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
 <!-- 认证和授权的service -->
-<bean id="sysService" class="cn.itcast.ssm.service.system.SysServiceImpl"></bean> 
+<bean id="sysService" class="cn.prozhu.ssm.service.system.SysServiceImpl"></bean> 
 <!-- 会员信息的Service -->
-<bean id="memberService" class="cn.itcast.ssm.service.member.MemberServiceImpl"></bean>
+<bean id="memberService" class="cn.prozhu.ssm.service.member.MemberServiceImpl"></bean>
 <!-- 会员卡信息的service -->
-<bean id="memberCardService" class="cn.itcast.ssm.service.membercard.MemberCardServiceImpl"></bean> 
+<bean id="memberCardService" class="cn.prozhu.ssm.service.membercard.MemberCardServiceImpl"></bean> 
 <!-- 会员卡充值记录 -->
-<bean id="cardRechargeRecordService" class="cn.itcast.ssm.service.cardchargerecord.CardRechargeRecordServiceImpl"></bean> 
+<bean id="cardRechargeRecordService" class="cn.prozhu.ssm.service.cardchargerecord.CardRechargeRecordServiceImpl"></bean> 
 <!-- 会员卡消费记录 -->
-<bean id="consumeRecordService" class="cn.itcast.ssm.service.consumerecord.ConsumeRecordServiceImpl"></bean> 
+<bean id="consumeRecordService" class="cn.prozhu.ssm.service.consumerecord.ConsumeRecordServiceImpl"></bean> 
 <!-- 会员卡积分记录 -->
-<bean id="pointRecordService" class="cn.itcast.ssm.service.pointrecord.PointRecordServiceImpl"></bean> 
+<bean id="pointRecordService" class="cn.prozhu.ssm.service.pointrecord.PointRecordServiceImpl"></bean> 
 <!-- 会员卡挂失、激活记录-->
-<bean id="cardRecordService" class="cn.itcast.ssm.service.cardrecord.CardRecordServiceImpl"></bean>
+<bean id="cardRecordService" class="cn.prozhu.ssm.service.cardrecord.CardRecordServiceImpl"></bean>
 
-<bean id="discountService" class="cn.itcast.ssm.service.member.DiscountServiceImpl"></bean> 
+<bean id="discountService" class="cn.prozhu.ssm.service.member.DiscountServiceImpl"></bean> 
 
 </beans>

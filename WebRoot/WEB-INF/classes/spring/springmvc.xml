@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
 	<!-- 使用spring组件扫描 -->
-	<context:component-scan base-package="cn.itcast.ssm.controller" />
+	<context:component-scan base-package="cn.prozhu.ssm.controller" />
 
 	
 	<!-- 通过annotation-driven可以替代下边的处理器映射器和适配器 -->
@@ -38,7 +38,7 @@
 		</property>
 	</bean>
 	<!-- 定义统一异常处理器 -->
-	<bean class="cn.itcast.ssm.exception.CustomExceptionResolver"></bean>
+	<bean class="cn.prozhu.ssm.exception.CustomExceptionResolver"></bean>
 	
 	<!-- 自定义拦截器 -->
 	 <mvc:interceptors>
@@ -51,7 +51,7 @@
 		  <mvc:mapping path="/consumeRecord/**"/>
 		  <mvc:mapping path="/memberCard/**"/>
 		  <mvc:mapping path="/pointRecord/**"/>
-		  <bean class="cn.itcast.ssm.intercepter.LoginInterceptor"></bean>
+		  <bean class="cn.prozhu.ssm.intercepter.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors> 
 
