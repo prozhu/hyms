@@ -1,16 +1,16 @@
-package cn.prozhu.ssm.model.cardrecord;
+package cn.prozhu.ssm.model.cardchargerecord;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CardrecordExample implements Serializable {
+public class CardRechargeRecordExample implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4554697359037878823L;
+	private static final long serialVersionUID = -3315748419038801941L;
 
 	protected String orderByClause;
 
@@ -18,7 +18,7 @@ public class CardrecordExample implements Serializable {
 
     protected List<Criteria> oredCriteria;
 
-    public CardrecordExample() {
+    public CardRechargeRecordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -312,73 +312,63 @@ public class CardrecordExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeIsNull() {
-            addCriterion("operationType is null");
+        public Criteria andRechargemoneyIsNull() {
+            addCriterion("rechargeMoney is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeIsNotNull() {
-            addCriterion("operationType is not null");
+        public Criteria andRechargemoneyIsNotNull() {
+            addCriterion("rechargeMoney is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeEqualTo(String value) {
-            addCriterion("operationType =", value, "operationtype");
+        public Criteria andRechargemoneyEqualTo(Long value) {
+            addCriterion("rechargeMoney =", value, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeNotEqualTo(String value) {
-            addCriterion("operationType <>", value, "operationtype");
+        public Criteria andRechargemoneyNotEqualTo(Long value) {
+            addCriterion("rechargeMoney <>", value, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeGreaterThan(String value) {
-            addCriterion("operationType >", value, "operationtype");
+        public Criteria andRechargemoneyGreaterThan(Long value) {
+            addCriterion("rechargeMoney >", value, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeGreaterThanOrEqualTo(String value) {
-            addCriterion("operationType >=", value, "operationtype");
+        public Criteria andRechargemoneyGreaterThanOrEqualTo(Long value) {
+            addCriterion("rechargeMoney >=", value, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeLessThan(String value) {
-            addCriterion("operationType <", value, "operationtype");
+        public Criteria andRechargemoneyLessThan(Long value) {
+            addCriterion("rechargeMoney <", value, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeLessThanOrEqualTo(String value) {
-            addCriterion("operationType <=", value, "operationtype");
+        public Criteria andRechargemoneyLessThanOrEqualTo(Long value) {
+            addCriterion("rechargeMoney <=", value, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeLike(String value) {
-            addCriterion("operationType like", value, "operationtype");
+        public Criteria andRechargemoneyIn(List<Long> values) {
+            addCriterion("rechargeMoney in", values, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeNotLike(String value) {
-            addCriterion("operationType not like", value, "operationtype");
+        public Criteria andRechargemoneyNotIn(List<Long> values) {
+            addCriterion("rechargeMoney not in", values, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeIn(List<String> values) {
-            addCriterion("operationType in", values, "operationtype");
+        public Criteria andRechargemoneyBetween(Long value1, Long value2) {
+            addCriterion("rechargeMoney between", value1, value2, "rechargemoney");
             return (Criteria) this;
         }
 
-        public Criteria andOperationtypeNotIn(List<String> values) {
-            addCriterion("operationType not in", values, "operationtype");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperationtypeBetween(String value1, String value2) {
-            addCriterion("operationType between", value1, value2, "operationtype");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperationtypeNotBetween(String value1, String value2) {
-            addCriterion("operationType not between", value1, value2, "operationtype");
+        public Criteria andRechargemoneyNotBetween(Long value1, Long value2) {
+            addCriterion("rechargeMoney not between", value1, value2, "rechargemoney");
             return (Criteria) this;
         }
 

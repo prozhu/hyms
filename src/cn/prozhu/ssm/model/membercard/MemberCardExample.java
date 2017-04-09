@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MembercardExample implements Serializable {
+public class MemberCardExample implements Serializable {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class MembercardExample implements Serializable {
 
     protected List<Criteria> oredCriteria;
 
-    public MembercardExample() {
+    public MemberCardExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

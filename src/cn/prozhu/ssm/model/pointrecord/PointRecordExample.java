@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PointrecordExample implements Serializable {
+public class PointRecordExample implements Serializable {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class PointrecordExample implements Serializable {
 
     protected List<Criteria> oredCriteria;
 
-    public PointrecordExample() {
+    public PointRecordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

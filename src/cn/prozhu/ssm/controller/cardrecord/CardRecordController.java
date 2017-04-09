@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.prozhu.ssm.controller.base.BaseController;
-import cn.prozhu.ssm.model.cardrecord.Cardrecord;
+import cn.prozhu.ssm.model.cardrecord.CardRecord;
 import cn.prozhu.ssm.model.member.Member;
 import cn.prozhu.ssm.service.cardrecord.CardRecordService;
 import cn.prozhu.ssm.util.JSONUtil;
@@ -54,7 +54,7 @@ public class CardRecordController extends BaseController{
         Integer total = 1;
       //获取session中的会员信息
         Member member = (Member) request.getSession().getAttribute("member");
-        List<Cardrecord> cardRecordList = new ArrayList<Cardrecord>();
+        List<CardRecord> cardRecordList = new ArrayList<CardRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = cardRecordService.getCount(startTime, endTime, keyword, null);
@@ -86,7 +86,7 @@ public class CardRecordController extends BaseController{
     public String exportMemberInfoExcel(String startTime, String endTime, String keyword, HttpSession session, HttpServletResponse response) throws Exception {
         //获取session中的会员信息
         Member member = (Member) session.getAttribute("member");
-        List<Cardrecord> cardRecordList = new ArrayList<Cardrecord>();
+        List<CardRecord> cardRecordList = new ArrayList<CardRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             cardRecordList = cardRecordService.findCardRecordByCondition(null, null, null, startTime, endTime, keyword,  null, null);
@@ -95,7 +95,7 @@ public class CardRecordController extends BaseController{
             cardRecordList = cardRecordService.findCardRecordByCondition(member.getMemberid().toString(),null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员卡号", "操作类型", "消费时间"};
-        String colKeys[] = { "membername", "membercardid", "operationtype", "changetime"};
+        String colKeys[] = { "memberName", "memberCardId", "operationType", "changeTime"};
         DjExcelCreator creator = new DjExcelCreator(colNames, colKeys, "会员卡激活/挂失记录表");
         creator.setColumnsWidth(new Integer[]{ 10,  20, 10, 20});
         creator.createForWeb(cardRecordList, response);

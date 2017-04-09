@@ -7,22 +7,22 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
-import cn.prozhu.ssm.mapper.cardrecord.CardrecordMapper;
-import cn.prozhu.ssm.model.cardrecord.Cardrecord;
-import cn.prozhu.ssm.model.cardrecord.CardrecordExample;
+import cn.prozhu.ssm.mapper.cardrecord.CardRecordMapper;
+import cn.prozhu.ssm.model.cardrecord.CardRecord;
+import cn.prozhu.ssm.model.cardrecord.CardRecordExample;
 import cn.prozhu.ssm.util.RandomUtils;
 import cn.prozhu.ssm.util.StringUitl;
 
 public class CardRecordServiceImpl implements CardRecordService {
 
     @Autowired
-    private CardrecordMapper cardrecordMapper;
+    private CardRecordMapper cardRecordMapper;
 
 
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null, null, startTime, endTime, keyword, null, null, memberid);
-        return cardrecordMapper.countByExample((CardrecordExample)condition.get(0));
+        return cardRecordMapper.countByExample((CardRecordExample)condition.get(0));
     }
 
     /**
@@ -35,7 +35,7 @@ public class CardRecordServiceImpl implements CardRecordService {
      * @param sort
      * @param order
      * @return 集合中返回三个参数： 
-     *  		1.：  CardrecordExample
+     *  		1.：  CardRecordExample
      *  		2.：  rowBounds
      *  		3.: criteria
      */
@@ -50,10 +50,10 @@ public class CardRecordServiceImpl implements CardRecordService {
             pageSize = "100000";
         }
         
-        CardrecordExample cardrecordExample = new CardrecordExample();
-        CardrecordExample.Criteria criteria = cardrecordExample.createCriteria();
+        CardRecordExample cardRecordExample = new CardRecordExample();
+        CardRecordExample.Criteria criteria = cardRecordExample.createCriteria();
         if (!StringUitl.isNullOrEmpty(sort) && !StringUitl.isNullOrEmpty(order)) {
-            cardrecordExample.setOrderByClause(sort + " " + order);
+            cardRecordExample.setOrderByClause(sort + " " + order);
         }
         //时间查询
         if (!StringUitl.isNullOrEmpty(startTime) && !StringUitl.isNullOrEmpty(endTime)) {
@@ -74,7 +74,7 @@ public class CardRecordServiceImpl implements CardRecordService {
             criteria.andMembernameLike("%" + keyword + "%");
         }
         RowBounds rowBounds = new RowBounds((Integer.parseInt(pageNow) -1) *  Integer.parseInt(pageSize), Integer.parseInt(pageSize));
-        condition.add(cardrecordExample);
+        condition.add(cardRecordExample);
         condition.add(rowBounds);
         condition.add(criteria);
         return condition;
@@ -84,11 +84,11 @@ public class CardRecordServiceImpl implements CardRecordService {
     		key = "'findCardRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize+#memberid",
     		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
-    public List<Cardrecord> findCardRecordByCondition(String memberid, String pageNow,
+    public List<CardRecord> findCardRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order) {
     	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
-        List<Cardrecord> list = cardrecordMapper.selectByExampleWithRowbounds((CardrecordExample)condition.get(0), (RowBounds)condition.get(1));
+        List<CardRecord> list = cardRecordMapper.selectByExampleWithRowbounds((CardRecordExample)condition.get(0), (RowBounds)condition.get(1));
         if (list.size() >  0 && list != null) {
             return list;
         }

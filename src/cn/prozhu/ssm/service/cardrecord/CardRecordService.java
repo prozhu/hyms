@@ -2,7 +2,7 @@ package cn.prozhu.ssm.service.cardrecord;
 
 import java.util.List;
 
-import cn.prozhu.ssm.model.cardrecord.Cardrecord;
+import cn.prozhu.ssm.model.cardrecord.CardRecord;
 
 public interface CardRecordService {
 
@@ -31,7 +31,7 @@ public interface CardRecordService {
      * @param order
      * @return
      */
-    List<Cardrecord> findCardRecordByCondition(String memberid, String pageNow,
+    List<CardRecord> findCardRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 

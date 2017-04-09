@@ -33,4 +33,11 @@ public interface DiscountMapper {
 	 */
 	List<Discount> queryAllDiscount();
 
+	/**
+	 * 删除折扣信息
+	 * @param id
+	 * @return
+	 */
+	Integer delDiscount(String id);
+
 }

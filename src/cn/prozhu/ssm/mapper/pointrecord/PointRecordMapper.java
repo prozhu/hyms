@@ -6,33 +6,33 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import cn.prozhu.ssm.model.pointrecord.Pointrecord;
-import cn.prozhu.ssm.model.pointrecord.PointrecordExample;
+import cn.prozhu.ssm.model.pointrecord.PointRecord;
+import cn.prozhu.ssm.model.pointrecord.PointRecordExample;
 
-public interface PointrecordMapper {
-    int countByExample(PointrecordExample example);
+public interface PointRecordMapper {
+    int countByExample(PointRecordExample example);
 
-    int deleteByExample(PointrecordExample example);
+    int deleteByExample(PointRecordExample example);
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Pointrecord record);
+    int insert(PointRecord record);
 
-    int insertSelective(Pointrecord record);
+    int insertSelective(PointRecord record);
 
-    List<Pointrecord> selectByExampleWithRowbounds(PointrecordExample example, RowBounds rowBounds);
+    List<PointRecord> selectByExampleWithRowbounds(PointRecordExample example, RowBounds rowBounds);
 
-    List<Pointrecord> selectByExample(PointrecordExample example);
+    List<PointRecord> selectByExample(PointRecordExample example);
 
-    Pointrecord selectByPrimaryKey(Long id);
+    PointRecord selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") Pointrecord record, @Param("example") PointrecordExample example);
+    int updateByExampleSelective(@Param("record") PointRecord record, @Param("example") PointRecordExample example);
 
-    int updateByExample(@Param("record") Pointrecord record, @Param("example") PointrecordExample example);
+    int updateByExample(@Param("record") PointRecord record, @Param("example") PointRecordExample example);
 
-    int updateByPrimaryKeySelective(Pointrecord record);
+    int updateByPrimaryKeySelective(PointRecord record);
 
-    int updateByPrimaryKey(Pointrecord record);
+    int updateByPrimaryKey(PointRecord record);
 
     /**
      * 查询积分表中所有的年份

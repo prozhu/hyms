@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.prozhu.ssm.controller.base.BaseController;
-import cn.prozhu.ssm.model.consumerecord.Consumerecord;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecord;
 import cn.prozhu.ssm.model.member.Member;
 import cn.prozhu.ssm.service.consumerecord.ConsumeRecordService;
 import cn.prozhu.ssm.util.JSONUtil;
@@ -56,7 +56,7 @@ public class ConsumeRecordController extends BaseController{
         Integer total = 1;
       //获取session中的会员信息
         Member member = (Member) request.getSession().getAttribute("member");
-        List<Consumerecord> consumeRecordList = new ArrayList<Consumerecord>();
+        List<ConsumeRecord> consumeRecordList = new ArrayList<ConsumeRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = consumeRecordService.getCount(startTime, endTime, keyword, null);
@@ -89,7 +89,7 @@ public class ConsumeRecordController extends BaseController{
     public String exportMemberInfoExcel(String startTime, String endTime, String keyword, HttpSession session, HttpServletResponse response) throws Exception {
       //获取session中的会员信息
         Member member = (Member) session.getAttribute("member");
-        List<Consumerecord> consumeRecordList = new ArrayList<Consumerecord>();
+        List<ConsumeRecord> consumeRecordList = new ArrayList<ConsumeRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             consumeRecordList = consumeRecordService.findConsumeRecordByCondition(null, null, null, startTime, endTime, keyword,  null, null);
@@ -98,12 +98,14 @@ public class ConsumeRecordController extends BaseController{
             consumeRecordList = consumeRecordService.findConsumeRecordByCondition(member.getMemberid().toString()
             		, null, null, startTime, endTime, keyword,  null, null);
         }
-        String colNames[] = { "会员名称", "会员卡号", "消费金额", "消费时间"};
-        String colKeys[] = { "membername", "membercardid", "consumemoney", "consumetime"};
+        String colNames[] = { "会员名称", "会员卡号", "消费金额(折前|元)", "消费金额(折后|元)", "消费时间"};
+        String colKeys[] = { "memberName", "memberCardId", "discountMoney", "consumeMoney", "consumeTime"};
         DjExcelCreator creator = new DjExcelCreator(colNames, colKeys, "会员卡消费记录");
-        creator.setColumnsWidth(new Integer[]{ 20, 30, 20, 40});
-        creator.addNumberCol("consumemoney", "0.00");
-        creator.addSumColumn("consumemoney");
+        creator.setColumnsWidth(new Integer[]{ 20, 30, 20, 20, 40});
+        creator.addNumberCol("discountMoney", "0.00");
+        creator.addSumColumn("discountMoney");
+        creator.addNumberCol("consumeMoney", "0.00");
+        creator.addSumColumn("consumeMoney");
         creator.createForWeb(consumeRecordList, response);
         return null;
     }

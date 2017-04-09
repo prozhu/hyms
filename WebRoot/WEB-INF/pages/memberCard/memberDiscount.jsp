@@ -20,11 +20,9 @@
             <div class="wu-toolbar-button">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAddDiscount()" plain="true">添加</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEditDiscount()" plain="true">修改</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="del()" plain="true">删除</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="delDiscount()" plain="true">删除</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="refresh()" plain="true">刷新</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-print" onclick="print()" plain="true">打印</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-page-excel" onclick="exportMemberInfoExcel()"
-                   plain="true">导出报表</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-help" onclick="help()" plain="true">帮助</a>
             </div>
         </div>
@@ -41,21 +39,23 @@
         <table>
             <tr>
                 <td width="60" align="right">累计消费区间(低):</td>
-                <td><input type="text" name="lowConsume" class="wu-text" id="lowConsume"/></td>
+                <td><input type="text" name="lowConsume" class="wu-text easyui-validatebox" id="lowConsume"
+                validtype = "checkNum"/></td>
             </tr>
             <tr>
                <td width="60" align="right">累计消费区间(高):</td>
-                <td><input type="text" name="highConsume" class="wu-text" id="highConsume"/></td>
+                <td><input type="text" name="highConsume" class="wu-text easyui-validatebox" id="highConsume"
+                validtype = "compareDiscount['#lowConsume']"/></td>
             </tr>
             <tr>
                 <td align="right">会员级别:</td>
                 <td><input type="text" name="grade" class="wu-text easyui-validatebox" id="grade"
-                           required="true"/></td>
+                           required="true" validtype="length[1, 10]"/></td>
             </tr>
             <tr>
                 <td align="right">折扣:</td>
                 <td><input type="text" name="discount" class="wu-text easyui-validatebox" id="discount" required="true"
-                           /></td>
+                          validtype = "discount" /></td>
             </tr>
         </table>
     </form>

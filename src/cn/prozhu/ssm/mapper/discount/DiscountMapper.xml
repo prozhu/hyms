@@ -40,6 +40,10 @@
 		select id, lowConsume, highConsume, grade, discount, createTime from discount 
 		where delFlag = 0
 	</select>
+	
+	<update id="delDiscount" parameterType="String">
+		update discount set delFlag = 1 where id = #{id}
+	</update>
 
 
 </mapper>

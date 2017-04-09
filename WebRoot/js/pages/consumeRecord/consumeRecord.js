@@ -64,24 +64,23 @@
                     checkbox: true
                 },
                 {
-                    field: 'membername',
+                    field: 'memberName',
                     title: '会员名称',
                     width: 40
                 },
                 {
-                    field: 'memberid',
+                    field: 'memberId',
                     title: '会员编号',
-                    width: 80,
+                    width: 80
                 },
                 {
-                    field: 'membercardid',
+                    field: 'memberCardId',
                     title: '会员卡号',
                     width: 55
                 },
                 {
                     field: 'discountMoney',
                     title: '消费金额(折前|元)',
-                    sortable: true,
                     width: 50
                 },
                 {
@@ -91,7 +90,7 @@
                     width: 50
                 },
                 {
-                    field: 'consumetime',
+                    field: 'consumeTime',
                     title: '消费时间',
                     sortable: true,
                     width: 100,

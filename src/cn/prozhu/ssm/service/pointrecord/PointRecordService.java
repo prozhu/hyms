@@ -3,7 +3,7 @@ package cn.prozhu.ssm.service.pointrecord;
 import java.util.List;
 import java.util.Map;
 
-import cn.prozhu.ssm.model.pointrecord.Pointrecord;
+import cn.prozhu.ssm.model.pointrecord.PointRecord;
 
 public interface PointRecordService {
     /**
@@ -31,7 +31,7 @@ public interface PointRecordService {
      * @param order
      * @return
      */
-    List<Pointrecord> findPointRecordByCondition(String memberid,String pageNow,
+    List<PointRecord> findPointRecordByCondition(String memberid,String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 

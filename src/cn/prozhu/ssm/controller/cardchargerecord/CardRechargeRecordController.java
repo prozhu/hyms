@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.prozhu.ssm.controller.base.BaseController;
-import cn.prozhu.ssm.model.cardchargerecord.Cardrechargerecord;
+import cn.prozhu.ssm.model.cardchargerecord.CardRechargeRecord;
 import cn.prozhu.ssm.model.member.Member;
 import cn.prozhu.ssm.service.cardchargerecord.CardRechargeRecordService;
 import cn.prozhu.ssm.util.JSONUtil;
@@ -55,7 +55,7 @@ public class CardRechargeRecordController extends BaseController{
         Integer total = 1;
       //获取session中的会员信息
         Member member = (Member) request.getSession().getAttribute("member");
-        List<Cardrechargerecord> cardRechargeRecordList = new ArrayList<Cardrechargerecord>();
+        List<CardRechargeRecord> cardRechargeRecordList = new ArrayList<CardRechargeRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = cardRechargeRecordService.getCount(startTime, endTime, keyword, null);
@@ -87,7 +87,7 @@ public class CardRechargeRecordController extends BaseController{
     public String exportMemberInfoExcel(String startTime, String endTime, String keyword, HttpSession session, HttpServletResponse response) throws Exception {
       //获取session中的会员信息
         Member member = (Member) session.getAttribute("member");
-        List<Cardrechargerecord> cardRechargeRecordList = new ArrayList<Cardrechargerecord>();
+        List<CardRechargeRecord> cardRechargeRecordList = new ArrayList<CardRechargeRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(null, null, null, startTime, endTime, keyword, null, null);
@@ -96,11 +96,11 @@ public class CardRechargeRecordController extends BaseController{
             cardRechargeRecordList = cardRechargeRecordService.findCardRechargeRecordByCondition(member.getMemberid().toString(), null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员卡号", "充值金额", "充值时间"};
-        String colKeys[] = { "membername", "membercardid", "rechargemoney", "changetime"};
+        String colKeys[] = { "memberName", "memberCardId", "rechargeMoney", "changeTime"};
         DjExcelCreator creator = new DjExcelCreator(colNames, colKeys, "会员卡充值记录");
         creator.setColumnsWidth(new Integer[]{ 20, 30, 20, 40});
-        creator.addNumberCol("rechargemoney", "0.00");
-        creator.addSumColumn("rechargemoney");
+        creator.addNumberCol("rechargeMoney", "0.00");
+        creator.addSumColumn("rechargeMoney");
         creator.createForWeb(cardRechargeRecordList, response);
         return null;
     }

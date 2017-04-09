@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.prozhu.ssm.controller.base.BaseController;
 import cn.prozhu.ssm.model.member.Member;
-import cn.prozhu.ssm.model.pointrecord.Pointrecord;
+import cn.prozhu.ssm.model.pointrecord.PointRecord;
 import cn.prozhu.ssm.service.pointrecord.PointRecordService;
 import cn.prozhu.ssm.util.JSONUtil;
 import cn.prozhu.ssm.util.StringUitl;
@@ -56,7 +56,7 @@ public class PointRecordController extends BaseController{
         Integer total = 1;
       //获取session中的会员信息
         Member member = (Member) request.getSession().getAttribute("member");
-        List<Pointrecord> pointRecordList = new ArrayList<Pointrecord>();
+        List<PointRecord> pointRecordList = new ArrayList<PointRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = pointRecordService.getCount(startTime, endTime, keyword, null);
@@ -88,7 +88,7 @@ public class PointRecordController extends BaseController{
     public String exportMemberInfoExcel(String startTime, String endTime, String keyword, HttpSession session, HttpServletResponse response) throws Exception {
       //获取session中的会员信息
         Member member = (Member) session.getAttribute("member");
-        List<Pointrecord> pointRecordList = new ArrayList<Pointrecord>();
+        List<PointRecord> pointRecordList = new ArrayList<PointRecord>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             pointRecordList = pointRecordService.findPointRecordByCondition(null, null, null, startTime, endTime, keyword,  null, null);
@@ -98,7 +98,7 @@ public class PointRecordController extends BaseController{
             		, null, null, startTime, endTime, keyword,  null, null);
         }
         String colNames[] = { "会员名称", "会员编号", "会员卡号", "积分", "积分类型", "变更时间"};
-        String colKeys[] = { "membername", "memberid", "membercardid", "points", "operationtype", "changetime"};
+        String colKeys[] = { "memberName", "memberId", "memberCardId", "points", "operationType", "changeTime"};
         DjExcelCreator creator = new DjExcelCreator(colNames, colKeys, "会员卡积分变更记录表");
         creator.setColumnsWidth(new Integer[]{ 20, 30, 30, 10, 10, 20});
         creator.addSumColumn("points");

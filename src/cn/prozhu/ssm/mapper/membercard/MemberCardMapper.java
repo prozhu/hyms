@@ -6,33 +6,33 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import cn.prozhu.ssm.model.membercard.Membercard;
-import cn.prozhu.ssm.model.membercard.MembercardExample;
+import cn.prozhu.ssm.model.membercard.MemberCard;
+import cn.prozhu.ssm.model.membercard.MemberCardExample;
 
-public interface MembercardMapper {
-    int countByExample(MembercardExample example);
+public interface MemberCardMapper {
+    int countByExample(MemberCardExample example);
 
-    int deleteByExample(MembercardExample example);
+    int deleteByExample(MemberCardExample example);
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Membercard record);
+    int insert(MemberCard record);
 
-    int insertSelective(Membercard record);
+    int insertSelective(MemberCard record);
 
-    List<Membercard> selectByExampleWithRowbounds(MembercardExample example, RowBounds rowBounds);
+    List<MemberCard> selectByExampleWithRowbounds(MemberCardExample example, RowBounds rowBounds);
 
-    List<Membercard> selectByExample(MembercardExample example);
+    List<MemberCard> selectByExample(MemberCardExample example);
 
-    Membercard selectByPrimaryKey(Long id);
+    MemberCard selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") Membercard record, @Param("example") MembercardExample example);
+    int updateByExampleSelective(@Param("record") MemberCard record, @Param("example") MemberCardExample example);
 
-    int updateByExample(@Param("record") Membercard record, @Param("example") MembercardExample example);
+    int updateByExample(@Param("record") MemberCard record, @Param("example") MemberCardExample example);
 
-    int updateByPrimaryKeySelective(Membercard record);
+    int updateByPrimaryKeySelective(MemberCard record);
 
-    int updateByPrimaryKey(Membercard record);
+    int updateByPrimaryKey(MemberCard record);
 
     /**
      * 通过 "年度"查询会员卡图表

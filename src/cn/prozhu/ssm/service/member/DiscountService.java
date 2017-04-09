@@ -26,4 +26,11 @@ public interface DiscountService {
 	 */
 	Integer editDiscount(Discount discount);
 
+	/**
+	 * 删除折扣信息
+	 * @param id
+	 * @return
+	 */
+	Integer delDiscount(String id);
+
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import cn.prozhu.ssm.exception.CustomException;
 import cn.prozhu.ssm.model.member.Member;
-import cn.prozhu.ssm.model.membercard.Membercard;
+import cn.prozhu.ssm.model.membercard.MemberCard;
 import cn.prozhu.ssm.service.member.MemberService;
 
 /**
@@ -44,7 +44,7 @@ public interface MemberCardService {
     * @param memberid
     * @return
     */
-    public List<Membercard> findMemberCardByMemberId(String memberid);
+    public List<MemberCard> findMemberCardByMemberId(String memberid);
     
     
     /**
@@ -53,7 +53,7 @@ public interface MemberCardService {
      * @date ：2017-2-7 下午4:41:52 
      * @param id
      * @return
-    public Membercard findMemberCardById(String id);
+    public MemberCard findMemberCardById(String id);
     
     
     /**
@@ -70,7 +70,7 @@ public interface MemberCardService {
      * @param memberService
      * @return
      */
-    public List<Membercard> findMemberCardByCondition(String pageNow, String pageSize, String startTime, String endTime, String keyword, String sort, String order, MemberService memberService);
+    public List<MemberCard> findMemberCardByCondition(String pageNow, String pageSize, String startTime, String endTime, String keyword, String sort, String order, MemberService memberService);
             
 
     /**

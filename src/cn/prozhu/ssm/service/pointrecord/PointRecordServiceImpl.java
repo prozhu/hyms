@@ -9,21 +9,21 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
-import cn.prozhu.ssm.mapper.pointrecord.PointrecordMapper;
-import cn.prozhu.ssm.model.pointrecord.Pointrecord;
-import cn.prozhu.ssm.model.pointrecord.PointrecordExample;
+import cn.prozhu.ssm.mapper.pointrecord.PointRecordMapper;
+import cn.prozhu.ssm.model.pointrecord.PointRecord;
+import cn.prozhu.ssm.model.pointrecord.PointRecordExample;
 import cn.prozhu.ssm.util.RandomUtils;
 import cn.prozhu.ssm.util.StringUitl;
 
 public class PointRecordServiceImpl implements PointRecordService {
 
     @Autowired
-    private PointrecordMapper pointrecordMapper;
+    private PointRecordMapper pointRecordMapper;
 
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberid) {
     	List<Object> condition = buildSelectCondition(null,null, startTime, endTime, keyword,null, null, memberid);
-        return pointrecordMapper.countByExample((PointrecordExample)condition.get(0));
+        return pointRecordMapper.countByExample((PointRecordExample)condition.get(0));
     }
     
     /**
@@ -36,7 +36,7 @@ public class PointRecordServiceImpl implements PointRecordService {
      * @param sort
      * @param order
      * @return 集合中返回三个参数： 
-     *  		1.：  PointrecordExample
+     *  		1.：  PointRecordExample
      *  		2.：  rowBounds
      *  		3.: criteria
      */
@@ -51,10 +51,10 @@ public class PointRecordServiceImpl implements PointRecordService {
             pageSize = "100000";
         }
        
-        PointrecordExample pointrecordExample = new PointrecordExample();
-        PointrecordExample.Criteria criteria = pointrecordExample.createCriteria();
+        PointRecordExample pointRecordExample = new PointRecordExample();
+        PointRecordExample.Criteria criteria = pointRecordExample.createCriteria();
         if (!StringUitl.isNullOrEmpty(sort) && !StringUitl.isNullOrEmpty(order)) {
-            pointrecordExample.setOrderByClause(sort + " " + order);
+            pointRecordExample.setOrderByClause(sort + " " + order);
         }
         //会员编号
         if (!StringUitl.isNullOrEmpty(memberid)) {
@@ -75,7 +75,7 @@ public class PointRecordServiceImpl implements PointRecordService {
             criteria.andMembernameLike("%" + keyword + "%");
         }
         RowBounds rowBounds = new RowBounds((Integer.parseInt(pageNow) -1) * Integer.parseInt(pageSize), Integer.parseInt(pageSize));
-        condition.add(pointrecordExample);
+        condition.add(pointRecordExample);
         condition.add(rowBounds);
         condition.add(criteria);
     	return condition;
@@ -85,11 +85,11 @@ public class PointRecordServiceImpl implements PointRecordService {
     		key = "'findPointRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize+#memberid",
     		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
-    public List<Pointrecord> findPointRecordByCondition(String memberid,String pageNow,
+    public List<PointRecord> findPointRecordByCondition(String memberid,String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order) {
     	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
-        List<Pointrecord> list = pointrecordMapper.selectByExampleWithRowbounds((PointrecordExample)condition.get(0), (RowBounds)condition.get(1));
+        List<PointRecord> list = pointRecordMapper.selectByExampleWithRowbounds((PointRecordExample)condition.get(0), (RowBounds)condition.get(1));
         if (list.size() >  0 && list != null) {
             return list;
         }
@@ -98,7 +98,7 @@ public class PointRecordServiceImpl implements PointRecordService {
 
 	@Override
 	public List<String> findPointYears() {
-		List<String> list = pointrecordMapper.selectYears();
+		List<String> list = pointRecordMapper.selectYears();
 		if (StringUitl.isNullOrEmpty(list)) {
 			return null;
 		}
@@ -112,13 +112,13 @@ public class PointRecordServiceImpl implements PointRecordService {
 		}
 		List<Map<String, Object>> map = null;
 		if ("year".equals(mark.trim())) {
-			map = pointrecordMapper.pointChartByYear();
+			map = pointRecordMapper.pointChartByYear();
 		} else if ("quarter".equals(mark.trim())) {
-			map = pointrecordMapper.pointChartByQuarter(markYear);
+			map = pointRecordMapper.pointChartByQuarter(markYear);
 		} else if ("month".equals(mark.trim())) {
-			map = pointrecordMapper.pointChartByMonth(markYear);
+			map = pointRecordMapper.pointChartByMonth(markYear);
 		} else {
-				map = pointrecordMapper.pointChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
+				map = pointRecordMapper.pointChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
 		}
 		if (StringUitl.isNullOrEmpty(map)) {
 			return null;

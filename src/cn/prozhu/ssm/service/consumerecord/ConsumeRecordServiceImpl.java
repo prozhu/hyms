@@ -9,22 +9,22 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
-import cn.prozhu.ssm.mapper.consumerecord.ConsumerecordMapper;
-import cn.prozhu.ssm.model.consumerecord.Consumerecord;
-import cn.prozhu.ssm.model.consumerecord.ConsumerecordExample;
+import cn.prozhu.ssm.mapper.consumerecord.ConsumeRecordMapper;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecord;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecordExample;
 import cn.prozhu.ssm.util.RandomUtils;
 import cn.prozhu.ssm.util.StringUitl;
 
 public class ConsumeRecordServiceImpl implements ConsumeRecordService {
 
     @Autowired
-    private ConsumerecordMapper consumerecordMapper;
+    private ConsumeRecordMapper consumeRecordMapper;
    
 
     @Override
     public Integer getCount(String startTime, String endTime, String keyword, String memberId) {
     	List<Object> condition = buildSelectCondition(null,null, startTime, endTime, keyword,null, null, memberId);
-        return consumerecordMapper.countByExample((ConsumerecordExample)condition.get(0));
+        return consumeRecordMapper.countByExample((ConsumeRecordExample)condition.get(0));
     }
 
     /**
@@ -51,10 +51,10 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
         if (pageSize == null) {
             pageSize = "100000";
         }
-        ConsumerecordExample consumerecordExample = new ConsumerecordExample();
-        ConsumerecordExample.Criteria criteria = consumerecordExample.createCriteria();
+        ConsumeRecordExample consumeRecordExample = new ConsumeRecordExample();
+        ConsumeRecordExample.Criteria criteria = consumeRecordExample.createCriteria();
         if (!StringUitl.isNullOrEmpty(sort) && !StringUitl.isNullOrEmpty(order)) {
-            consumerecordExample.setOrderByClause(sort + " " + order);
+            consumeRecordExample.setOrderByClause(sort + " " + order);
         }
         //时间查询
         if (!StringUitl.isNullOrEmpty(startTime) && !StringUitl.isNullOrEmpty(endTime)) {
@@ -75,7 +75,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
         }
         
         RowBounds rowBounds = new RowBounds((Integer.parseInt(pageNow) -1) *  Integer.parseInt(pageSize), Integer.parseInt(pageSize));
-        condition.add(consumerecordExample);
+        condition.add(consumeRecordExample);
         condition.add(rowBounds);
         condition.add(criteria);
         return condition;
@@ -87,11 +87,11 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
     		key = "'findConsumeRecordByMemberIdAndCondition'+#sort + #order+#pageNow+#pageSize+#memberid",
     		condition = "null == #startTime and null == #endTime and null == #keyword ")
     @Override
-    public List<Consumerecord> findConsumeRecordByCondition(String memberid, String pageNow,
+    public List<ConsumeRecord> findConsumeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order) {
     	List<Object> condition = buildSelectCondition(pageNow, pageSize, startTime, endTime, keyword, sort, order, memberid);
-        List<Consumerecord> list = consumerecordMapper.selectByExampleWithRowbounds((ConsumerecordExample)condition.get(0), (RowBounds)condition.get(1));
+        List<ConsumeRecord> list = consumeRecordMapper.selectByExampleWithRowbounds((ConsumeRecordExample)condition.get(0), (RowBounds)condition.get(1));
         if (list.size() >  0 && list != null) {
             return list;
         }
@@ -106,13 +106,13 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
 		}
 		List<Map<String, Object>> map = null;
 		if ("year".equals(mark.trim())) {
-			map = consumerecordMapper.consumeChartByYear();
+			map = consumeRecordMapper.consumeChartByYear();
 		} else if ("quarter".equals(mark.trim())) {
-			map = consumerecordMapper.consumeChartByQuarter(markYear);
+			map = consumeRecordMapper.consumeChartByQuarter(markYear);
 		} else if ("month".equals(mark.trim())) {
-			map = consumerecordMapper.consumeChartByMonth(markYear);
+			map = consumeRecordMapper.consumeChartByMonth(markYear);
 		} else {
-				map = consumerecordMapper.consumeChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
+				map = consumeRecordMapper.consumeChartByWeek(StringUitl.isNullOrEmpty(time)? RandomUtils.formatTime1(new Date()) : time);
 		}
 		if (StringUitl.isNullOrEmpty(map)) {
 			return null;
@@ -122,7 +122,7 @@ public class ConsumeRecordServiceImpl implements ConsumeRecordService {
 
 	@Override
 	public List<String> findConsumeYears() {
-		List<String> list = consumerecordMapper.selectYears();
+		List<String> list = consumeRecordMapper.selectYears();
 		if (StringUitl.isNullOrEmpty(list)) {
 			return null;
 		}

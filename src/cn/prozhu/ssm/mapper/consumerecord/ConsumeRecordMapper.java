@@ -6,33 +6,33 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import cn.prozhu.ssm.model.consumerecord.Consumerecord;
-import cn.prozhu.ssm.model.consumerecord.ConsumerecordExample;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecord;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecordExample;
 
-public interface ConsumerecordMapper {
-    int countByExample(ConsumerecordExample example);
+public interface ConsumeRecordMapper {
+    int countByExample(ConsumeRecordExample example);
 
-    int deleteByExample(ConsumerecordExample example);
+    int deleteByExample(ConsumeRecordExample example);
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Consumerecord record);
+    int insert(ConsumeRecord record);
 
-    int insertSelective(Consumerecord record);
+    int insertSelective(ConsumeRecord record);
 
-    List<Consumerecord> selectByExampleWithRowbounds(ConsumerecordExample example, RowBounds rowBounds);
+    List<ConsumeRecord> selectByExampleWithRowbounds(ConsumeRecordExample example, RowBounds rowBounds);
 
-    List<Consumerecord> selectByExample(ConsumerecordExample example);
+    List<ConsumeRecord> selectByExample(ConsumeRecordExample example);
 
-    Consumerecord selectByPrimaryKey(Long id);
+    ConsumeRecord selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") Consumerecord record, @Param("example") ConsumerecordExample example);
+    int updateByExampleSelective(@Param("record") ConsumeRecord record, @Param("example") ConsumeRecordExample example);
 
-    int updateByExample(@Param("record") Consumerecord record, @Param("example") ConsumerecordExample example);
+    int updateByExample(@Param("record") ConsumeRecord record, @Param("example") ConsumeRecordExample example);
 
-    int updateByPrimaryKeySelective(Consumerecord record);
+    int updateByPrimaryKeySelective(ConsumeRecord record);
 
-    int updateByPrimaryKey(Consumerecord record);
+    int updateByPrimaryKey(ConsumeRecord record);
     
     /**
      * 按 "年度"查询销售图表

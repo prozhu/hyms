@@ -440,7 +440,7 @@ $('#wu-datagrid4').datagrid({
                 checkbox: true
             },
             {
-                field: 'membername',
+                field: 'memberName',
                 title: '会员名称',
                 width: 60,
                 sortable: true,
@@ -455,13 +455,13 @@ $('#wu-datagrid4').datagrid({
          * width : 180 }
          */,
             {
-                field: 'membercardid',
+                field: 'memberCardId',
                 title: '会员卡编号',
                 width: 130,
                 align: 'center'
             },
             {
-                field: 'cardstatus',
+                field: 'cardStatus',
                 title: '状态',
                 align: 'center',
                 width: 60,
@@ -482,14 +482,14 @@ $('#wu-datagrid4').datagrid({
                 editor: {
                     type: 'combobox',
                     options: {
-                        valueField: 'cardstatus',
+                        valueField: 'cardStatus',
                         textField: '23',
                         required: true
                     }
                 }
             },
             {
-                field: 'cardgrade',
+                field: 'cardGrade',
                 title: '会员卡级别',
                 align: 'center',
                 width: 50
@@ -508,28 +508,28 @@ $('#wu-datagrid4').datagrid({
                 width: 70
             },
             {
-                field: 'totalpoint',
+                field: 'totalPoint',
                 title: '累计积分',
                 sortable: true,
                 align: 'center',
                 width: 80
             },
             {
-                field: 'totalconsumption',
+                field: 'totalConsumption',
                 title: '累计消费总额(元)',
                 sortable: true,
                 align: 'center',
                 width: 80
             },
             {
-                field: 'totalrecharge',
+                field: 'totalRecharge',
                 title: '累计充值总额(元)',
                 sortable: true,
                 align: 'center',
                 width: 80
             },
             {
-                field: 'opendate',
+                field: 'openDate',
                 title: '开卡日期',
                 sortable: true,
                 align: 'center',

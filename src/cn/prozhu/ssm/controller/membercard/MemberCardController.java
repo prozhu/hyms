@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cn.prozhu.ssm.controller.base.BaseController;
 import cn.prozhu.ssm.exception.CustomException;
 import cn.prozhu.ssm.model.member.Member;
-import cn.prozhu.ssm.model.membercard.Membercard;
+import cn.prozhu.ssm.model.membercard.MemberCard;
 import cn.prozhu.ssm.service.member.MemberService;
 import cn.prozhu.ssm.service.membercard.MemberCardService;
 import cn.prozhu.ssm.util.JSONUtil;
@@ -95,7 +95,7 @@ public class MemberCardController extends BaseController {
         Integer total = 1;
       //获取session中的会员信息
         Member member = (Member) request.getSession().getAttribute("member");
-        List<Membercard> memberCardList = new ArrayList<Membercard>();
+        List<MemberCard> memberCardList = new ArrayList<MemberCard>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             total = memberCardService.getCount(startTime, endTime, keyword);
@@ -126,7 +126,7 @@ public class MemberCardController extends BaseController {
     public String exportMemberInfoExcel(String startTime, String endTime, String keyword, HttpSession session, HttpServletResponse response) throws Exception {
       //获取session中的会员信息
         Member member = (Member) session.getAttribute("member");
-        List<Membercard> memberCardList = new ArrayList<Membercard>();
+        List<MemberCard> memberCardList = new ArrayList<MemberCard>();
         if ("0".equals(member.getMembertype())) {
             //管理员：查询所有信息
             memberCardList = memberCardService.findMemberCardByCondition(null, null, startTime, endTime, keyword,  null, null, memberService);
@@ -135,13 +135,13 @@ public class MemberCardController extends BaseController {
             memberCardList = memberCardService.findMemberCardByMemberId(member.getMemberid().toString());
         }
         String colNames[] = { "会员名称", "会员卡号", "卡状态", "会员卡级别", "会员折扣", "卡余额", "累计充值", "累计消费", "累计积分", "开卡日期"};
-        String colKeys[] = { "membername", "membercardid", "cardstatus", "cardgrade", "discount", "balance", "totalrecharge", "totalconsumption", "totalpoint", "opendate"};
+        String colKeys[] = { "memberName", "memberCardId", "cardStatus", "cardGrade", "discount", "balance", "totalRecharge", "totalConsumption", "totalPoint", "openDate"};
         DjExcelCreator creator = new DjExcelCreator(colNames, colKeys, "会员卡基本信息表");
         creator.setColumnsWidth(new Integer[]{ 20, 20, 10, 10,  10, 20, 20, 20,  20,  40});
-        creator.addNumberCol("totalconsumption", "0.00");
+        creator.addNumberCol("totalConsumption", "0.00");
         creator.addNumberCol("balance", "0.00");
-        creator.addSumColumn(new String[]{"balance", "totalrecharge", "totalconsumption", "totalpoint"});
-        creator.addRenderColumn("cardstatus", new DjExcelDataRender() {
+        creator.addSumColumn(new String[]{"balance", "totalRecharge", "totalConsumption", "totalPoint"});
+        creator.addRenderColumn("cardStatus", new DjExcelDataRender() {
             public String render(Object obj) {
                 return  obj == null?"": obj.toString().equals("0")?"正常":obj.toString().equals("1")?"禁用":"挂失";
             }

@@ -65,33 +65,33 @@
                     checkbox: true
                 },
                 {
-                    field: 'membername',
+                    field: 'memberName',
                     title: '会员名称',
                     width: 40
                 },
                 {
-                    field: 'memberid',
+                    field: 'memberId',
                     title: '会员编号',
                     width: 90,
                 },
                 {
-                    field: 'membercardid',
+                    field: 'memberCardId',
                     title: '会员卡号',
                     width: 60
                 },
                 {
                     field: 'points',
                     title: '积分',
-                    width: 50
-                },
-                {
-                    field: 'operationtype',
-                    title: '积分类型',
                     sortable: true,
                     width: 50
                 },
                 {
-                    field: 'changetime',
+                    field: 'operationType',
+                    title: '积分类型',
+                    width: 50
+                },
+                {
+                    field: 'changeTime',
                     title: '变更时间',
                     sortable: true,
                     width: 100,

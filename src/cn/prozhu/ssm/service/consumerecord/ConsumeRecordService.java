@@ -3,7 +3,7 @@ package cn.prozhu.ssm.service.consumerecord;
 import java.util.List;
 import java.util.Map;
 
-import cn.prozhu.ssm.model.consumerecord.Consumerecord;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecord;
 
 public interface ConsumeRecordService {
 
@@ -31,7 +31,7 @@ public interface ConsumeRecordService {
      * @param order
      * @return
      */
-    List<Consumerecord> findConsumeRecordByCondition(String memberid, String pageNow,
+    List<ConsumeRecord> findConsumeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 

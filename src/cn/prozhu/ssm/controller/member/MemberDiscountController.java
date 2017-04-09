@@ -57,5 +57,20 @@ public class MemberDiscountController extends BaseController{
 		}
 		return writeAjaxResponse(JSONUtil.result(false, "修改失败！", "", ""), response);
 	}
+	
+	/**
+	 * 删除折扣信息
+	 * @param response
+	 * @param id ：折扣信息编号
+	 * @return
+	 */
+	@RequestMapping("/delDiscount")
+	public String delDiscount(HttpServletResponse response, String id) {
+		Integer flag = discountService.delDiscount(id);
+		if (flag > 0) {
+			return writeAjaxResponse(JSONUtil.result(true, "删除成功！", "", ""), response);
+		}
+		return writeAjaxResponse(JSONUtil.result(false, "删除失败！", "", ""), response);
+	}
 
 }

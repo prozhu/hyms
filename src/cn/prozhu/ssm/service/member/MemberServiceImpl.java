@@ -13,24 +13,24 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.prozhu.ssm.exception.CustomException;
-import cn.prozhu.ssm.mapper.cardchargerecord.CardrechargerecordMapper;
-import cn.prozhu.ssm.mapper.cardrecord.CardrecordMapper;
-import cn.prozhu.ssm.mapper.consumerecord.ConsumerecordMapper;
+import cn.prozhu.ssm.mapper.cardchargerecord.CardRechargeRecordMapper;
+import cn.prozhu.ssm.mapper.cardrecord.CardRecordMapper;
+import cn.prozhu.ssm.mapper.consumerecord.ConsumeRecordMapper;
 import cn.prozhu.ssm.mapper.member.MemberMapper;
-import cn.prozhu.ssm.mapper.membercard.MembercardMapper;
-import cn.prozhu.ssm.mapper.pointrecord.PointrecordMapper;
-import cn.prozhu.ssm.model.cardchargerecord.Cardrechargerecord;
-import cn.prozhu.ssm.model.cardchargerecord.CardrechargerecordExample;
-import cn.prozhu.ssm.model.cardrecord.Cardrecord;
-import cn.prozhu.ssm.model.cardrecord.CardrecordExample;
-import cn.prozhu.ssm.model.consumerecord.Consumerecord;
-import cn.prozhu.ssm.model.consumerecord.ConsumerecordExample;
+import cn.prozhu.ssm.mapper.membercard.MemberCardMapper;
+import cn.prozhu.ssm.mapper.pointrecord.PointRecordMapper;
+import cn.prozhu.ssm.model.cardchargerecord.CardRechargeRecord;
+import cn.prozhu.ssm.model.cardchargerecord.CardRechargeRecordExample;
+import cn.prozhu.ssm.model.cardrecord.CardRecord;
+import cn.prozhu.ssm.model.cardrecord.CardRecordExample;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecord;
+import cn.prozhu.ssm.model.consumerecord.ConsumeRecordExample;
 import cn.prozhu.ssm.model.member.Member;
 import cn.prozhu.ssm.model.member.MemberExample;
-import cn.prozhu.ssm.model.membercard.Membercard;
-import cn.prozhu.ssm.model.membercard.MembercardExample;
-import cn.prozhu.ssm.model.pointrecord.Pointrecord;
-import cn.prozhu.ssm.model.pointrecord.PointrecordExample;
+import cn.prozhu.ssm.model.membercard.MemberCard;
+import cn.prozhu.ssm.model.membercard.MemberCardExample;
+import cn.prozhu.ssm.model.pointrecord.PointRecord;
+import cn.prozhu.ssm.model.pointrecord.PointRecordExample;
 import cn.prozhu.ssm.util.MD5;
 import cn.prozhu.ssm.util.MailSenderUtil;
 import cn.prozhu.ssm.util.RandomUtils;
@@ -42,15 +42,15 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper memberMapper;
     @Autowired
-    private ConsumerecordMapper consumerecordMapper;
+    private ConsumeRecordMapper consumeRecordMapper;
     @Autowired
-    private PointrecordMapper pointrecordMapper;
+    private PointRecordMapper pointRecordMapper;
     @Autowired
-    private CardrechargerecordMapper cardrechargerecordMapper;
+    private CardRechargeRecordMapper cardRechargeRecordMapper;
     @Autowired
-    private MembercardMapper membercardMapper;
+    private MemberCardMapper memberCardMapper;
     @Autowired
-    private CardrecordMapper cardrecordMapper;
+    private CardRecordMapper cardRecordMapper;
 	@Autowired
 	private MailSenderUtil mailSenderUtil;
 	
@@ -115,8 +115,8 @@ public class MemberServiceImpl implements MemberService {
         //伪删除，只是更改一下删除的标记为1
         Member member = null;
         Integer state = 0;
-        MembercardExample memberCardExample = new MembercardExample();
-        MembercardExample.Criteria criteria = memberCardExample.createCriteria();
+        MemberCardExample memberCardExample = new MemberCardExample();
+        MemberCardExample.Criteria criteria = memberCardExample.createCriteria();
         for (String id : idd) {
             member = findMemberById(id);
             //如果是管理员，就不允许删除管理员
@@ -126,9 +126,9 @@ public class MemberServiceImpl implements MemberService {
             member.setState((short)1);
             //在删除用户的同时，需要将该用户的会员卡状态设置为注销（但是其会员卡的相关记录并不会被删除），到时候在查询会员卡时，不会被查询出来
             criteria.andMemberidEqualTo(member.getMemberid());
-            Membercard memberCard = membercardMapper.selectByExample(memberCardExample).get(0);
-            memberCard.setCardstatus((short)3);
-            membercardMapper.updateByPrimaryKey(memberCard);
+            MemberCard memberCard = memberCardMapper.selectByExample(memberCardExample).get(0);
+            memberCard.setCardStatus((short)3);
+            memberCardMapper.updateByPrimaryKey(memberCard);
             state = memberMapper.updateByPrimaryKey(member);
         }
        return state;
@@ -219,58 +219,58 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     private void updateMemberName(String membername, String memberid) {
         //消费记录
-        ConsumerecordExample consumerecordExample = new ConsumerecordExample();
-        ConsumerecordExample.Criteria criteria = consumerecordExample.createCriteria();
+        ConsumeRecordExample consumeRecordExample = new ConsumeRecordExample();
+        ConsumeRecordExample.Criteria criteria = consumeRecordExample.createCriteria();
         criteria.andMemberidEqualTo(memberid);
         //根据会员编号查询出所有消费记录
-        List<Consumerecord> consumeRecordList = consumerecordMapper.selectByExample(consumerecordExample);
-        for (Consumerecord record : consumeRecordList) {
-            record.setMembername(membername);
-            consumerecordMapper.updateByPrimaryKey(record);
+        List<ConsumeRecord> consumeRecordList = consumeRecordMapper.selectByExample(consumeRecordExample);
+        for (ConsumeRecord record : consumeRecordList) {
+            record.setMemberName(membername);
+            consumeRecordMapper.updateByPrimaryKey(record);
         }
         
         //会员卡信息
-        MembercardExample memberCardExample = new MembercardExample();
-        MembercardExample.Criteria criteria1 = memberCardExample.createCriteria();
+        MemberCardExample memberCardExample = new MemberCardExample();
+        MemberCardExample.Criteria criteria1 = memberCardExample.createCriteria();
         criteria1.andMemberidEqualTo(memberid);
         //根据会员编号查询出所有消费记录
-        List<Membercard> memberCardRecordList = membercardMapper.selectByExample(memberCardExample);
-        for (Membercard record : memberCardRecordList) {
-            record.setMembername(membername);
-            membercardMapper.updateByPrimaryKey(record);
+        List<MemberCard> memberCardRecordList = memberCardMapper.selectByExample(memberCardExample);
+        for (MemberCard record : memberCardRecordList) {
+            record.setMemberName(membername);
+            memberCardMapper.updateByPrimaryKey(record);
         }
         
         //会员卡激活、挂失记录
-        CardrecordExample cardRecordExample = new CardrecordExample();
-        CardrecordExample.Criteria criteria2 = cardRecordExample.createCriteria();
+        CardRecordExample cardRecordExample = new CardRecordExample();
+        CardRecordExample.Criteria criteria2 = cardRecordExample.createCriteria();
         criteria2.andMemberidEqualTo(memberid);
         //根据会员编号查询出所有消费记录
-        List<Cardrecord> cardRecordList = cardrecordMapper.selectByExample(cardRecordExample);
-        for (Cardrecord record : cardRecordList) {
-            record.setMembername(membername);
-            cardrecordMapper.updateByPrimaryKey(record);
+        List<CardRecord> cardRecordList = cardRecordMapper.selectByExample(cardRecordExample);
+        for (CardRecord record : cardRecordList) {
+            record.setMemberName(membername);
+            cardRecordMapper.updateByPrimaryKey(record);
         }
         
         //充值记录
-        CardrechargerecordExample rechargeRecordExample = new CardrechargerecordExample();
-        CardrechargerecordExample.Criteria criteria3 = rechargeRecordExample.createCriteria();
+        CardRechargeRecordExample rechargeRecordExample = new CardRechargeRecordExample();
+        CardRechargeRecordExample.Criteria criteria3 = rechargeRecordExample.createCriteria();
         criteria3.andMemberidEqualTo(memberid);
         //根据会员编号查询出所有消费记录
-        List<Cardrechargerecord> rechargeRecordList = cardrechargerecordMapper.selectByExample(rechargeRecordExample);
-        for (Cardrechargerecord record : rechargeRecordList) {
-            record.setMembername(membername);
-            cardrechargerecordMapper.updateByPrimaryKey(record);
+        List<CardRechargeRecord> rechargeRecordList = cardRechargeRecordMapper.selectByExample(rechargeRecordExample);
+        for (CardRechargeRecord record : rechargeRecordList) {
+            record.setMemberName(membername);
+            cardRechargeRecordMapper.updateByPrimaryKey(record);
         }
         
         //积分记录
-        PointrecordExample pointRecordExample = new PointrecordExample();
-        PointrecordExample.Criteria criteria4 = pointRecordExample.createCriteria();
+        PointRecordExample pointRecordExample = new PointRecordExample();
+        PointRecordExample.Criteria criteria4 = pointRecordExample.createCriteria();
         criteria4.andMemberidEqualTo(memberid);
         //根据会员编号查询出所有消费记录
-        List<Pointrecord> pointRecordList = pointrecordMapper.selectByExample(pointRecordExample);
-        for (Pointrecord record : pointRecordList) {
-            record.setMembername(membername);
-            pointrecordMapper.updateByPrimaryKey(record);
+        List<PointRecord> pointRecordList = pointRecordMapper.selectByExample(pointRecordExample);
+        for (PointRecord record : pointRecordList) {
+            record.setMemberName(membername);
+            pointRecordMapper.updateByPrimaryKey(record);
         }
     }
 

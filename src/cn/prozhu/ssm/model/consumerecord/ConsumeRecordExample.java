@@ -1,16 +1,16 @@
-package cn.prozhu.ssm.model.cardchargerecord;
+package cn.prozhu.ssm.model.consumerecord;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CardrechargerecordExample implements Serializable {
+public class ConsumeRecordExample implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3315748419038801941L;
+	private static final long serialVersionUID = 6661959682852987096L;
 
 	protected String orderByClause;
 
@@ -18,7 +18,7 @@ public class CardrechargerecordExample implements Serializable {
 
     protected List<Criteria> oredCriteria;
 
-    public CardrechargerecordExample() {
+    public ConsumeRecordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -311,124 +311,123 @@ public class CardrechargerecordExample implements Serializable {
             addCriterion("memberCardId not between", value1, value2, "membercardid");
             return (Criteria) this;
         }
-
-        public Criteria andRechargemoneyIsNull() {
-            addCriterion("rechargeMoney is null");
+        public Criteria andDiscountMoneyIsNull() {
+            addCriterion("discountMoney is null");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyIsNotNull() {
-            addCriterion("rechargeMoney is not null");
+        public Criteria andDiscountMoneyIsNotNull() {
+            addCriterion("discountMoney is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyEqualTo(Long value) {
-            addCriterion("rechargeMoney =", value, "rechargemoney");
+        public Criteria andDiscountMoneyEqualTo(Long value) {
+            addCriterion("discountMoney =", value, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyNotEqualTo(Long value) {
-            addCriterion("rechargeMoney <>", value, "rechargemoney");
+        public Criteria andDiscountMoneyNotEqualTo(Long value) {
+            addCriterion("discountMoney <>", value, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyGreaterThan(Long value) {
-            addCriterion("rechargeMoney >", value, "rechargemoney");
+        public Criteria andDiscountMoneyGreaterThan(Long value) {
+            addCriterion("discountMoney >", value, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyGreaterThanOrEqualTo(Long value) {
-            addCriterion("rechargeMoney >=", value, "rechargemoney");
+        public Criteria andDiscountMoneyGreaterThanOrEqualTo(Long value) {
+            addCriterion("discountMoney >=", value, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyLessThan(Long value) {
-            addCriterion("rechargeMoney <", value, "rechargemoney");
+        public Criteria andDiscountMoneyLessThan(Long value) {
+            addCriterion("discountMoney <", value, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyLessThanOrEqualTo(Long value) {
-            addCriterion("rechargeMoney <=", value, "rechargemoney");
+        public Criteria andDiscountMoneyLessThanOrEqualTo(Long value) {
+            addCriterion("discountMoney <=", value, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyIn(List<Long> values) {
-            addCriterion("rechargeMoney in", values, "rechargemoney");
+        public Criteria andDiscountMoneyIn(List<Long> values) {
+            addCriterion("discountMoney in", values, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyNotIn(List<Long> values) {
-            addCriterion("rechargeMoney not in", values, "rechargemoney");
+        public Criteria andDiscountMoneyNotIn(List<Long> values) {
+            addCriterion("discountMoney not in", values, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyBetween(Long value1, Long value2) {
-            addCriterion("rechargeMoney between", value1, value2, "rechargemoney");
+        public Criteria andDiscountMoneyBetween(Long value1, Long value2) {
+            addCriterion("discountMoney between", value1, value2, "discountMoney");
             return (Criteria) this;
         }
 
-        public Criteria andRechargemoneyNotBetween(Long value1, Long value2) {
-            addCriterion("rechargeMoney not between", value1, value2, "rechargemoney");
+        public Criteria andDiscountMoneyNotBetween(Long value1, Long value2) {
+            addCriterion("discountMoney not between", value1, value2, "discountMoney");
+            return (Criteria) this;
+        }
+//////
+        public Criteria andConsumemoneyIsNull() {
+            addCriterion("consumeMoney is null");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeIsNull() {
-            addCriterion("changetime is null");
+        public Criteria andConsumemoneyIsNotNull() {
+            addCriterion("consumeMoney is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeIsNotNull() {
-            addCriterion("changetime is not null");
+        public Criteria andConsumemoneyEqualTo(Long value) {
+            addCriterion("consumeMoney =", value, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeEqualTo(Date value) {
-            addCriterion("changetime =", value, "changetime");
+        public Criteria andConsumemoneyNotEqualTo(Long value) {
+            addCriterion("consumeMoney <>", value, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeNotEqualTo(Date value) {
-            addCriterion("changetime <>", value, "changetime");
+        public Criteria andConsumemoneyGreaterThan(Long value) {
+            addCriterion("consumeMoney >", value, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeGreaterThan(Date value) {
-            addCriterion("changetime >", value, "changetime");
+        public Criteria andConsumemoneyGreaterThanOrEqualTo(Long value) {
+            addCriterion("consumeMoney >=", value, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("changetime >=", value, "changetime");
+        public Criteria andConsumemoneyLessThan(Long value) {
+            addCriterion("consumeMoney <", value, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeLessThan(Date value) {
-            addCriterion("changetime <", value, "changetime");
+        public Criteria andConsumemoneyLessThanOrEqualTo(Long value) {
+            addCriterion("consumeMoney <=", value, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeLessThanOrEqualTo(Date value) {
-            addCriterion("changetime <=", value, "changetime");
+        public Criteria andConsumemoneyIn(List<Long> values) {
+            addCriterion("consumeMoney in", values, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeIn(List<Date> values) {
-            addCriterion("changetime in", values, "changetime");
+        public Criteria andConsumemoneyNotIn(List<Long> values) {
+            addCriterion("consumeMoney not in", values, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeNotIn(List<Date> values) {
-            addCriterion("changetime not in", values, "changetime");
+        public Criteria andConsumemoneyBetween(Long value1, Long value2) {
+            addCriterion("consumeMoney between", value1, value2, "consumemoney");
             return (Criteria) this;
         }
 
-        public Criteria andChangetimeBetween(Date value1, Date value2) {
-            addCriterion("changetime between", value1, value2, "changetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andChangetimeNotBetween(Date value1, Date value2) {
-            addCriterion("changetime not between", value1, value2, "changetime");
+        public Criteria andConsumemoneyNotBetween(Long value1, Long value2) {
+            addCriterion("consumeMoney not between", value1, value2, "consumemoney");
             return (Criteria) this;
         }
 
@@ -499,6 +498,66 @@ public class CardrechargerecordExample implements Serializable {
 
         public Criteria andMembernameNotBetween(String value1, String value2) {
             addCriterion("memberName not between", value1, value2, "membername");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeIsNull() {
+            addCriterion("consumetime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeIsNotNull() {
+            addCriterion("consumetime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeEqualTo(Date value) {
+            addCriterion("consumetime =", value, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeNotEqualTo(Date value) {
+            addCriterion("consumetime <>", value, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeGreaterThan(Date value) {
+            addCriterion("consumetime >", value, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("consumetime >=", value, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeLessThan(Date value) {
+            addCriterion("consumetime <", value, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeLessThanOrEqualTo(Date value) {
+            addCriterion("consumetime <=", value, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeIn(List<Date> values) {
+            addCriterion("consumetime in", values, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeNotIn(List<Date> values) {
+            addCriterion("consumetime not in", values, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeBetween(Date value1, Date value2) {
+            addCriterion("consumetime between", value1, value2, "consumetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andConsumetimeNotBetween(Date value1, Date value2) {
+            addCriterion("consumetime not between", value1, value2, "consumetime");
             return (Criteria) this;
         }
     }

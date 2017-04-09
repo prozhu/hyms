@@ -1,3 +1,6 @@
+
+//解决异步加载js文件，在浏览器开发工具source目录中找不到js文件的问题
+//@ sourceURL=memberDiscount.js
 /**
  * 会员信息的js文件
  */
@@ -7,52 +10,31 @@
  * 拓展easyui表单的校验规则
  */
 $.extend($.fn.validatebox.defaults.rules, {
-    mobile: {// 验证手机号码
+    discount: {// 验证手机号码
         validator: function (value) {
-            return /^(13|15|18)\d{9}$/i.test(value);
+            return value > 0 && value <= 1;
         },
-        message: '手机号码格式不正确'
+        message: '折扣金额必须在 (0 - 1]之间的小数'
     },
-    age: {// 验证年龄
+    checkNum: {// 验证年龄
         validator: function (value) {
-            return /^(?:[1-9][0-9]?|1[01][0-9]|120)$/i.test(value);
+            return /^\d+$/.test(value);
         },
-        message: '年龄必须是0到120之间的整数'
+        message: '金额必须为整数'
+    },
+    compareDiscount: {// 验证年龄
+        validator: function (value, param) {
+        	if (/^\d+$/.test(value)) {
+        		return $(param[0]).val() < value;
+        	} else {
+        		return false;
+        	}
+        },
+        message: '累计消费区间(高) 必须大于 累计消费区间(低)'
     }
 });
 
 
-/**
- * 有条件的查询所有会员信息
- */
-function findAllByCondition() {
-    var startTime = $.trim($('input[name="startTime5"]').val());
-    var endTime = $.trim($('input[name="endTime5"]').val());
-    $('#wu-datagrid').datagrid('load', {
-        startTime: startTime.length > 0 ? startTime + ' 00:00:00' : startTime,
-        endTime: endTime.length > 0 ? endTime + ' 23:59:59' : endTime,
-        keyword: $.trim($("#keyword5").val())
-    });
-}
-
-
-
-/**
- * 用户注册表单的校验
- */
-//用户名校验
-/* 	$('#loginname').validatebox({
- required : true,
- validType :"remote['${baseurl}member/checkLoginName.action',  'loginname']",
- invalidMessage : '该用户已被注册！'
- }); */
-/**
- * 性别校验
- */
-$('#sex').validatebox({
-    required: true,
-    missingMessage: '性别必须选择'
-});
 
 /**
  * 导出会员信息表格
@@ -85,35 +67,36 @@ function refresh() {
 /**
  * 删除会员信息
  */
-function del() {
-    var members = $('#wu-datagrid11').datagrid('getSelections');
+function delDiscount() {
+    var discounts = $('#wu-datagrid11').datagrid('getSelections');
     var ids = [];
-    if (members == null || members.length == 0) {
+    if (discounts == null || discounts.length == 0) {
         $.messager.alert('信息提示', '请选择一条用户信息！');
+        return false;
+    }
+    if (discounts.length > 1) {
+        $.messager.alert('信息提示', '只能选择一条用户信息进行删除！');
         return false;
     }
     $.messager.confirm('信息提示', '确定要删除该记录？', function (result) {
         if (result) {
-            $(members).each(function () {
-                if (this.membertype == 0) {
-                    $.messager.alert('信息提示', '管理员账号不允许删除！', 'info');
-                    return false;
-                }
+            $(discounts).each(function () {
                 ids.push(this.id);
             });
+            
             $.ajax({
                 traditional: true,
-                url: baseurl + 'member/delMember.action',
+                url: baseurl + 'delDiscount.action',
                 type: 'post',
                 async: true,
                 dataType: 'json',
                 data: {
-                    ids: ids.join(",")
+                    id: ids.join(",")
                 },
                 success: function (data) {
                     if (data.success) {
-                        $.messager.alert('信息提示', '删除成功！', 'info');
-                        $('#wu-datagrid').datagrid('reload');
+                        $.messager.alert('信息提示', data.msg, 'info');
+                        $('#wu-datagrid11').datagrid('reload');
                     } else {
                         $.messager.alert('信息提示', data.msg, 'info');
                     }
@@ -287,8 +270,7 @@ $('#wu-datagrid11').datagrid({
             {
                 field: 'highConsume',
                 title: '累计消费区间(高)',
-                width: 80,
-                sortable: true
+                width: 80
             },
             {
             field: 'grade',
@@ -298,7 +280,6 @@ $('#wu-datagrid11').datagrid({
             {
                 field: 'discount',
                 title: '会员折扣',
-                sortable: true,
                 width: 50
             },
             {

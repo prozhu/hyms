@@ -65,29 +65,29 @@
                     checkbox: true
                 },
                 {
-                    field: 'membername',
+                    field: 'memberName',
                     title: '会员名称',
                     width: 40
                 },
                 {
-                    field: 'memberid',
+                    field: 'memberId',
                     title: '会员编号',
                     width: 80,
                     sortable: true
                 },
                 {
-                    field: 'membercardid',
+                    field: 'memberCardId',
                     title: '会员卡号',
                     width: 55
                 },
                 {
-                    field: 'rechargemoney',
+                    field: 'rechargeMoney',
                     title: '充值金额(元)',
                     sortable: true,
                     width: 50
                 },
                 {
-                    field: 'changetime',
+                    field: 'changeTime',
                     title: '充值时间',
                     sortable: true,
                     width: 100,

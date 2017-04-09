@@ -14,10 +14,12 @@ public class DiscountServiceImpl implements DiscountService {
 
 	@Autowired
 	private DiscountMapper discountMapper;
+
 	@Override
 	public List<Discount> queryAllDiscount() {
 		return discountMapper.queryAllDiscount();
 	}
+
 	@Override
 	public Integer addDiscount(Discount discount) {
 		if (StringUitl.isNullOrEmpty(discount)) {
@@ -25,12 +27,21 @@ public class DiscountServiceImpl implements DiscountService {
 		}
 		return discountMapper.insertDiscount(discount);
 	}
+
 	@Override
 	public Integer editDiscount(Discount discount) {
 		if (StringUitl.isNullOrEmpty(discount)) {
 			return 0;
 		}
 		return discountMapper.updateDiscount(discount);
+	}
+
+	@Override
+	public Integer delDiscount(String id) {
+		if (StringUitl.isNullOrEmpty(id)) {
+			return 0;
+		}
+		return discountMapper.delDiscount(id);
 	}
 
 }

@@ -3,7 +3,7 @@ package cn.prozhu.ssm.service.cardchargerecord;
 import java.util.List;
 import java.util.Map;
 
-import cn.prozhu.ssm.model.cardchargerecord.Cardrechargerecord;
+import cn.prozhu.ssm.model.cardchargerecord.CardRechargeRecord;
 
 public interface CardRechargeRecordService {
 
@@ -32,7 +32,7 @@ public interface CardRechargeRecordService {
      * @param order
      * @return
      */
-    List<Cardrechargerecord> findCardRechargeRecordByCondition(String memberid, String pageNow,
+    List<CardRechargeRecord> findCardRechargeRecordByCondition(String memberid, String pageNow,
             String pageSize, String startTime, String endTime, String keyword,
             String sort, String order);
 

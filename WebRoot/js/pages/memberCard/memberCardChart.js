@@ -57,9 +57,9 @@
                             data[i][0] = "" + this.times + "日";
                         }
                         data[i][1] = this.balance;
-                        data[i][2] = this.totalpoint;
-                        data[i][3] = this.totalconsumption;
-                        data[i][4] = this.totalrecharge;
+                        data[i][2] = this.totalPoint;
+                        data[i][3] = this.totalConsumption;
+                        data[i][4] = this.totalRecharge;
                     });
                 }
                 var myChart = new JSChart('memberCardChart_container', "bar");
@@ -172,9 +172,9 @@
                                  data3[i][0] = "" + this.month + "月";
                              }
                     		 data[i][1] = this.balance;
-                    		 data1[i][1] = this.totalpoint;
-                    		 data2[i][1] = this.totalconsumption;
-                    		 data3[i][1] = this.totalrecharge;
+                    		 data1[i][1] = this.totalPoint;
+                    		 data2[i][1] = this.totalConsumption;
+                    		 data3[i][1] = this.totalRecharge;
                     });
                 }
 
@@ -199,7 +199,7 @@
                 //设置 y轴名称, 对饼图无效。
                 myChart.setAxisNameY('额度');
                 //设置图表的大小
-                myChart.setSize(900, 500);
+                myChart.setSize(900, 450);
                 //设置轴线名字体大小，对饼图无效。默认是11。
                 myChart.setAxisNameFontSize(13);
                 //设置x轴和容器底部的距离，默认30
