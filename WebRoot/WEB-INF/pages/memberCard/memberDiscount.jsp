@@ -38,22 +38,22 @@
         <input type="hidden" name="id" class="wu-text"/>
         <table>
             <tr>
-                <td width="60" align="right">累计消费区间(低):</td>
+                <td width="70" align="right">累计消费(低):</td>
                 <td><input type="text" name="lowConsume" class="wu-text easyui-validatebox" id="lowConsume"
                 validtype = "checkNum"/></td>
             </tr>
             <tr>
-               <td width="60" align="right">累计消费区间(高):</td>
+               <td width="70" align="right">累计消费(高):</td>
                 <td><input type="text" name="highConsume" class="wu-text easyui-validatebox" id="highConsume"
-                validtype = "compareDiscount['#lowConsume']"/></td>
+              data-options="required:true,validType:['checkNum', 'compareDiscount[\'#lowConsume\']']"  /></td>
             </tr>
             <tr>
-                <td align="right">会员级别:</td>
+                <td width="70" align="right">会员级别:</td>
                 <td><input type="text" name="grade" class="wu-text easyui-validatebox" id="grade"
                            required="true" validtype="length[1, 10]"/></td>
             </tr>
             <tr>
-                <td align="right">折扣:</td>
+                <td width="70" align="right">折扣:</td>
                 <td><input type="text" name="discount" class="wu-text easyui-validatebox" id="discount" required="true"
                           validtype = "discount" /></td>
             </tr>

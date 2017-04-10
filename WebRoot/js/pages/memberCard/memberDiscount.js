@@ -22,13 +22,9 @@ $.extend($.fn.validatebox.defaults.rules, {
         },
         message: '金额必须为整数'
     },
-    compareDiscount: {// 验证年龄
+    compareDiscount: {// 验证金额区间大小
         validator: function (value, param) {
-        	if (/^\d+$/.test(value)) {
-        		return $(param[0]).val() < value;
-        	} else {
-        		return false;
-        	}
+        		return parseInt($(param[0]).val()) < value;
         },
         message: '累计消费区间(高) 必须大于 累计消费区间(低)'
     }
