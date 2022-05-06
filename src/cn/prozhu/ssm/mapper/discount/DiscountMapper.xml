@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.prozhu.ssm.mapper.discount.DiscountMapper">
+
+
+	<select id="queyDiscountByGrade" parameterType="java.lang.String"
+		resultType="cn.prozhu.ssm.model.discount.Discount">
+		select lowConsume, highConsume, grade, discount from 
+		discount where delFlag = 0 and grade = #{name}
+	</select>
+	
+	<insert id="insertDiscount" parameterType="cn.prozhu.ssm.model.discount.Discount" >
+		insert into discount(lowConsume, highConsume, grade, discount) values(#{lowConsume}, #{highConsume}, #{grade}, #{discount})
+	</insert>
+	
+	<update id="updateDiscount" parameterType="cn.prozhu.ssm.model.discount.Discount">
+	update discount 
+	<set>
+		<if test="lowConsume != null">
+			lowConsume = #{lowConsume}, 
+		</if>
+		<if test="highConsume != null">
+			highConsume = #{highConsume}, 
+		</if>
+		<if test="grade != null">
+			grade = #{grade}, 
+		</if>
+		<if test="discount != null">
+			discount = #{discount}, 
+		</if>
+		<if test="createTime != null">
+			createTime = #{createTime}, 
+		</if>
+	</set>
+	where id = #{id}
+	</update>
+	
+	<select id="queryAllDiscount" resultType="cn.prozhu.ssm.model.discount.Discount">
+		select id, lowConsume, highConsume, grade, discount, createTime from discount 
+		where delFlag = 0
+	</select>
+	
+	<update id="delDiscount" parameterType="String">
+		update discount set delFlag = 1 where id = #{id}
+	</update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

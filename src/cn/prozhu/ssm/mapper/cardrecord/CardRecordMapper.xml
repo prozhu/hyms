@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.prozhu.ssm.mapper.cardrecord.CardRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.prozhu.ssm.model.cardrecord.CardRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memberId" property="memberId" jdbcType="VARCHAR" />
+    <result column="memberCardId" property="memberCardId" jdbcType="VARCHAR" />
+    <result column="operationType" property="operationType" jdbcType="VARCHAR" />
+    <result column="changeTime" property="changeTime" jdbcType="TIMESTAMP" />
+    <result column="memberName" property="memberName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, memberId, memberCardId, operationType, changeTime, memberName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cardrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cardrecord
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cardrecord
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecordExample" >
+    delete from cardrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecord" >
+    insert into cardrecord (id, memberId, memberCardId, 
+      operationType, changeTime, memberName
+      )
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=VARCHAR}, #{memberCardId,jdbcType=VARCHAR}, 
+      #{operationType,jdbcType=VARCHAR}, #{changeTime,jdbcType=TIMESTAMP}, #{memberName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecord" >
+    insert into cardrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberId != null" >
+        memberId,
+      </if>
+      <if test="memberCardId != null" >
+        memberCardId,
+      </if>
+      <if test="operationType != null" >
+        operationType,
+      </if>
+      <if test="changeTime != null" >
+        changeTime,
+      </if>
+      <if test="memberName != null" >
+        memberName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCardId != null" >
+        #{memberCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null" >
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecordExample" resultType="java.lang.Integer" >
+    select count(*) from cardrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cardrecord
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberId != null" >
+        memberId = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberCardId != null" >
+        memberCardId = #{record.memberCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationType != null" >
+        operationType = #{record.operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeTime != null" >
+        changeTime = #{record.changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberName != null" >
+        memberName = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cardrecord
+    set id = #{record.id,jdbcType=BIGINT},
+      memberId = #{record.memberId,jdbcType=VARCHAR},
+      memberCardId = #{record.memberCardId,jdbcType=VARCHAR},
+      operationType = #{record.operationType,jdbcType=VARCHAR},
+      changeTime = #{record.changeTime,jdbcType=TIMESTAMP},
+      memberName = #{record.memberName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecord" >
+    update cardrecord
+    <set >
+      <if test="memberId != null" >
+        memberId = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCardId != null" >
+        memberCardId = #{memberCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null" >
+        operationType = #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null" >
+        changeTime = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberName != null" >
+        memberName = #{memberName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecord" >
+    update cardrecord
+    set memberId = #{memberId,jdbcType=VARCHAR},
+      memberCardId = #{memberCardId,jdbcType=VARCHAR},
+      operationType = #{operationType,jdbcType=VARCHAR},
+      changeTime = #{changeTime,jdbcType=TIMESTAMP},
+      memberName = #{memberName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="cn.prozhu.ssm.model.cardrecord.CardRecordExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cardrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
