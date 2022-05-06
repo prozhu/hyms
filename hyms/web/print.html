@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>数据打印</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        body {
+            background: white;
+            margin: 0px;
+            padding: 0px;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .pb {
+            font-size: 13px;
+            border-collapse: collapse;
+        }
+
+        .pb th {
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #333333;
+            padding: 2px;
+        }
+
+        .pb td {
+            border: 1px solid #333333;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+
+
+<script type="text/javascript">
+   
+    //解决浏览器兼容问题
+    if (navigator.userAgent.indexOf("Chrome") > 0) {
+        var afterUrl = window.location.search.substring(1);//(问号以后的字符串)
+        var afterEqual = afterUrl.substring(afterUrl.indexOf('=') + 1);//(等号以后的字符串，及你所要的参数)
+        var str = decodeURI(decodeURI(afterEqual));
+        document.write(str);
+        window.print();
+    } else {
+        document.write(window.dialogArguments);
+        window.print();
+    }
+
+</script>
+</body>
+</html>
